@@ -1,5 +1,6 @@
-package com.entity;
+package com.fanda.entity;
 
+import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,12 +15,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-public class Picture {
+public class Prioritized {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Picture_id")
+	@Column(name = "Id")
 	int Id ;
 	
-	Integer food_id;
-	Integer picture;
+	Integer premium_id;
+	Date start_date;
+	Date end_date;
+	
+	Boolean active;
+	
 }

@@ -1,6 +1,5 @@
-package com.entity;
+package com.fanda.entity;
 
-import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,16 +14,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-public class Prioritized {
+public class Cart {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Id")
+	@Column(name = "Cart_id")
 	int Id ;
 	
-	Integer premium_id;
-	Date start_date;
-	Date end_date;
-	
-	Boolean active;
-	
+	Integer food_id;
+	String username;
+	Integer qty;
 }
