@@ -1,4 +1,4 @@
-package com.entity;
+package com.fanda.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

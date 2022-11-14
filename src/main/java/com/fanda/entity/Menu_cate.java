@@ -1,4 +1,4 @@
-package com.entity;
+package com.fanda.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,13 +14,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-public class Cart {
+public class Menu_cate {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Cart_id")
+	@Column(name = "Menu_id")
 	int Id ;
-	
-	Integer food_id;
-	String username;
-	Integer qty;
+	Integer restaurant_id;
+	String cate_name;
 }
