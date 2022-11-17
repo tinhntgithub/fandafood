@@ -1,4 +1,4 @@
-package com.entity;
+package com.fanda.entity;
 
 import java.sql.Date;
 import javax.persistence.Column;

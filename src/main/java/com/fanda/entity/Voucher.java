@@ -1,4 +1,6 @@
-package com.entity;
+package com.fanda.entity;
+
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,12 +16,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-public class Picture {
+public class Voucher {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Picture_id")
+	@Column(name = "Voucher")
 	int Id ;
 	
-	Integer food_id;
-	Integer picture;
+	Integer restaurant_id;
+	Integer discount;
+	Integer minimum_order;
+	Double delivery_discount;
+	Date end_date;
+	Date start_date;
+	
+	
 }
