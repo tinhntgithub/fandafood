@@ -1,6 +1,7 @@
 package com.fanda.rest;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fanda.entity.Account;
+import com.fanda.service.AccountSv;
+
+
 
 @RestController
 @RequestMapping("/rest/user")
 public class AccountRestController {
 	@Autowired
-	AccountService accServ;
+	AccountSv accServ;
 	
 	
 	@GetMapping()
@@ -26,8 +31,8 @@ public class AccountRestController {
 		return accServ.findAll();
 	}
 	@GetMapping("{id}")
-	public Account getAccountById(@PathVariable("id") String id) {
-		return accServ.findBySDT(id);
+	public Optional<Account> getAccountById(@PathVariable("id") String id) {
+		return accServ.findById(id);
 	}
 	@PostMapping
 	public Account create(@RequestBody Account acc) {

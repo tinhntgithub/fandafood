@@ -1,5 +1,8 @@
 package com.fanda.rest;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +12,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fanda.entity.FoodCategory;
+import com.fanda.service.FoodCategoryService;
 
 @RestController
 @RequestMapping("/rest/foodcate")
@@ -22,7 +28,7 @@ public class FoodCateRestController {
 		return fcServ.findAll();
 	}
 	@GetMapping("{id}")
-	public FoodCategory getById(@PathVariable("id") String id) {
+	public Optional<FoodCategory> getById(@PathVariable("id") int id) {
 		return fcServ.findById(id);
 	}
 	@PostMapping
@@ -37,7 +43,7 @@ public class FoodCateRestController {
 	
 
 	@DeleteMapping("{id}")
-	public void delete(@PathVariable("id") String id) {
+	public void delete(@PathVariable("id") int id) {
 		fcServ.delete(id);
 	}
 }

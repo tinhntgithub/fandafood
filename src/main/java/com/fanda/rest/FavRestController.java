@@ -1,6 +1,7 @@
 package com.fanda.rest;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fanda.entity.Favorite;
+import com.fanda.service.Favorite_Sv;
+
 @RestController
 @RequestMapping("/rest/fav")
 public class FavRestController {
 	@Autowired
-	FavoriteSevice favServ;
+	Favorite_Sv favServ;
 	
 	
 	@GetMapping()
@@ -24,12 +28,12 @@ public class FavRestController {
 		return favServ.findAll();
 	}
 	@GetMapping("{id}")
-	public Favorite getById(@PathVariable("id") String id) {
+	public Optional<Favorite> getById(@PathVariable("id") int id) {
 		return favServ.findById(id);
 	}
 	@PostMapping
-	public Favorite create(@RequestBody favServ fav) {
-		return favServ.create(auth);
+	public Favorite create(@RequestBody Favorite fav) {
+		return favServ.create(fav);
 	}
 	
 	@PutMapping("{id}")
@@ -39,7 +43,7 @@ public class FavRestController {
 	
 
 	@DeleteMapping("{id}")
-	public void delete(@PathVariable("id") String id) {
+	public void delete(@PathVariable("id") int id) {
 		favServ.delete(id);
 	}
 }

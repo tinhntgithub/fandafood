@@ -1,5 +1,8 @@
 package com.fanda.rest;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fanda.entity.premiumBundle;
+import com.fanda.service.PremiumBundleService;
+
 @RestController
 @RequestMapping("/rest/pre")
 public class PremiumRestController {
@@ -18,26 +24,26 @@ public class PremiumRestController {
 	
 	
 	@GetMapping()
-	public List<PremiumBundle> getAll() {
+	public List<premiumBundle> getAll() {
 		return pServ.findAll();
 	}
 	@GetMapping("{id}")
-	public PremiumBundle getById(@PathVariable("id") String id) {
-		return PremiumBundle.findById(id);
+	public Optional<premiumBundle> getById(@PathVariable("id") int id) {
+		return pServ.findById(id);
 	}
 	@PostMapping
-	public PremiumBundle create(@RequestBody PremiumBundle o) {
+	public premiumBundle create(@RequestBody premiumBundle o) {
 		return pServ.create(o);
 	}
 	
 	@PutMapping("{id}")
-	public PremiumBundle update(@PathVariable("id") String id, @RequestBody PremiumBundle o) {
+	public premiumBundle update(@PathVariable("id") String id, @RequestBody premiumBundle o) {
 		return pServ.update(o);
 	}
 	
 
 	@DeleteMapping("{id}")
-	public void delete(@PathVariable("id") String id) {
+	public void delete(@PathVariable("id") int id) {
 		pServ.delete(id);
 	}
 }

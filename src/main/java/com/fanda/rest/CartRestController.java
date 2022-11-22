@@ -1,6 +1,7 @@
 package com.fanda.rest;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fanda.entity.Cart;
+import com.fanda.service.CartSv;
+
 @RestController
 @RequestMapping("/rest/cart")
 public class CartRestController {
 	@Autowired
-	CartService cartServ;
+	CartSv cartServ;
 	
 	
 	@GetMapping()
@@ -24,12 +28,12 @@ public class CartRestController {
 		return cartServ.findAll();
 	}
 	@GetMapping("{id}")
-	public Cart getById(@PathVariable("id") String id) {
+	public Optional<Cart> getById(@PathVariable("id") int id) {
 		return cartServ.findById(id);
 	}
 	@PostMapping
-	public Cart create(@RequestBody cartServ cart) {
-		return cartServ.create(auth);
+	public Cart create(@RequestBody Cart cart) {
+		return cartServ.create(cart);
 	}
 	
 	@PutMapping("{id}")
@@ -39,7 +43,7 @@ public class CartRestController {
 	
 
 	@DeleteMapping("{id}")
-	public void delete(@PathVariable("id") String id) {
+	public void delete(@PathVariable("id") int id) {
 		cartServ.delete(id);
 	}
 }

@@ -1,6 +1,7 @@
 package com.fanda.rest;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,11 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fanda.entity.Authority;
+import com.fanda.service.AccountSv;
+import com.fanda.service.AuthoritySv;
+
 @RestController
 @RequestMapping("/rest/auth")
 public class AuthorityRestController {
 	@Autowired
-	AuthorityService authServ;
+	AuthoritySv authServ;
 	
 	
 	@GetMapping()
@@ -24,7 +29,7 @@ public class AuthorityRestController {
 		return authServ.findAll();
 	}
 	@GetMapping("{id}")
-	public Authority getById(@PathVariable("id") String id) {
+	public Optional<Authority> getById(@PathVariable("id") int id) {
 		return authServ.findById(id);
 	}
 	@PostMapping
@@ -33,13 +38,13 @@ public class AuthorityRestController {
 	}
 	
 	@PutMapping("{id}")
-	public Account update(@PathVariable("id") String id, @RequestBody Account acc) {
-		return accServ.update(acc);
+	public Authority update(@PathVariable("id") int id, @RequestBody Authority acc) {
+		return authServ.update(acc);
 	}
 	
 
 	@DeleteMapping("{id}")
-	public void delete(@PathVariable("id") String id) {
+	public void delete(@PathVariable("id") int id) {
 		authServ.delete(id);
 	}
 }
