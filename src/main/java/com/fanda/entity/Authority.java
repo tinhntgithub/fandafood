@@ -18,13 +18,13 @@ import lombok.Data;
 @SuppressWarnings("serial")
 @Data
 @Entity
-@Table(name = "authorities", uniqueConstraints = { @UniqueConstraint(columnNames = { "username", "role_id" }) })
+@Table(name = "authority")
 public class Authority implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@ManyToOne
-	@JoinColumn(name = "username")
+	@JoinColumn(name = "userid")
 	private Account account;
 	@ManyToOne
 	@JoinColumn(name = "role_id")
