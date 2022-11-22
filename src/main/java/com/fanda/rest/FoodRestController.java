@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fanda.entity.Food;
-import com.fanda.service.FoodService;
+import com.fanda.service.FoodServ;
 
 @RestController
 @RequestMapping("/rest/food")
 public class FoodRestController {
-	@Autowired
-	FoodService fServ;
 	
+	@Autowired
+	FoodServ fServ;	
 	
 	@GetMapping()
 	public List<Food> getAll() {

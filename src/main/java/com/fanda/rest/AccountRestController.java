@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fanda.entity.Account;
-import com.fanda.service.AccountSv;
+import com.fanda.service.AccountServ;
+import com.fanda.serviceImpl.AccountServImpl;
 
 
 
@@ -23,7 +24,7 @@ import com.fanda.service.AccountSv;
 @RequestMapping("/rest/user")
 public class AccountRestController {
 	@Autowired
-	AccountSv accServ;
+	AccountServ accServ;
 	
 	
 	@GetMapping()

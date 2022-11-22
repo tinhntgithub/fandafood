@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fanda.entity.Favorite;
-import com.fanda.service.Favorite_Sv;
+import com.fanda.service.FavoriteServ;
+import com.fanda.serviceImpl.FavoriteServImpl;
 
 @RestController
 @RequestMapping("/rest/fav")
 public class FavRestController {
 	@Autowired
-	Favorite_Sv favServ;
+	FavoriteServ favServ;
 	
 	
 	@GetMapping()

@@ -17,10 +17,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-<<<<<<< HEAD
-@Entity 
-@Table(name = "role")
-=======
 
 
 @Data
@@ -28,7 +24,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "role")
 @Entity
->>>>>>> 9de8307b61fe577146c6d7d47dccff4cc3475ee7
+
 public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

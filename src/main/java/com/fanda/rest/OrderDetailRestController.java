@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fanda.entity.Order_detail;
-import com.fanda.service.Order_detail_Service;
+import com.fanda.service.OrderDetailServ;
+import com.fanda.serviceImpl.OderDetailServImpl;
 
 @RestController
 @RequestMapping("/rest/odetail")
 public class OrderDetailRestController {
 	@Autowired
-	Order_detail_Service odServ;
+	OrderDetailServ odServ;
 	
 	
 	@GetMapping()

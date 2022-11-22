@@ -46,5 +46,5 @@ public class Review implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "restaurant_id")
-	Restaurant restaurantIdReview;
+	Restaurant restaurant;
 }

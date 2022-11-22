@@ -25,22 +25,23 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "order")
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "order")
 public class Order implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3398429331657279447L;
 	@Id
+	@Column(name="order_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer Id;
+	Integer id;
 	String note;
 	Double total;
 	@Temporal(TemporalType.DATE)
-	@Column(name = "Createdate")
-	Date createDate = new Date();
+	@Column(name = "date")
+	Date date = new Date();
 	Boolean status;
 
 	@ManyToOne
@@ -53,7 +54,7 @@ public class Order implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "address_id")
-	List<Delivery_address> delivery_address;
+	Delivery_address deliAdd;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "order")

@@ -14,14 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fanda.entity.Authority;
-import com.fanda.service.AccountSv;
-import com.fanda.service.AuthoritySv;
+import com.fanda.service.AuthorityServ;
+import com.fanda.serviceImpl.AccountServImpl;
+import com.fanda.serviceImpl.AuthorityServImpl;
 
 @RestController
 @RequestMapping("/rest/auth")
 public class AuthorityRestController {
 	@Autowired
-	AuthoritySv authServ;
+	AuthorityServ authServ;
 	
 	
 	@GetMapping()
