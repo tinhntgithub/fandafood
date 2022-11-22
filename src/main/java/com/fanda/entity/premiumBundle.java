@@ -19,12 +19,21 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "premium_bundle")
+@NoArgsConstructor
+@AllArgsConstructor
 public class premiumBundle implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3569928633507574071L;
+
 	@Id
 	@Column(name="premium_id")
 	Integer premiumId;

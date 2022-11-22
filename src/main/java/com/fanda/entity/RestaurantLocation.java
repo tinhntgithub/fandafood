@@ -12,10 +12,14 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 @Data
 @Entity 
 @Table(name = "restaurant_location")
+@NoArgsConstructor
+@AllArgsConstructor
 public class RestaurantLocation implements Serializable{
 	@Id
 	@Column(name = "id")

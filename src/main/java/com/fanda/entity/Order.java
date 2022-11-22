@@ -19,12 +19,20 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "order")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3398429331657279447L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer Id;
