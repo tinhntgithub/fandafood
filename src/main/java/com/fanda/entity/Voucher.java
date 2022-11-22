@@ -16,6 +16,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Table(name = "voucher")
+@Data
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Voucher {
 
 	@Id

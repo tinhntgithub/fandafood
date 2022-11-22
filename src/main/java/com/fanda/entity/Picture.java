@@ -14,6 +14,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name="picture")
 public class Picture {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

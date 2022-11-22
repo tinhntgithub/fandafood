@@ -15,6 +15,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Table(name="prioritized")
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
 public class Prioritized {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -16,11 +16,15 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "review")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Review implements Serializable {
 	@Id
 	@Column(name="review_id")
