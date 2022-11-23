@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class Cart {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Cart_id")
+	@Column(name = "cart_id")
 	int Id ;
 	
 	
