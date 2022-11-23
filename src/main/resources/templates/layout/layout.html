@@ -27,6 +27,51 @@
  			<main th:replace="~{/layout/menu.html :: header}"></main>
 		
 			<main th:replace="${view}"></main>
+			<div
+		class="osahan-menu-fotter fixed-bottom bg-white px-3 py-2 text-center d-none">
+		<div class="row">
+			<div class="col selected">
+				<a href="/home/index"
+					class="text-danger small font-weight-bold text-decoration-none">
+					<p class="h4 m-0">
+						<i class="feather-home text-danger"></i>
+					</p> Home
+				</a>
+			</div>
+			<div class="col">
+				<a href="/home/trending"
+					class="text-dark small font-weight-bold text-decoration-none">
+					<p class="h4 m-0">
+						<i class="feather-map-pin"></i>
+					</p> Trending
+				</a>
+			</div>
+			<div class="col bg-white rounded-circle mt-n4 px-3 py-2">
+				<div class="bg-danger rounded-circle mt-n0 shadow">
+					<a href="checkout.html"
+						class="text-white small font-weight-bold text-decoration-none">
+						<i class="feather-shopping-cart"></i>
+					</a>
+				</div>
+			</div>
+			<div class="col">
+				<a href="/home/favorites"
+					class="text-dark small font-weight-bold text-decoration-none">
+					<p class="h4 m-0">
+						<i class="feather-heart"></i>
+					</p> Favorites
+				</a>
+			</div>
+			<div class="col">
+				<a href="profile.html"
+					class="text-dark small font-weight-bold text-decoration-none">
+					<p class="h4 m-0">
+						<i class="feather-user"></i>
+					</p> Profile
+				</a>
+			</div>
+		</div>
+	</div>
 		
 		<main th:replace="~{/layout/footer.html :: footer}"></main>
   	
@@ -34,7 +79,7 @@
   
 	<nav id="main-nav">
 		<ul class="second-nav">
-			<li><a href="home.html"><i class="feather-home mr-2"></i>
+			<li><a href="/home/index"><i class="feather-home mr-2"></i>
 					Homepage</a></li>
 			<li><a href="my_order.html"><i class="feather-list mr-2"></i>
 					My Orders</a></li>
@@ -45,27 +90,27 @@
 					<li><a href="signup.html">Register</a></li>
 					<li><a href="forgot_password.html">Forgot Password</a></li>
 					<li><a href="verification.html">Verification</a></li>
-					<li><a href="location.html">Location</a></li>
+					<li><a href="/home/location">Location</a></li>
 				</ul></li>
-			<li><a href="favorites.html"><i class="feather-heart mr-2"></i>
+			<li><a href="/home/favorites"><i class="feather-heart mr-2"></i>
 					Favorites</a></li>
-			<li><a href="trending.html"><i
+			<li><a href="/home/trending"><i
 					class="feather-trending-up mr-2"></i> Trending</a></li>
-			<li><a href="most_popular.html"><i
+			<li><a href="/home/most_popular"><i
 					class="feather-award mr-2"></i> Most Popular</a></li>
 			<li><a href="restaurant.html"><i
 					class="feather-paperclip mr-2"></i> Restaurant Detail</a></li>
-			<li><a href="checkout.html"><i class="feather-list mr-2"></i>
+			<li><a href="/home/checkout"><i class="feather-list mr-2"></i>
 					Checkout</a></li>
 			<li><a href="successful.html"><i
 					class="feather-check-circle mr-2"></i> Successful</a></li>
-			<li><a href="map.html"><i class="feather-map-pin mr-2"></i>
+			<li><a href="/home/map"><i class="feather-map-pin mr-2"></i>
 					Live Map</a></li>
 			<li><a href="#"><i class="feather-user mr-2"></i> Profile</a>
 				<ul>
 					<li><a href="profile.html">Profile</a></li>
 					<li><a href="favorites.html">Delivery support</a></li>
-					<li><a href="contact-us.html">Contact Us</a></li>
+					<li><a href="/home/contact_us">Contact Us</a></li>
 					<li><a href="terms.html">Terms of use</a></li>
 					<li><a href="privacy.html">Privacy & Policy</a></li>
 				</ul></li>
@@ -73,8 +118,8 @@
 					Error</a>
 				<ul>
 					<li><a href="not-found.html">Not Found</a>
-					<li><a href="maintence.html"> Maintence</a>
-					<li><a href="coming-soon.html">Coming Soon</a>
+					<li><a href="/home/maintencen"> Maintence</a>
+					<li><a href="/home/coming_soon">Coming Soon</a>
 				</ul></li>
 			<li><a href="#"><i class="feather-link mr-2"></i> Navigation
 					Link Example</a>
@@ -112,7 +157,7 @@
 						<i class="feather-home text-danger"></i>
 					</p> Home
 			</a></li>
-			<li class="github"><a href="faq.html">
+			<li class="github"><a href="/home/faq">
 					<p class="h5 m-0">
 						<i class="feather-message-circle"></i>
 					</p> FAQ
