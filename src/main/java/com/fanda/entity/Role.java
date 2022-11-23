@@ -19,11 +19,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+@Entity 
+@Table(name = "role")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "role")
-@Entity
+
+
 
 public class Role {
 	@Id
@@ -35,5 +37,5 @@ public class Role {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="role")
-	List<Authority> trungThuong;
+	List<Authority> authority;
 }
