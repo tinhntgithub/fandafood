@@ -9,4 +9,9 @@ public class HomeController {
 	public String index() {
 		return "home/home";
 	}
+	
+	@RequestMapping("/home/trending")
+	public String trending() {
+		return "home/trending";
+	}
 }
