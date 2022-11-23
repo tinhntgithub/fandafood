@@ -14,6 +14,7 @@ public class HomeController {
 	public String trending() {
 		return "home/trending";
 	}
+<<<<<<< HEAD
 	
 	@RequestMapping("/home/checkout")
 	public String checkout() {
@@ -75,4 +76,44 @@ public class HomeController {
 	
 	
 	
+=======
+	@RequestMapping("/home/terms")
+	public String terms() {
+		return "home/terms";
+	}
+	
+	@RequestMapping("/home/success")
+	public String success() {
+		return "home/successful";
+	}
+
+	@RequestMapping("/home/search")
+	public String search() {
+		return "home/search";
+	}
+	@RequestMapping("/home/restaurant")
+	public String restaurant() {
+		return "home/restaurant";
+	}
+	@RequestMapping("/home/profile")
+	public String profile() {
+		return "home/profile";
+	}
+	@RequestMapping("/home/privacy")
+	public String privacy() {
+		return "home/privacy";
+	}
+	@RequestMapping("/home/offers")
+	public String offers() {
+		return "home/offers";
+	}
+	@RequestMapping("/home/notfound")
+	public String notfound() {
+		return "home/not_found";
+	}
+	@RequestMapping("/home/myorder")
+	public String myorder() {
+		return "home/my_order";
+	}
+>>>>>>> ee1ede34ef5a7d8812b7ad8bf0fd7624be66f5a4
 }
