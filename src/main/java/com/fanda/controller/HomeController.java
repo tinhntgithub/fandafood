@@ -14,7 +14,7 @@ public class HomeController {
 	public String trending() {
 		return "home/trending";
 	}
-<<<<<<< HEAD
+
 	
 	@RequestMapping("/home/checkout")
 	public String checkout() {
@@ -62,21 +62,8 @@ public class HomeController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-=======
+
+
 	@RequestMapping("/home/terms")
 	public String terms() {
 		return "home/terms";
@@ -109,11 +96,11 @@ public class HomeController {
 	}
 	@RequestMapping("/home/notfound")
 	public String notfound() {
-		return "home/not_found";
+		return "home/not-found";
 	}
 	@RequestMapping("/home/myorder")
 	public String myorder() {
 		return "home/my_order";
 	}
->>>>>>> ee1ede34ef5a7d8812b7ad8bf0fd7624be66f5a4
+
 }
