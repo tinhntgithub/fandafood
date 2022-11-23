@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fanda.entity.Review;
-import com.fanda.service.ReviewService;
+import com.fanda.service.ReviewServ;
+import com.fanda.serviceImpl.ReviewServImpl;
 
 @RestController
 @RequestMapping("/rest/review")
 public class ReviewRestController {
 	@Autowired
-	ReviewService rServ;
+	ReviewServ rServ;
 	
 	
 	@GetMapping()

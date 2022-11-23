@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fanda.entity.Cart;
-import com.fanda.service.CartSv;
+import com.fanda.service.CartServ;
+import com.fanda.serviceImpl.CartServImpl;
 
 @RestController
 @RequestMapping("/rest/cart")
 public class CartRestController {
 	@Autowired
-	CartSv cartServ;
+	CartServ cartServ;
 	
 	
 	@GetMapping()

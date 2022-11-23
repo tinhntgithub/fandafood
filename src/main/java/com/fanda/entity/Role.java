@@ -18,12 +18,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+<<<<<<< HEAD
 @Entity 
 @Table(name = "role")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
+=======
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "role")
+@Entity
+>>>>>>> 632f0fc5c73bd5e8a742e1751bc2fe68e2281ff7
 
 public class Role {
 	@Id

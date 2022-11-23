@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fanda.entity.Prioritized;
-import com.fanda.service.PrioritizedService;
+import com.fanda.service.PrioritizedServ;
+import com.fanda.serviceImpl.PrioritizedServImpl;
 
 @RestController
 @RequestMapping("/rest/prior")
 public class PriorRestController {
 	@Autowired
-	PrioritizedService pServ;
+	PrioritizedServ pServ;
 	
 	
 	@GetMapping()

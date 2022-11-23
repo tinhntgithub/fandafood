@@ -15,11 +15,16 @@ import lombok.Data;
 @Entity
 @Table(name = "favorite")
 public class Favorite implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1641773588912269554L;
+
 	@Id
 	@Column(name="favorite_id")
 	Integer favoriteId;
 	
 	@ManyToOne
 	@JoinColumn(name = "restaurant_id")
-	Restaurant restaurantIdFavorite;
+	Restaurant restaurant;
 }

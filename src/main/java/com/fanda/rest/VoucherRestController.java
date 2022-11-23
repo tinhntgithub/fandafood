@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fanda.entity.Voucher;
-import com.fanda.service.VoucherService;
+import com.fanda.service.VoucherServ;
+import com.fanda.serviceImpl.VoucherServImpl;
 
 @RestController
 @RequestMapping("/rest/voucher")
 public class VoucherRestController {
 	@Autowired
-	VoucherService vServ;
+	VoucherServ vServ;
 	
 	
 	@GetMapping()

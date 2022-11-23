@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fanda.entity.Picture;
-import com.fanda.service.PictureService;
+import com.fanda.service.PictureServ;
+import com.fanda.serviceImpl.PictureServImpl;
 
 @RestController
 @RequestMapping("/rest/pic")
 public class PictureRestController {
 	@Autowired
-	PictureService pServ;
+	PictureServ pServ;
 	
 	
 	@GetMapping()

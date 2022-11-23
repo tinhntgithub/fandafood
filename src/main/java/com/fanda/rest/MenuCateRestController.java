@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fanda.entity.Menu_cate;
-import com.fanda.service.Menu_cate_Service;
+import com.fanda.service.MenuCateServ;
+import com.fanda.serviceImpl.MenuCateServImpl;
 
 @RestController
 @RequestMapping("/rest/menucate")
 public class MenuCateRestController {
 	@Autowired
-	Menu_cate_Service mcServ;
+	MenuCateServ mcServ;
 	
 	
 	@GetMapping()

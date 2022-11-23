@@ -30,6 +30,11 @@ CREATE TABLE `account` (
   `phone_number` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `email` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `active` bit(1) DEFAULT NULL,
+  `createdate` date DEFAULT NULL,
+  `gender` bit(1) NOT NULL,
+  `firstname` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
+  `phonenumber` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -56,6 +61,8 @@ CREATE TABLE `authority` (
   `userid` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_user_author_idx` (`userid`),
+  KEY `FK_author_role_idx` (`role_id`),
+  CONSTRAINT `FK_author_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
   CONSTRAINT `FK_user_author` FOREIGN KEY (`userid`) REFERENCES `account` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -111,6 +118,7 @@ CREATE TABLE `delivery_address` (
   `username` varchar(20) DEFAULT NULL,
   `address` varchar(500) DEFAULT NULL,
   `active` tinyint(1) DEFAULT NULL,
+  `id` int NOT NULL,
   PRIMARY KEY (`address_id`),
   KEY `username` (`username`),
   CONSTRAINT `delivery_address_ibfk_1` FOREIGN KEY (`username`) REFERENCES `account` (`username`)
@@ -167,9 +175,12 @@ CREATE TABLE `food` (
   `image` varchar(50) DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL,
   `status` bit(1) DEFAULT NULL,
+  `menu_id` int DEFAULT NULL,
   PRIMARY KEY (`food_id`),
   KEY `menu_cate_id` (`menu_cate_id`),
   KEY `food_cate_id` (`food_cate_id`),
+  KEY `FKrjbsvxnq30atcjtf8ticaq8u9` (`menu_id`),
+  CONSTRAINT `FKrjbsvxnq30atcjtf8ticaq8u9` FOREIGN KEY (`menu_id`) REFERENCES `menu_cate` (`menu_id`),
   CONSTRAINT `food_ibfk_1` FOREIGN KEY (`menu_cate_id`) REFERENCES `menu_cate` (`menu_id`),
   CONSTRAINT `food_ibfk_2` FOREIGN KEY (`food_cate_id`) REFERENCES `food_category` (`food_cate_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -281,6 +292,8 @@ CREATE TABLE `order_detail` (
   `food_id` int DEFAULT NULL,
   `qty` int DEFAULT NULL,
   `price` double DEFAULT NULL,
+  `oder_detail_id` int NOT NULL,
+  `quantity` int DEFAULT NULL,
   PRIMARY KEY (`order_detail_id`),
   KEY `order_id` (`order_id`),
   KEY `food_id` (`food_id`),
@@ -420,6 +433,8 @@ CREATE TABLE `restaurant_location` (
   `restaurant_id` int DEFAULT NULL,
   `location` varchar(300) DEFAULT NULL,
   KEY `Key` (`id`,`restaurant_id`,`location`),
+  KEY `FKkgl6ss2nr2yb87wedxpury51c` (`restaurant_id`),
+  CONSTRAINT `FKkgl6ss2nr2yb87wedxpury51c` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant` (`restaurant_id`),
   CONSTRAINT `restaurant_location_ibfk_1` FOREIGN KEY (`id`) REFERENCES `restaurant` (`restaurant_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -473,6 +488,7 @@ DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `id` int NOT NULL,
   `roleName` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `role_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -525,4 +541,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-10 10:36:51
+-- Dump completed on 2022-11-22 12:41:18

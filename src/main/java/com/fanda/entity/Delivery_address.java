@@ -34,4 +34,7 @@ public class Delivery_address implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "username")
 	Account account;
+	
+	@OneToMany(mappedBy = "deliAdd")
+	List<Order> order;
 }

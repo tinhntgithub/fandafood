@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fanda.entity.Delivery_address;
-import com.fanda.service.Delivery_address_Sv;
+import com.fanda.service.DeliAddServ;
+import com.fanda.serviceImpl.DeliAddServImpl;
 @RestController
 @RequestMapping("/rest/deliadd")
 public class DeliveryAddRestController {
 	@Autowired
-	 Delivery_address_Sv deliAddServ;
+	 DeliAddServ deliAddServ;
 	
 	
 	@GetMapping()

@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fanda.entity.Order;
-import com.fanda.service.OrderService;
+import com.fanda.service.OrderServ;
+import com.fanda.serviceImpl.OrderServImpl;
 
 @RestController
 @RequestMapping("/rest/order")
 public class OrderRestController {
 	@Autowired
-	OrderService oServ;
+	OrderServ oServ;
 	
 	
 	@GetMapping()

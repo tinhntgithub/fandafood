@@ -50,11 +50,11 @@ public class Restaurant implements Serializable {
 	List<RestaurantLocation> listLocation;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "restaurantIdFavorite" )
-	List<Favorite> listFavorite ;
+	@OneToMany(mappedBy = "restaurant" )
+	List<Favorite> favorite ;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "restaurantIdReview" )
-	List<Favorite> listReview ;
+	@OneToMany(mappedBy = "restaurant" )
+	List<Review> review  ;
 	
 }

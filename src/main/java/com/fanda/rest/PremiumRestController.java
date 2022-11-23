@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fanda.entity.premiumBundle;
-import com.fanda.service.PremiumBundleService;
+import com.fanda.service.PremiumBundleServ;
+import com.fanda.serviceImpl.PremiumBundleServImpl;
 
 @RestController
 @RequestMapping("/rest/pre")
 public class PremiumRestController {
 	@Autowired
-	PremiumBundleService pServ;
+	PremiumBundleServ pServ;
 	
 	
 	@GetMapping()

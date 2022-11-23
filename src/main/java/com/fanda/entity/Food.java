@@ -28,7 +28,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "food")
 @NoArgsConstructor
+@AllArgsConstructor
 public class Food implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7282290230123589697L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "food_id")
@@ -40,7 +45,7 @@ public class Food implements Serializable {
 	Boolean Status;
 	@ManyToOne
 	@JoinColumn(name = "food_cate_id")
-	FoodCategory food_category;
+	FoodCategory foodCate;
 	@ManyToOne
 	@JoinColumn(name = "menu_id")
 	Menu_cate menu_cate;

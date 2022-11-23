@@ -25,6 +25,10 @@ public class Picture {
 	@Column(name = "Picture_id")
 	int Id ;
 	
-	Integer food_id;
+	
 	Integer picture;
+	
+	@ManyToOne
+	@JoinColumn(name= "food_id")
+	Food food;
 }
