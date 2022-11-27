@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fanda.dao.AccountDAO;
+import com.fanda.entity.Account;
 import com.fanda.service.AccountServ;
 
 
@@ -17,25 +18,25 @@ public class AccountServImpl implements AccountServ {
 	AccountDAO dao;
 	
 	@Override
-	public List<com.fanda.entity.Account> findAll() {
+	public List<Account> findAll() {
 		// TODO Auto-generated method stub
 		return dao.findAll();
 	}
 
 	@Override
-	public Optional<com.fanda.entity.Account> findById(String id) {
+	public Optional<Account> findById(String id) {
 		
 		return dao.findById(id);
 	}
 
 	@Override
-	public com.fanda.entity.Account create(com.fanda.entity.Account acc) {
+	public Account create(Account acc) {
 		// TODO Auto-generated method stub
 		return dao.saveAndFlush(acc);
 	}
 
 	@Override
-	public com.fanda.entity.Account update(com.fanda.entity.Account acc) {
+	public Account update(Account acc) {
 		// TODO Auto-generated method stub
 		return dao.saveAndFlush(acc);
 	}
