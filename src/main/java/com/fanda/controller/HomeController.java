@@ -17,8 +17,6 @@ public class HomeController {
 	public String trending() {
 		return "home/trending";
 	}
-
-	
 	@RequestMapping("/home/checkout")
 	public String checkout() {
 		return "home/checkout";
@@ -106,5 +104,4 @@ public class HomeController {
 	public String myorder() {
 		return "home/my_order";
 	}
-
 }
