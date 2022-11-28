@@ -32,9 +32,7 @@ public class Role {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	int Id ;
-
 	String roleName;
-	
 	@JsonIgnore
 	@OneToMany(mappedBy="role")
 	List<Authority> authority;
