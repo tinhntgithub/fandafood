@@ -3,6 +3,7 @@ package com.fanda.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -37,13 +40,14 @@ public class Restaurant implements Serializable {
 	@Column(name = "total_rate")
 	Double totalRate;
 	
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+
+	@Temporal(TemporalType.DATE)
 	@Column(name = "open_time")
-	LocalDateTime openTime = LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh"));
+	Date openTime;
 	
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@Temporal(TemporalType.DATE)
 	@Column(name = "close_time")
-	LocalDateTime closeTime = LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh"));
+	Date closeTime;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "restaurantId" )
