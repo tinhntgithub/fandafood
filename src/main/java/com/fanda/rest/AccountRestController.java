@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -14,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fanda.dao.AccountDAO;
 import com.fanda.entity.Account;
 import com.fanda.service.AccountServ;
-import com.fanda.serviceImpl.AccountServImpl;
 
 
 
@@ -25,6 +24,9 @@ import com.fanda.serviceImpl.AccountServImpl;
 public class AccountRestController {
 	@Autowired
 	AccountServ accServ;
+
+	@Autowired
+	AccountDAO accDao;
 	
 	
 	@GetMapping()
@@ -33,11 +35,19 @@ public class AccountRestController {
 	}
 	@GetMapping("{id}")
 	public Optional<Account> getAccountById(@PathVariable("id") String id) {
-		return accServ.findById(id);
+		Optional<Account> acc = accServ.findById(id);
+		if(acc.isPresent()){
+			return accServ.findById(id);
+		}else{
+			return null;
+		}
 	}
+	
+
 	@PostMapping
 	public Account create(@RequestBody Account acc) {
-		return accServ.create(acc);
+			return accServ.create(acc);
+		
 	}
 	
 	@PutMapping("{id}")

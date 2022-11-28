@@ -6,11 +6,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -42,13 +38,17 @@ public class Account implements Serializable{
 	@Column(name="last_name")
 	String lastname;
 	@Column(name="phone_number")
+<<<<<<< HEAD
 	String phonenumber;
+=======
+	String phone;
+>>>>>>> 778d9a2c2f205e6f5da5370b2081be7e838b20c7
 	String email;
-	boolean Active;
-	boolean Gender;
+	boolean active;
+	boolean gender;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "createdate")
-	Date Createdate = new Date();
+	Date createdate = new Date();
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "account")
