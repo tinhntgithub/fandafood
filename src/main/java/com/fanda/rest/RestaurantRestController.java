@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fanda.dao.RestaurantDAO;
 import com.fanda.entity.Restaurant;
 import com.fanda.service.RestaurantServ;
 import com.fanda.serviceImpl.RestaurantServImpl;
@@ -22,29 +23,31 @@ import com.fanda.serviceImpl.RestaurantServImpl;
 public class RestaurantRestController {
 	@Autowired
 	RestaurantServ rServ;
+	@Autowired
+	RestaurantDAO dao;
 	
 	
 	@GetMapping()
 	public List<Restaurant> getAll() {
-		return rServ.findAll();
+		return dao.findAll();
 	}
 	@GetMapping("{id}")
 	public Optional<Restaurant> getById(@PathVariable("id") int id) {
-		return rServ.findById(id);
+		return dao.findById(id);
 	}
 	@PostMapping
 	public Restaurant create(@RequestBody Restaurant o) {
-		return rServ.create(o);
+		return dao.saveAndFlush(o);
 	}
 	
 	@PutMapping("{id}")
 	public Restaurant update(@PathVariable("id") String id, @RequestBody Restaurant o) {
-		return rServ.update(o);
+		return  dao.saveAndFlush(o);
 	}
 	
 
 	@DeleteMapping("{id}")
 	public void delete(@PathVariable("id") int id) {
-		rServ.delete(id);
+		dao.deleteById(id);
 	}
 }

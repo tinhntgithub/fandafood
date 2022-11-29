@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fanda.dao.MenuCategoryDAO;
 import com.fanda.entity.Menu_cate;
 import com.fanda.service.MenuCateServ;
 import com.fanda.serviceImpl.MenuCateServImpl;
@@ -22,11 +23,14 @@ import com.fanda.serviceImpl.MenuCateServImpl;
 public class MenuCateRestController {
 	@Autowired
 	MenuCateServ mcServ;
+	@Autowired
+	MenuCategoryDAO dao;
 	
 	
 	@GetMapping()
 	public List<Menu_cate> getAll() {
-		return mcServ.findAll();
+	
+		return dao.findAll();
 	}
 	@GetMapping("{id}")
 	public Optional<Menu_cate> getById(@PathVariable("id") int id) {
