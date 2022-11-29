@@ -28,7 +28,6 @@ import lombok.Setter;
 @Table(name = "account")
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
 public class Account implements Serializable{
 	@Id
 	String username;
@@ -62,5 +61,7 @@ public class Account implements Serializable{
 	@OneToMany(mappedBy = "account")
 	List<Delivery_address> delivery_address;
 	
-	
+	@JsonIgnore
+	@OneToMany(mappedBy = "account")
+	List<Review> review;
 }

@@ -5,19 +5,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
-	@RequestMapping("/admin/index")
+	// ---------- DÙNG CHO ADMIN
+	@RequestMapping("/index")
 	public String adminIndex(Model model) {
 		return "redirect:/admin/index.html#!/index";
 	}
-	@RequestMapping("/admin/restaurant/index")
+
+
+	// ---------- DÙNG CHO CHỦ NHÀ HÀNG
+	@RequestMapping("/restaurant/index")
 	public String restaurantIndex(Model model) {
 		return "redirect:/admin/index.html#!/restaurant/index";
 	}
-	@RequestMapping("/admin/header")
-	public String header(Model model) {
-		
-		 
-		return "admin/layout/layout";
-	}
+	
+	// ---------- DÙNG CHO TÀI XẾ
 }
