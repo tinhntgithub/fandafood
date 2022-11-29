@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AdminController {
 	@RequestMapping("/admin/index")
-	public String success(Model model) {
-		
-		 
-		return "admin/index";
+	public String adminIndex(Model model) {
+		return "redirect:/admin/index.html#!/index";
+	}
+	@RequestMapping("/admin/restaurant/index")
+	public String restaurantIndex(Model model) {
+		return "redirect:/admin/index.html#!/restaurant/index";
 	}
 	@RequestMapping("/admin/header")
 	public String header(Model model) {
