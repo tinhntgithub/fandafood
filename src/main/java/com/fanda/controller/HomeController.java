@@ -1,10 +1,5 @@
 package com.fanda.controller;
 
-import java.util.List;
-import java.util.Optional;
-
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,11 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.fanda.dao.AccountDAO;
 import com.fanda.dao.FoodDAO;
 import com.fanda.dao.MenuCategoryDAO;
 import com.fanda.dao.RestaurantDAO;
-import com.fanda.entity.Account;
 import com.fanda.entity.Food;
 import com.fanda.entity.Menu_cate;
 import com.fanda.entity.Restaurant;

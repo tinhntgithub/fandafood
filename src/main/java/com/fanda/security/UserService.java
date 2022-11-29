@@ -1,6 +1,5 @@
 package com.fanda.security;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import com.fanda.dao.AccountDAO;
 import com.fanda.entity.Account;
-import com.fanda.entity.Authority;
 
 @Service
 public class UserService implements UserDetailsService {
