@@ -30,6 +30,11 @@ CREATE TABLE `account` (
   `phone_number` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `email` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `active` bit(1) DEFAULT NULL,
+  `gender` bit(1) NOT NULL,
+  `createdate` date DEFAULT NULL,
+  `firstname` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
+  `phonenumber` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -40,6 +45,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
+INSERT INTO `account` VALUES ('admin','123','Nguyễn','Quản Trị','0788791726','tinhntpc02175@fpt.edu.vn',_binary '',_binary '',NULL,NULL,NULL,NULL),('user1','123','Nguyễn','Nhất Niệm','0986633495',NULL,_binary '',_binary '\0',NULL,NULL,NULL,NULL),('user2','123','Nguyễn','Nhị Khúc',NULL,NULL,_binary '',_binary '',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,6 +62,8 @@ CREATE TABLE `authority` (
   `userid` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_user_author_idx` (`userid`),
+  KEY `FK_author_role_idx` (`role_id`),
+  CONSTRAINT `FK_author_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
   CONSTRAINT `FK_user_author` FOREIGN KEY (`userid`) REFERENCES `account` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -66,6 +74,7 @@ CREATE TABLE `authority` (
 
 LOCK TABLES `authority` WRITE;
 /*!40000 ALTER TABLE `authority` DISABLE KEYS */;
+INSERT INTO `authority` VALUES (1,1,'admin'),(2,2,'user1'),(3,2,'user2');
 /*!40000 ALTER TABLE `authority` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,12 +117,12 @@ DROP TABLE IF EXISTS `delivery_address`;
 CREATE TABLE `delivery_address` (
   `address_id` int NOT NULL,
   `name` varchar(100) DEFAULT NULL,
-  `username` varchar(20) DEFAULT NULL,
   `address` varchar(500) DEFAULT NULL,
-  `active` tinyint(1) DEFAULT NULL,
+  `active` bit(1) DEFAULT NULL,
+  `username` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`address_id`),
-  KEY `username` (`username`),
-  CONSTRAINT `delivery_address_ibfk_1` FOREIGN KEY (`username`) REFERENCES `account` (`username`)
+  KEY `FKuseraddress_idx` (`username`),
+  CONSTRAINT `FKuseraddress` FOREIGN KEY (`username`) REFERENCES `account` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -123,6 +132,7 @@ CREATE TABLE `delivery_address` (
 
 LOCK TABLES `delivery_address` WRITE;
 /*!40000 ALTER TABLE `delivery_address` DISABLE KEYS */;
+INSERT INTO `delivery_address` VALUES (1,'Nhà','288 nvl',_binary '','user1'),(2,'Nhà','300 nvl',_binary '','user2');
 /*!40000 ALTER TABLE `delivery_address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,6 +191,7 @@ CREATE TABLE `food` (
 
 LOCK TABLES `food` WRITE;
 /*!40000 ALTER TABLE `food` DISABLE KEYS */;
+INSERT INTO `food` VALUES (1,1,1,'Machiato',40000,'machi.png','HEHE',_binary ''),(2,3,4,'Macha đá xay',36000,'mach machme','naruto\' fav',_binary '');
 /*!40000 ALTER TABLE `food` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,6 +215,7 @@ CREATE TABLE `food_category` (
 
 LOCK TABLES `food_category` WRITE;
 /*!40000 ALTER TABLE `food_category` DISABLE KEYS */;
+INSERT INTO `food_category` VALUES (1,'Cafe'),(2,'Bò'),(3,'Salad'),(4,'Đá xay'),(5,'Sữa chua'),(6,'Sữa tươi'),(7,'Hamburger'),(8,'Bánh mì'),(9,'Bữa sáng'),(10,'Pizza'),(11,'Bánh'),(12,'Kẹo'),(13,'Ăn no'),(14,'Thức anh nhanh');
 /*!40000 ALTER TABLE `food_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,6 +242,7 @@ CREATE TABLE `menu_cate` (
 
 LOCK TABLES `menu_cate` WRITE;
 /*!40000 ALTER TABLE `menu_cate` DISABLE KEYS */;
+INSERT INTO `menu_cate` VALUES (1,1,'Đồ nóng'),(2,1,'Đồ lạnh'),(3,2,'Khai vị'),(4,2,'Tráng miệng');
 /*!40000 ALTER TABLE `menu_cate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,6 +294,8 @@ CREATE TABLE `order_detail` (
   `food_id` int DEFAULT NULL,
   `qty` int DEFAULT NULL,
   `price` double DEFAULT NULL,
+  `oder_detail_id` int NOT NULL,
+  `quantity` int DEFAULT NULL,
   PRIMARY KEY (`order_detail_id`),
   KEY `order_id` (`order_id`),
   KEY `food_id` (`food_id`),
@@ -348,6 +363,7 @@ CREATE TABLE `premium_bundle` (
 
 LOCK TABLES `premium_bundle` WRITE;
 /*!40000 ALTER TABLE `premium_bundle` DISABLE KEYS */;
+INSERT INTO `premium_bundle` VALUES (1,'Phổ thông',0,NULL,NULL,_binary '\0'),(2,'Cao cấp',200000,'2022-11-25 00:00:00','Cao cấp',_binary '');
 /*!40000 ALTER TABLE `premium_bundle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -363,7 +379,7 @@ CREATE TABLE `prioritized` (
   `premium_id` int DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
-  `active` tinyint(1) DEFAULT NULL,
+  `active` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `premium_id` (`premium_id`),
   CONSTRAINT `prioritized_ibfk_1` FOREIGN KEY (`premium_id`) REFERENCES `premium_bundle` (`premium_id`)
@@ -376,6 +392,7 @@ CREATE TABLE `prioritized` (
 
 LOCK TABLES `prioritized` WRITE;
 /*!40000 ALTER TABLE `prioritized` DISABLE KEYS */;
+INSERT INTO `prioritized` VALUES (1,1,'2022-11-25',NULL,_binary '');
 /*!40000 ALTER TABLE `prioritized` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -405,6 +422,7 @@ CREATE TABLE `restaurant` (
 
 LOCK TABLES `restaurant` WRITE;
 /*!40000 ALTER TABLE `restaurant` DISABLE KEYS */;
+INSERT INTO `restaurant` VALUES (1,1,'Tui\'s restaurant','tui.png','0102 NVC',2,'08:00:00','24:00:00'),(2,1,'Bạn\'s food','ban.png','QL HEHE CT',4.5,'00:00:00','24:00:00');
 /*!40000 ALTER TABLE `restaurant` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -420,6 +438,8 @@ CREATE TABLE `restaurant_location` (
   `restaurant_id` int DEFAULT NULL,
   `location` varchar(300) DEFAULT NULL,
   KEY `Key` (`id`,`restaurant_id`,`location`),
+  KEY `FKkgl6ss2nr2yb87wedxpury51c` (`restaurant_id`),
+  CONSTRAINT `FKkgl6ss2nr2yb87wedxpury51c` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant` (`restaurant_id`),
   CONSTRAINT `restaurant_location_ibfk_1` FOREIGN KEY (`id`) REFERENCES `restaurant` (`restaurant_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -472,7 +492,7 @@ DROP TABLE IF EXISTS `role`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role` (
   `id` int NOT NULL,
-  `roleName` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `role_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -483,6 +503,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
+INSERT INTO `role` VALUES (1,'ADMIN'),(2,'USER');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -525,4 +546,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-10 10:36:51
+-- Dump completed on 2022-11-25 22:14:40
