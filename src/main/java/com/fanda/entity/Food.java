@@ -47,7 +47,7 @@ public class Food implements Serializable {
 	@JoinColumn(name = "food_cate_id")
 	FoodCategory foodCate;
 	@ManyToOne
-	@JoinColumn(name = "menu_id")
+	@JoinColumn(name = "menu_cate_id")
 	Menu_cate menu_cate;
 	@JsonIgnore
 	@OneToMany(mappedBy = "food")
