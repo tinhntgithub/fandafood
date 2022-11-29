@@ -1,6 +1,7 @@
 package com.fanda.controller;
 
-import java.util.List;
+
+import java.lang.ProcessBuilder.Redirect;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fanda.dao.AccountDAO;
-import com.fanda.entity.Account;
 
 @Controller
 public class AccountController {
@@ -24,7 +24,7 @@ public class AccountController {
 	public String success(Model model) {
 		
 		 
-		return "home/home";
+		return  "redirect:/home/index";
 	}
 	
 	
