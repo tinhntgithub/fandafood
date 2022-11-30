@@ -1,7 +1,6 @@
 package com.fanda.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,15 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -47,7 +43,7 @@ public class Food implements Serializable {
 	@JoinColumn(name = "food_cate_id")
 	FoodCategory foodCate;
 	@ManyToOne
-	@JoinColumn(name = "menu_id")
+	@JoinColumn(name = "menu_cate_id")
 	Menu_cate menu_cate;
 	@JsonIgnore
 	@OneToMany(mappedBy = "food")
@@ -58,4 +54,10 @@ public class Food implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "food")
 	List<Picture> picture;
+	@JsonIgnore
+	@OneToMany(mappedBy = "food")
+	List<Review> review;
+	@JsonIgnore
+	@OneToMany(mappedBy = "food" )
+	List<VoucherApply> voucherApplyto  ;
 }

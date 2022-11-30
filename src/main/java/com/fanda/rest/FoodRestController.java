@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fanda.dao.FoodDAO;
 import com.fanda.entity.Food;
 import com.fanda.service.FoodServ;
 
@@ -22,6 +23,8 @@ public class FoodRestController {
 	
 	@Autowired
 	FoodServ fServ;	
+	@Autowired
+	FoodDAO dao;
 	
 	@GetMapping()
 	public List<Food> getAll() {
@@ -29,7 +32,8 @@ public class FoodRestController {
 	}
 	@GetMapping("{id}")
 	public Optional<Food> getById(@PathVariable("id") int id) {
-		return fServ.findById(id);
+		
+		return dao.findById(id);
 	}
 	@PostMapping
 	public Food create(@RequestBody Food f) {

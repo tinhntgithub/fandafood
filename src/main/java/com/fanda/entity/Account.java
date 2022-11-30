@@ -6,11 +6,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -21,9 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
 @SuppressWarnings("serial")
@@ -32,23 +26,31 @@ import lombok.Setter;
 @Table(name = "account")
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
 public class Account implements Serializable{
 	@Id
 	String username;
 	String password;
+<<<<<<< HEAD
 	@Column(name = "first_name")
 	String firstname;
 	@Column(name = "last_name")
 	String lastname;
 	@Column(name = "phone_number")
 	String phonenumber;
+=======
+	@Column(name="first_name")
+	String firstname;
+	@Column(name="last_name")
+	String lastname;
+	@Column(name="phone_number")
+	String phone;
+>>>>>>> 5acf283aa88d56a081c4c1d8e3a03434220921c9
 	String email;
-	boolean Active;
-	boolean Gender;
+	boolean active;
+	boolean gender;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "createdate")
-	Date Createdate = new Date();
+	Date createdate = new Date();
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "account")
@@ -66,5 +68,7 @@ public class Account implements Serializable{
 	@OneToMany(mappedBy = "account")
 	List<Delivery_address> delivery_address;
 	
-	
+	@JsonIgnore
+	@OneToMany(mappedBy = "account")
+	List<Review> review;
 }
