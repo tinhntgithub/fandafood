@@ -37,8 +37,11 @@ public class Account implements Serializable{
 	@Id
 	String username;
 	String password;
+	@Column(name = "first_name")
 	String firstname;
+	@Column(name = "last_name")
 	String lastname;
+	@Column(name = "phone_number")
 	String phonenumber;
 	String email;
 	boolean Active;
