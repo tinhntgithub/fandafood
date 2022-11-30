@@ -18,9 +18,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
 @SuppressWarnings("serial")
@@ -29,7 +27,6 @@ import lombok.Setter;
 @Table(name = "account")
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
 public class Account implements Serializable{
 	@Id
 	String username;
@@ -64,5 +61,7 @@ public class Account implements Serializable{
 	@OneToMany(mappedBy = "account")
 	List<Delivery_address> delivery_address;
 	
-	
+	@JsonIgnore
+	@OneToMany(mappedBy = "account")
+	List<Review> review;
 }

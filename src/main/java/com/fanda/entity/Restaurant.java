@@ -1,8 +1,6 @@
 package com.fanda.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +12,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -60,5 +57,9 @@ public class Restaurant implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "restaurant" )
 	List<Review> review  ;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "restaurant" )
+	List<VoucherApply> voucherApplyto  ;
 	
 }
