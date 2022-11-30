@@ -127,6 +127,7 @@
 								</div>
 							</div>
 						</div>
+						
 						<hr>
 						<div class="reviews-members py-3">
 							<div class="media">
@@ -219,28 +220,35 @@
 								<span class="count-number float-right">
 									<button
 										type="button"
+											ng-click="qty_decr()"
 										class="btn-sm left dec btn btn-outline-secondary">
 										<i class="feather-minus"></i>
 									</button> 
-									<input class="count-number-input" type="text"  value="2">
+									<input class="count-number-input" type="text"    value="{{quantity}}"  >
 									<button type="button"
+										ng-click="qty_incr()"
 										class="btn-sm right inc btn btn-outline-secondary">
 										<i class="feather-plus"></i>
 									</button>
 									</span>
-								<p class="text-gray mb-0 float-right ml-2 text-muted small">$628</p>
+								<p class="text-gray mb-0 float-right ml-2 text-muted small">{{quantity * [[${food.price}]] | number}} </p>
 							</div>
 						</div>
 
 
 
+</div>
+
+		
 
 
+					<div class="p-3" th:if="${#request.remoteUser}">
+						<a class="btn btn-success btn-block btn-lg" href=""  th:attr="ng-click=@{|cart.add(${food.food_id})|}">Thêm Vào Giỏ Hàng <i class="feather-arrow-right"></i>
+						</a>
 					</div>
-
-
-					<div class="p-3">
-						<a class="btn btn-success btn-block btn-lg" href="successful.html">Thêm Vào Giỏ Hàng<i class="feather-arrow-right"></i>
+					
+						<div class="p-3" th:unless="${#request.remoteUser}">
+						<a class="btn btn-danger btn-block btn-lg" href="/account/login"  >Hãy đăng nhập nhé<i class="feather-arrow-right"></i>
 						</a>
 					</div>
 				</div>

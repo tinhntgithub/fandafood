@@ -52,9 +52,8 @@ public class Order implements Serializable {
 	@JoinColumn(name = "voucher_id")
 	Voucher voucher;
 
-	@ManyToOne
-	@JoinColumn(name = "address_id")
-	Delivery_address deliAdd;
+	@ManyToOne @JoinColumn(name = "address_id")
+	Delivery_address address;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "order")

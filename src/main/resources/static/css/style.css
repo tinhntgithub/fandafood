@@ -473,9 +473,9 @@ a {
 
 .bg-primary {
     background: #b91e1e;
-    background: -moz-linear-gradient(45deg, #b91e1e 0%, #B10101 100%);
-    background: -webkit-linear-gradient(45deg, #b91e1e 0%, #B10101 100%);
-    background: linear-gradient(45deg, #b91e1e 0%, #B10101 100%);
+    background: -moz-linear-gradient(45deg, #b91e1e 0%, #b91e1e 100%);
+    background: -webkit-linear-gradient(45deg, #b91e1e 0%, #b91e1e 100%);
+    background: linear-gradient(45deg, #b91e1e 0%, #b91e1e 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b91e1e', endColorstr='#B10101', GradientType=1)
 }
 

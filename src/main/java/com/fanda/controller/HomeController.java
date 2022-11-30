@@ -94,7 +94,7 @@ public class HomeController {
 	@RequestMapping("/home/food/detail/{id}")
 	public String detail(@PathVariable("id") Integer id , Food food ,Menu_cate menu,Restaurant res, Model model) {
 			food = dao.findById(id).get();
-			menu = menudao.findById(id).get();
+			
 			int id_rest = food.getMenu_cate().getRestaurant_id();
 			
 			

@@ -18,16 +18,21 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "delivery_address")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Delivery_address implements Serializable {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer Id;
-	String name;
+	@Column(name = "address_id")
+	Integer id;
+	String phone;
 	String address;
 	Boolean Active;
 
@@ -35,6 +40,7 @@ public class Delivery_address implements Serializable {
 	@JoinColumn(name = "username")
 	Account account;
 	
-	@OneToMany(mappedBy = "deliAdd")
-	List<Order> order;
+	@JsonIgnore
+	@OneToMany(mappedBy = "address")
+	List<Order> orders;
 }
