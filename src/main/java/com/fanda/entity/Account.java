@@ -30,21 +30,12 @@ public class Account implements Serializable{
 	@Id
 	String username;
 	String password;
-<<<<<<< HEAD
-	@Column(name = "first_name")
-	String firstname;
-	@Column(name = "last_name")
-	String lastname;
-	@Column(name = "phone_number")
-	String phonenumber;
-=======
 	@Column(name="first_name")
 	String firstname;
 	@Column(name="last_name")
 	String lastname;
 	@Column(name="phone_number")
 	String phone;
->>>>>>> 5acf283aa88d56a081c4c1d8e3a03434220921c9
 	String email;
 	boolean active;
 	boolean gender;

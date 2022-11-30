@@ -1,6 +1,5 @@
 package com.fanda.controller;
 
-import java.net.http.HttpClient.Redirect;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +33,7 @@ public class ProfileController {
 		account.setFirstname(firstname);
 		account.setLastname(lastname);
 		account.setEmail(email);
-		account.setPhonenumber(phonenumber);
+		account.setPhone(phonenumber);
 		account.setGender(gender);
 		account.setActive(true);
 		account.setCreatedate(new Date());
