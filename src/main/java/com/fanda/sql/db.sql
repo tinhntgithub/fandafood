@@ -42,8 +42,38 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES ('admin','123','Nguyễn','Quản Trị','0788791726','tinhntpc02175@fpt.edu.vn',_binary '',_binary '',NULL),('user1','123','Nguyễn','Nhất Niệm','0986633495',NULL,_binary '',_binary '\0',NULL),('user2','123','Nguyễn','Nhị Khúc',NULL,NULL,_binary '',_binary '',NULL);
+INSERT INTO `account` VALUES ('admin','123','Nguyễn','Quản Trị','0788791726','tinhntpc02175@fpt.edu.vn',_binary '',_binary '',NULL),('use','123','a','b','0987654321',NULL,_binary '',_binary '',NULL),('user1','123','Nguyễn','Nhất Niệm','0986633495',NULL,_binary '',_binary '\0',NULL),('user2','123','Nguyễn','Nhị Khúc',NULL,NULL,_binary '',_binary '',NULL);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `accounts`
+--
+
+DROP TABLE IF EXISTS `accounts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `accounts` (
+  `username` varchar(255) NOT NULL,
+  `active` bit(1) NOT NULL,
+  `createdate` date DEFAULT NULL,
+  `gender` bit(1) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `firstname` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `phonenumber` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `accounts`
+--
+
+LOCK TABLES `accounts` WRITE;
+/*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -54,16 +84,16 @@ DROP TABLE IF EXISTS `authority`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `authority` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `role_id` int DEFAULT NULL,
   `userid` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UKs1gjv619ehephhyauffufq669` (`userid`,`role_id`),
   KEY `FK_user_author_idx` (`userid`),
-  KEY `FK_author_role_idx` (`role_id`),
-  CONSTRAINT `FK_author_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
+  KEY `fk_auth_role_idx` (`role_id`),
+  CONSTRAINT `fk_auth_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
   CONSTRAINT `FK_user_author` FOREIGN KEY (`userid`) REFERENCES `account` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,11 +119,12 @@ CREATE TABLE `cart` (
   `username` varchar(20) DEFAULT NULL,
   `qty` int DEFAULT NULL,
   PRIMARY KEY (`cart_id`),
-  KEY `FK_food_idx` (`food_id`),
   KEY `FK_acc_idx` (`username`),
+  KEY `fk_food_idx` (`food_id`),
+  KEY `fk_food_cart_idx` (`food_id`),
   CONSTRAINT `FK_acc` FOREIGN KEY (`username`) REFERENCES `account` (`username`),
-  CONSTRAINT `FK_food` FOREIGN KEY (`food_id`) REFERENCES `food` (`food_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `fk_food_cart` FOREIGN KEY (`food_id`) REFERENCES `food` (`food_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,6 +133,7 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+INSERT INTO `cart` VALUES (3,2,'admin',4),(4,1,'user1',1);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,16 +145,17 @@ DROP TABLE IF EXISTS `delivery_address`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `delivery_address` (
-  `address_id` int NOT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `address` varchar(500) DEFAULT NULL,
+  `address_id` int NOT NULL AUTO_INCREMENT,
+  `city` varchar(500) DEFAULT NULL,
+  `districts` varchar(500) DEFAULT NULL,
+  `wards` varchar(500) DEFAULT NULL,
   `active` bit(1) DEFAULT NULL,
   `username` varchar(20) DEFAULT NULL,
-  `id` int NOT NULL,
+  `phone` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`address_id`),
   KEY `FKuseraddress_idx` (`username`),
   CONSTRAINT `FKuseraddress` FOREIGN KEY (`username`) REFERENCES `account` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +164,7 @@ CREATE TABLE `delivery_address` (
 
 LOCK TABLES `delivery_address` WRITE;
 /*!40000 ALTER TABLE `delivery_address` DISABLE KEYS */;
-INSERT INTO `delivery_address` VALUES (1,'Nhà','288 nvl',_binary '','user1',0),(2,'Nhà','300 nvl',_binary '','user2',0);
+INSERT INTO `delivery_address` VALUES (1,'Thành phố Cần Thơ','Quận Ninh Kiều','Phường An Hòa',_binary '','user1',NULL),(2,'300 nvl',NULL,NULL,_binary '','user2',NULL),(6,'Tỉnh Long An','Thành phố Tân An','Phường 5',_binary '','admin','056231241233'),(8,'Tỉnh Tiền Giang','Thị xã Gò Công','Phường 2',_binary '\0','admin','091234123'),(9,'Tỉnh Bến Tre','Huyện Chợ Lách','Xã Hưng Khánh Trung B',_binary '\0','admin','0987654321');
 /*!40000 ALTER TABLE `delivery_address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,11 +176,11 @@ DROP TABLE IF EXISTS `favorite`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `favorite` (
-  `favorite_id` int NOT NULL,
+  `favorite_id` int NOT NULL AUTO_INCREMENT,
   `restaurant_id` int DEFAULT NULL,
   PRIMARY KEY (`favorite_id`),
-  KEY `restaurant_id` (`restaurant_id`),
-  CONSTRAINT `favorite_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant` (`restaurant_id`)
+  KEY `fk_rest_fav_idx` (`restaurant_id`),
+  CONSTRAINT `fk_rest_fav` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant` (`restaurant_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -168,7 +201,7 @@ DROP TABLE IF EXISTS `food`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `food` (
-  `food_id` int NOT NULL,
+  `food_id` int NOT NULL AUTO_INCREMENT,
   `menu_cate_id` int DEFAULT NULL,
   `food_cate_id` int DEFAULT NULL,
   `name` varchar(50) DEFAULT NULL,
@@ -177,11 +210,11 @@ CREATE TABLE `food` (
   `description` varchar(500) DEFAULT NULL,
   `status` bit(1) DEFAULT NULL,
   PRIMARY KEY (`food_id`),
-  KEY `menu_cate_id` (`menu_cate_id`),
-  KEY `food_cate_id` (`food_cate_id`),
-  CONSTRAINT `food_ibfk_1` FOREIGN KEY (`menu_cate_id`) REFERENCES `menu_cate` (`menu_id`),
-  CONSTRAINT `food_ibfk_2` FOREIGN KEY (`food_cate_id`) REFERENCES `food_category` (`food_cate_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_food_cate_idx` (`food_cate_id`),
+  KEY `fk_menu_cate_idx` (`menu_cate_id`),
+  CONSTRAINT `fk_food_cate` FOREIGN KEY (`food_cate_id`) REFERENCES `food_category` (`food_cate_id`),
+  CONSTRAINT `fk_menu_cate` FOREIGN KEY (`menu_cate_id`) REFERENCES `menu_cate` (`menu_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,10 +235,10 @@ DROP TABLE IF EXISTS `food_category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `food_category` (
-  `food_cate_id` int NOT NULL,
+  `food_cate_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`food_cate_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,13 +259,13 @@ DROP TABLE IF EXISTS `menu_cate`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `menu_cate` (
-  `menu_id` int NOT NULL,
+  `menu_id` int NOT NULL AUTO_INCREMENT,
   `restaurant_id` int DEFAULT NULL,
   `cate_name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`menu_id`),
-  KEY `restaurant_id` (`restaurant_id`),
-  CONSTRAINT `menu_cate_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant` (`restaurant_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_menu_rest_idx` (`restaurant_id`),
+  CONSTRAINT `fk_menu_rest` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant` (`restaurant_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -246,41 +279,6 @@ INSERT INTO `menu_cate` VALUES (1,1,'Đồ nóng'),(2,1,'Đồ lạnh'),(3,2,'Kh
 UNLOCK TABLES;
 
 --
--- Table structure for table `order`
---
-
-DROP TABLE IF EXISTS `order`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `order` (
-  `order_id` int NOT NULL,
-  `username` varchar(20) DEFAULT NULL,
-  `voucher_id` int DEFAULT NULL,
-  `address_id` int DEFAULT NULL,
-  `total` double DEFAULT NULL,
-  `date` date DEFAULT NULL,
-  `note` varchar(500) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`order_id`),
-  KEY `username` (`username`),
-  KEY `voucher_id` (`voucher_id`),
-  KEY `address_id` (`address_id`),
-  CONSTRAINT `order_ibfk_1` FOREIGN KEY (`username`) REFERENCES `account` (`username`),
-  CONSTRAINT `order_ibfk_2` FOREIGN KEY (`voucher_id`) REFERENCES `voucher` (`restaurant_id`),
-  CONSTRAINT `order_ibfk_3` FOREIGN KEY (`address_id`) REFERENCES `delivery_address` (`address_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `order`
---
-
-LOCK TABLES `order` WRITE;
-/*!40000 ALTER TABLE `order` DISABLE KEYS */;
-/*!40000 ALTER TABLE `order` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `order_detail`
 --
 
@@ -291,16 +289,14 @@ CREATE TABLE `order_detail` (
   `order_detail_id` int NOT NULL AUTO_INCREMENT,
   `order_id` int DEFAULT NULL,
   `food_id` int DEFAULT NULL,
-  `qty` int DEFAULT NULL,
-  `price` double DEFAULT NULL,
   `quantity` int DEFAULT NULL,
-  `oder_detail_id` int NOT NULL,
+  `price` double DEFAULT NULL,
   PRIMARY KEY (`order_detail_id`),
-  KEY `order_id` (`order_id`),
-  KEY `food_id` (`food_id`),
-  CONSTRAINT `order_detail_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`),
-  CONSTRAINT `order_detail_ibfk_2` FOREIGN KEY (`food_id`) REFERENCES `food` (`food_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_food_odt_idx` (`food_id`),
+  KEY `fk_order_odt_idx` (`order_id`),
+  CONSTRAINT `fk_food_odt` FOREIGN KEY (`food_id`) REFERENCES `food` (`food_id`),
+  CONSTRAINT `fk_order_odt` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -309,7 +305,44 @@ CREATE TABLE `order_detail` (
 
 LOCK TABLES `order_detail` WRITE;
 /*!40000 ALTER TABLE `order_detail` DISABLE KEYS */;
+INSERT INTO `order_detail` VALUES (1,13,2,4,36000);
 /*!40000 ALTER TABLE `order_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `orders` (
+  `order_id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) DEFAULT NULL,
+  `voucher_id` int DEFAULT NULL,
+  `address_id` int DEFAULT NULL,
+  `total` double DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `note` varchar(500) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `username` (`username`),
+  KEY `voucher_id` (`voucher_id`),
+  KEY `FK_deliadd_idx` (`address_id`),
+  CONSTRAINT `FK_deliadd` FOREIGN KEY (`address_id`) REFERENCES `delivery_address` (`address_id`),
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`username`) REFERENCES `account` (`username`),
+  CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`voucher_id`) REFERENCES `voucher` (`restaurant_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders`
+--
+
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (12,'admin',NULL,6,0,'2022-12-01',NULL,1),(13,'admin',NULL,6,0,'2022-12-01',NULL,1);
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -320,12 +353,12 @@ DROP TABLE IF EXISTS `picture`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `picture` (
-  `picture_id` int NOT NULL,
+  `picture_id` int NOT NULL AUTO_INCREMENT,
   `food_id` int DEFAULT NULL,
   `picture` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   PRIMARY KEY (`picture_id`),
-  KEY `food_id` (`food_id`),
-  CONSTRAINT `picture_ibfk_1` FOREIGN KEY (`food_id`) REFERENCES `food` (`food_id`)
+  KEY `fk_food_idx` (`food_id`),
+  CONSTRAINT `fk_food` FOREIGN KEY (`food_id`) REFERENCES `food` (`food_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -346,14 +379,14 @@ DROP TABLE IF EXISTS `premium_bundle`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `premium_bundle` (
-  `premium_id` int NOT NULL,
+  `premium_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `price` double DEFAULT NULL,
   `date` datetime DEFAULT NULL,
   `restaurant_tag` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `premium_icon` bit(1) DEFAULT NULL,
   PRIMARY KEY (`premium_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -374,15 +407,15 @@ DROP TABLE IF EXISTS `prioritized`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `prioritized` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `premium_id` int DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
   `active` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `premium_id` (`premium_id`),
-  CONSTRAINT `prioritized_ibfk_1` FOREIGN KEY (`premium_id`) REFERENCES `premium_bundle` (`premium_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_bundle_idx` (`premium_id`),
+  CONSTRAINT `fk_bundle` FOREIGN KEY (`premium_id`) REFERENCES `premium_bundle` (`premium_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -403,9 +436,10 @@ DROP TABLE IF EXISTS `restaurant`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `restaurant` (
-  `restaurant_id` int NOT NULL,
+  `restaurant_id` int NOT NULL AUTO_INCREMENT,
   `user_id` varchar(20) DEFAULT NULL,
   `prioritized_id` int DEFAULT NULL,
+  `location_id` int DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `main_image` varchar(500) DEFAULT NULL,
   `address` varchar(200) DEFAULT NULL,
@@ -414,10 +448,12 @@ CREATE TABLE `restaurant` (
   `close_time` time DEFAULT NULL,
   PRIMARY KEY (`restaurant_id`),
   KEY `FK_user_idx` (`user_id`),
-  KEY `FK_pri_idx` (`prioritized_id`),
-  CONSTRAINT `FK_pri` FOREIGN KEY (`prioritized_id`) REFERENCES `prioritized` (`id`),
+  KEY `FK_location_idx` (`location_id`),
+  KEY `fk_pri_rest_idx` (`prioritized_id`),
+  CONSTRAINT `FK_location` FOREIGN KEY (`location_id`) REFERENCES `restaurant_location` (`id`),
+  CONSTRAINT `fk_pri_rest` FOREIGN KEY (`prioritized_id`) REFERENCES `prioritized` (`id`),
   CONSTRAINT `FK_user` FOREIGN KEY (`user_id`) REFERENCES `account` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -426,7 +462,7 @@ CREATE TABLE `restaurant` (
 
 LOCK TABLES `restaurant` WRITE;
 /*!40000 ALTER TABLE `restaurant` DISABLE KEYS */;
-INSERT INTO `restaurant` VALUES (1,NULL,1,'Tui\'s restaurant','tui.png','0102 NVC',2,'08:00:00','24:00:00'),(2,NULL,1,'Bạn\'s food','ban.png','QL HEHE CT',4.5,'00:00:00','24:00:00');
+INSERT INTO `restaurant` VALUES (1,NULL,1,NULL,'Tui\'s restaurant','tui.png','0102 NVC',2,'08:00:00','24:00:00'),(2,NULL,1,NULL,'Bạn\'s food','ban.png','QL HEHE CT',4.5,'00:00:00','24:00:00');
 /*!40000 ALTER TABLE `restaurant` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -438,13 +474,10 @@ DROP TABLE IF EXISTS `restaurant_location`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `restaurant_location` (
-  `id` int DEFAULT NULL,
-  `restaurant_id` int DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `location` varchar(300) DEFAULT NULL,
-  KEY `Key` (`id`,`restaurant_id`,`location`),
-  KEY `FKkgl6ss2nr2yb87wedxpury51c` (`restaurant_id`),
-  CONSTRAINT `FKkgl6ss2nr2yb87wedxpury51c` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant` (`restaurant_id`),
-  CONSTRAINT `restaurant_location_ibfk_1` FOREIGN KEY (`id`) REFERENCES `restaurant` (`restaurant_id`)
+  PRIMARY KEY (`id`),
+  KEY `Key` (`id`,`location`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -471,14 +504,13 @@ CREATE TABLE `review` (
   `message` varchar(500) DEFAULT NULL,
   `date` datetime DEFAULT NULL,
   `rate` float DEFAULT NULL,
-  `vote` bit(1) DEFAULT NULL,
   `restaurant_id` int DEFAULT NULL,
   PRIMARY KEY (`review_id`),
-  KEY `FK_food_idx` (`food_id`),
   KEY `FK_user_idx` (`user_id`),
-  KEY `FK70ry7cuti298yxet366rynxch` (`restaurant_id`),
-  CONSTRAINT `FK70ry7cuti298yxet366rynxch` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant` (`restaurant_id`),
-  CONSTRAINT `food_review` FOREIGN KEY (`food_id`) REFERENCES `food` (`food_id`),
+  KEY `fk_food_review_idx` (`food_id`),
+  KEY `fk_rest_review_idx` (`restaurant_id`),
+  CONSTRAINT `fk_food_review` FOREIGN KEY (`food_id`) REFERENCES `food` (`food_id`),
+  CONSTRAINT `fk_rest_review` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant` (`restaurant_id`),
   CONSTRAINT `food_user` FOREIGN KEY (`user_id`) REFERENCES `account` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -500,10 +532,10 @@ DROP TABLE IF EXISTS `role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `role_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -524,15 +556,17 @@ DROP TABLE IF EXISTS `voucher`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `voucher` (
-  `voucher` int NOT NULL,
+  `voucher` int NOT NULL AUTO_INCREMENT,
   `restaurant_id` int DEFAULT NULL,
+  `name` varchar(20) DEFAULT NULL,
   `discount` int DEFAULT NULL,
   `minimum_order` int DEFAULT NULL,
   `delivery_discount` double DEFAULT NULL,
   `end_date` datetime DEFAULT NULL,
   `start_date` datetime DEFAULT NULL,
   PRIMARY KEY (`voucher`),
-  KEY `restaurant_id_idx` (`restaurant_id`)
+  KEY `restaurant_id_idx` (`restaurant_id`),
+  CONSTRAINT `fk_voucher_rest` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant` (`restaurant_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -553,20 +587,20 @@ DROP TABLE IF EXISTS `voucher_applyto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `voucher_applyto` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `voucher_id` int DEFAULT NULL,
   `restaurant_id` int DEFAULT NULL,
   `food_id` int DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `restaurant_idx` (`restaurant_id`),
-  KEY `food_idx` (`food_id`),
-  KEY `voucher_idx` (`voucher_id`),
   KEY `FKbnnlqvut1qja0f570cjgj3faj` (`username`),
-  CONSTRAINT `FKbnnlqvut1qja0f570cjgj3faj` FOREIGN KEY (`username`) REFERENCES `account` (`username`),
-  CONSTRAINT `food` FOREIGN KEY (`food_id`) REFERENCES `food` (`food_id`),
-  CONSTRAINT `restaurant` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant` (`restaurant_id`),
-  CONSTRAINT `voucher` FOREIGN KEY (`voucher_id`) REFERENCES `voucher` (`voucher`)
+  KEY `fk_food_apply_idx` (`food_id`),
+  KEY `fk_rest_apply_idx` (`restaurant_id`),
+  KEY `FKb2mqiet338stjgdevnvj919ka` (`voucher_id`),
+  CONSTRAINT `fk_food_apply` FOREIGN KEY (`food_id`) REFERENCES `food` (`food_id`),
+  CONSTRAINT `fk_rest_apply` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant` (`restaurant_id`),
+  CONSTRAINT `FKb2mqiet338stjgdevnvj919ka` FOREIGN KEY (`voucher_id`) REFERENCES `voucher` (`voucher`),
+  CONSTRAINT `FKbnnlqvut1qja0f570cjgj3faj` FOREIGN KEY (`username`) REFERENCES `account` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -588,4 +622,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-30  2:08:45
+-- Dump completed on 2022-12-01 16:46:36
