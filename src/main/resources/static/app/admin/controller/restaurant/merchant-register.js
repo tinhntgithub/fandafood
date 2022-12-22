@@ -102,7 +102,7 @@ app.controller('McRegisCtrl', function ($scope, $http, $document) {
                 $http.post("/rest/prior", dataPrior).then(function (response) {
                     log(response)
                     
-                    // thêm role SELLSER với người dùng
+                    // thêm role SELLSER với người dùng | đồng thời xóa role USER
                     $http.post("/rest/auth/seller", {
                         'account': $scope.currentUser
                     }).then(function (response) {

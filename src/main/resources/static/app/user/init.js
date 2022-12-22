@@ -14,6 +14,8 @@ function getCurrentUser(){
             console.log(data)
             if(data){
                 document.getElementById("mainImage").src= '/user/img/user/'+data.avatar;
+            }else{
+              document.getElementById("mainImage").src= '/user/img/user/noImage.jpg'
             }
         }
             )

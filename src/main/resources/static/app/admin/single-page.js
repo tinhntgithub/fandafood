@@ -21,7 +21,7 @@ app.config(function($routeProvider){
 		templateUrl:"/admin/restaurant/restaurant-review.html",
 		controller: "restaurantReviewCtrl"	
 	})
-	.when("/restaurant/setting",{
+	.when("/restaurant/food",{
 		templateUrl:"/admin/restaurant/restaurant-setting.html",
 		controller: "restaurantSettingCtrl"	
 	})

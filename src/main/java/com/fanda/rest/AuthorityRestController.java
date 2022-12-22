@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fanda.dao.AuthorityDAO;
 import com.fanda.dao.RoleDAO;
 import com.fanda.entity.Authority;
 import com.fanda.service.AuthorityServ;
@@ -25,6 +26,9 @@ public class AuthorityRestController {
 	
 	@Autowired 
 	RoleDAO rDao;
+
+	@Autowired 
+	AuthorityDAO aDao;
 	
 	@GetMapping()
 	public List<Authority> getAllAuthority() {
@@ -45,7 +49,14 @@ public class AuthorityRestController {
 	}
 	@PostMapping("/seller")
 	public Authority createSeller(@RequestBody Authority auth) {
+		//đặt role cho người dùng này là seller
 		auth.setRole(rDao.getSellerRole("SELLER").get());
+
+		//xóa role user cũ
+		Optional<Authority> oldAuth = aDao.findUserRoleByAccount(auth.getAccount().getUsername(), "USER");
+		if(oldAuth.isPresent()){
+			authServ.delete(oldAuth.get().getId());
+		}
 		return authServ.create(auth);
 	}
 
