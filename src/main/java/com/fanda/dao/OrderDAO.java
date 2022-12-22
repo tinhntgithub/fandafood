@@ -29,8 +29,12 @@ public interface OrderDAO extends JpaRepository<Order, Integer>{
 	@Query(value="SELECT sum(total) sum, count(*) count FROM fandafood.orders where restaraunt_id = ?1 and status = ?2 and date > ?3 and date < ?4",nativeQuery=true)
 	Object[] getListStatisticalTotalByResStatusByDate(Integer idRestaurant,Integer oderStatus,String dateStar,String dateEnd);
 	
+<<<<<<< HEAD
 	@Query(value="SELECT * FROM fandafood.orders where restaraunt_id = ?1 and status = 2 and date >= ?2 and date <= ?3 ",nativeQuery=true)
 	List<Order> getOrderByRestaurantAndByStatusAndByDate(Integer restaurantId, String startDate, String endDate);
+=======
+	
+>>>>>>> 0da8e6354590aa75b65d971f44ab9387520b3144
 	
 	
 }

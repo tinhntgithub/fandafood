@@ -20,7 +20,7 @@ public class AdminController {
 	// ---------- DÙNG CHO ADMIN
 	@RequestMapping("/index")
 	public String adminIndex(Model model) {
-		return "redirect:/admin/index.html#!/index";
+		return "redirect:/admin/index.html#!/manager/account";
 	}
 
 
@@ -28,6 +28,10 @@ public class AdminController {
 	@RequestMapping("/restaurant/index")
 	public String restaurantIndex(Model model) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+<<<<<<< HEAD
+=======
+		System.out.println(principal);
+>>>>>>> 0da8e6354590aa75b65d971f44ab9387520b3144
 		String username;
 		if (principal instanceof UserDetails) {
 			username = ((UserDetails) principal).getUsername();

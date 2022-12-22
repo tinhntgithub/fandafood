@@ -21,7 +21,7 @@ app.config(function($routeProvider){
 		templateUrl:"/admin/restaurant/restaurant-review.html",
 		controller: "restaurantReviewCtrl"	
 	})
-	.when("/restaurant/setting",{
+	.when("/restaurant/food",{
 		templateUrl:"/admin/restaurant/restaurant-setting.html",
 		controller: "restaurantSettingCtrl"	
 	})
@@ -64,11 +64,14 @@ app.config(function($routeProvider){
 		templateUrl:"/admin/admin/restaurant-dashboard.html",
 		controller: "restaurantController"	
 	})
+<<<<<<< HEAD
 	
 	.when("/manager/thongke",{
 		templateUrl:"/admin/admin/thongke-dashboard.html",
 		controller: "thongkeController"	
 	})
+=======
+>>>>>>> 0da8e6354590aa75b65d971f44ab9387520b3144
 			
 	
 	.when("/not-found",{

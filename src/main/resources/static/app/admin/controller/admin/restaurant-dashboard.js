@@ -1,5 +1,6 @@
 app.controller("restaurantController", function($scope, $http, $document){
 	
+<<<<<<< HEAD
 	
 	$scope.getAllLocation = function() {
 		//$hhtp giống axios
@@ -13,6 +14,8 @@ app.controller("restaurantController", function($scope, $http, $document){
 		}
 		$scope.getAllLocation();
 	
+=======
+>>>>>>> 0da8e6354590aa75b65d971f44ab9387520b3144
 		$document.ready(function(){
 				function readURL(input) {
     if (input.files && input.files[0]) {
@@ -99,13 +102,20 @@ $scope.image_new = ""
 	}
 			
 			
+<<<<<<< HEAD
 				$scope.image = "r";
+=======
+			
+>>>>>>> 0da8e6354590aa75b65d971f44ab9387520b3144
 			
 			//Cập nhật
 					$scope.update = function(){
 	
 		var data = new FormData();
+<<<<<<< HEAD
 		if($scope.image == ""){ 
+=======
+>>>>>>> 0da8e6354590aa75b65d971f44ab9387520b3144
 		data.append('file', $scope.mainImage[0]);
 
 		$http.post("/rest/img/food", data, {
@@ -130,6 +140,7 @@ $scope.image_new = ""
 			alert("Lỗi upload hình ảnh");
 			console.log("Error", error);
 		});
+<<<<<<< HEAD
 		}else{
 			var item = angular.copy($scope.formRest);
 					$http.put("/rest/restaurant", item).then(function(response) {
@@ -140,6 +151,10 @@ $scope.image_new = ""
 									console.log(error);
 								})
 				}
+=======
+		
+		
+>>>>>>> 0da8e6354590aa75b65d971f44ab9387520b3144
 	
 	}
 		
