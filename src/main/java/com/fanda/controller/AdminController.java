@@ -20,7 +20,7 @@ public class AdminController {
 	// ---------- DÙNG CHO ADMIN
 	@RequestMapping("/index")
 	public String adminIndex(Model model) {
-		return "redirect:/admin/index.html#!/index";
+		return "redirect:/admin/index.html#!/manager/account";
 	}
 
 
