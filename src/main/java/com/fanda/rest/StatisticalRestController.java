@@ -55,7 +55,6 @@ public class StatisticalRestController {
 	}
 	
 	
-<<<<<<< HEAD
 	// nhơn mới cập nhật cái này - - - -
 	@GetMapping("/thongke")
 	public List<Order> getThongKe(@RequestParam("restaurantId") Integer restaurantId,@RequestParam("startDate") String startDate,@RequestParam("endDate") String endDate ){
@@ -64,6 +63,4 @@ public class StatisticalRestController {
 	}
 	
 	
-=======
->>>>>>> 0da8e6354590aa75b65d971f44ab9387520b3144
 }
