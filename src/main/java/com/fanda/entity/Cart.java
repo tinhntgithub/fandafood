@@ -38,4 +38,9 @@ public class Cart {
 	@ManyToOne
 	@JoinColumn(name= "food_id")
 	Food food;
+	
+	@ManyToOne
+	@JoinColumn(name= "restaraunt_id")
+	Restaurant restaurant;
+	
 }

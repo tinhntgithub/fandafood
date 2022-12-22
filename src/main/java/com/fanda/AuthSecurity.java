@@ -50,8 +50,8 @@ public class AuthSecurity extends WebSecurityConfigurerAdapter {
 			
 			http.authorizeRequests().antMatchers("/home/profile" ,"/home/checkout","/home/myorder","/home/favorites"
 					)
-			.hasAnyRole("ADMIN", "USER")
-			.antMatchers("/home/checkout").authenticated().antMatchers("/admin/home/index").hasAnyRole("ADMIN")
+			.hasAnyRole("ADMIN", "USER","SELLER")
+			.antMatchers("/home/checkout").authenticated().antMatchers("/admin/***").hasAnyRole("ADMIN","SELLER")
 			.anyRequest().permitAll();
 			
 			

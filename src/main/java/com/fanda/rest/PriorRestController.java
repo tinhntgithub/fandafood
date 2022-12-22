@@ -34,7 +34,8 @@ public class PriorRestController {
 	}
 	@PostMapping
 	public Prioritized create(@RequestBody Prioritized o) {
-		return pServ.create(o);
+		pServ.create(o);
+		return pServ.findById(o.getId()).get();
 	}
 	
 	@PutMapping("{id}")

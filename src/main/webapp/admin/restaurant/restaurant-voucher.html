@@ -1,0 +1,268 @@
+<!-- row -->
+<div class="container">
+
+	<!-- modal Thêm-->
+	
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="staticBackdropLabel">Thêm ưu đãi</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					
+							
+
+							
+								<div class="row">
+									<div class="col-xl-4 col-sm-4">
+										<div class="setting-input">
+											<label for="exampleInputtext" class="form-label">Mã
+												ưu đãi</label> <input type="text"
+												class="form-control" id="exampleInputtext"
+												ng-model="formVoucher.id" placeholder="Nhập mã ưu đãi..."
+												maxlength="8"
+												>
+										</div>
+
+										<br>
+
+										<div class="setting-input">
+											<label class="form-label">Giá trị áp dụng</label> <input
+												type="number" class="form-control"
+												ng-model="formVoucher.minimum_order"
+												placeholder="giá trị đơn hàng để áp dụng ưu đãi"
+												min="0">
+										</div>
+
+									</div>
+
+									<div class="col-xl-4 col-sm-4">
+										<div class="setting-input">
+											<label class="form-label">Tên ưu đãi</label> <input
+												type="text" class="form-control" ng-model="formVoucher.name"
+												placeholder="Nhập tên ưu đãi...">
+										</div>
+										<br>
+										<div class="setting-input">
+											<label class="form-label">Tiền giảm</label> <input
+												type="number" class="form-control"
+												ng-model="formVoucher.discount"
+												placeholder="Nhập giảm giá..."
+												min="0"
+												>
+										</div>
+
+
+									</div>
+
+									<div class="col-xl-4 col-sm-4">
+										<div class="setting-input">
+											<label class="form-label">Ngày bắt đầu</label> <input
+												id="startDate" type="date" class="form-control"
+												ng-value="formVoucher.startDate" placeholder="Start Day">
+										</div>
+										<br>
+										<div class="setting-input">
+											<label class="form-label">Ngày kết thúc</label> <br> <input
+												id="endDate" type="date" class="form-control"
+												ng-value="formVoucher.endDate" placeholder="End Day">
+										</div>
+									</div>
+
+
+
+								</div>
+							
+							<br>
+							<div class="row">
+
+
+								
+
+							</div>
+				
+				</div>
+				<div class="modal-footer">
+					<button ng-click="createVoucher()" type="button" class="btn btn-primary">Thêm ưu đãi</button>
+					<button ng-click="resetVoucher()" type="button" class="btn btn-primary">Làm mới</button>
+					<button type="button" class="btn btn-secondary"	data-bs-dismiss="modal">Đóng</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- modal Cập nhật -->
+	<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="staticBackdropLabel">Cập nhật ưu đãi</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					
+							
+
+							
+								<div class="row">
+									<div class="col-xl-4 col-sm-4">
+										<div class="setting-input">
+											<label for="exampleInputtext" class="form-label">Mã
+												ưu đãi</label> <input type="text"
+												class="form-control" ng-model="formVoucher2.id" placeholder="Nhập mã ưu đãi..." readonly="readonly">
+										</div>
+
+										<br>
+
+										<div class="setting-input">
+											<label class="form-label">Giá trị áp dụng</label> <input
+												type="number" class="form-control"
+												ng-model="formVoucher2.minimum_order"
+												placeholder="giá trị đơn hàng để áp dụng ưu đãi">
+										</div>
+
+										<div class="setting-input" style="margin-top: 10px">
+											<label class="form-label">Trạng thái :</label>
+											<div style="display: flex; gap: 10px;">
+												<div class="form-check">
+													<input class="form-check-input" type="radio"
+														ng-model="formVoucher2.status" ng-value="true"
+														ng-checked="true" name="radio"> <label
+														class="form-check-label"> Hoạt động</label>
+												</div>
+
+												<div class="form-check">
+													<input class="form-check-input" type="radio"
+														ng-model="formVoucher2.status" ng-value="false"
+														name="radio"> <label class="form-check-label">
+														Tạm ngừng </label>
+												</div>
+
+											</div>
+
+										</div>
+
+
+									</div>
+
+									<div class="col-xl-4 col-sm-4">
+										<div class="setting-input">
+											<label class="form-label">Tên ưu đãi</label> <input
+												type="text" class="form-control" ng-model="formVoucher2.name"
+												placeholder="Nhập tên ưu đãi...">
+										</div>
+										<br>
+										<div class="setting-input">
+											<label class="form-label">Tiền giảm</label> <input
+												type="number" class="form-control"
+												ng-model="formVoucher2.discount"
+												placeholder="Nhập giảm giá...">
+										</div>
+
+
+									</div>
+
+									<div class="col-xl-4 col-sm-4">
+										<div class="setting-input">
+											<label class="form-label">Ngày bắt đầu</label> <input
+												id="startDate2" type="date" class="form-control"
+												ng-value="formVoucher2.startDate" placeholder="Start Day">
+										</div>
+										<br>
+										<div class="setting-input">
+											<label class="form-label">Ngày kết thúc</label> <br> <input
+												id="endDate2" type="date" class="form-control"
+												ng-value="formVoucher2.endDate" placeholder="End Day">
+										</div>
+									</div>
+
+
+
+								</div>
+							
+							<br>
+							<div class="row">
+
+
+								
+
+							</div>
+				
+				</div>
+				<div class="modal-footer">
+					
+					<button ng-click="updateVoucher()" type="button" class="btn btn-primary">Cập nhật</button>
+					<button type="button" class="btn btn-secondary"	data-bs-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<div class="row">
+				<div class="col-9">
+					<h3 class="mb-4">Danh sách ưu đãi</h3>
+				</div>
+				<div class="col-3 d-flex justify-content-end mb-3">
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" style="display: flex; gap:10px;"
+		             data-bs-target="#staticBackdrop"> <i class="bi bi-plus-circle"></i> Thêm ưu đãi</button>
+					
+				</div>
+			</div>
+	<div class="card" style="margin: 0px">
+		<div class="card-body" style="border: 0">
+			
+			<div class="row">
+				<table>
+					<tr>
+						<th>Mã ưu đãi</th>
+						<th>Tên ưu đãi</th>
+						<th>Giảm giá</th>
+						<th>Giá trị áp dụng</th>
+						<th>Trạng thái</th>
+						<th>Ngày bắt đầu</th>
+						<th>Ngày kết thúc</th>
+						<th></th>
+					</tr>
+
+					<tr ng-repeat="i in dataVoucher"
+						style="border-bottom: 1px solid black; gap: 5px;">
+						<td>{{i.id}}</td>
+						<td>{{i.name}}</td>
+						<td>{{i.discount}}</td>
+						<td>{{i.minimum_order}}</td>
+
+						<td ng-if="i.status">Hoạt động</td>
+						<td ng-if="!i.status">tạm ngừng</td>
+
+						<td>{{i.startDate | date : 'dd-MM-yyyy'}}</td>
+						<td>{{i.endDate | date : 'dd-MM-yyyy'}}</td>
+						<td>
+							<button ng-click="editVoucher(i.id)"
+								class="btn tp-btn-light btn-light" data-bs-toggle="modal"
+		                        data-bs-target="#staticBackdrop2" style="margin-right: 0px">
+								<i class="fas fa-pencil-alt"></i>
+							</button>
+							<button class="btn tp-btn-light btn-light"
+								ng-click="deleteVoucher(i.id)">
+								<i class="bi bi-trash"></i>
+							</button>
+						</td>
+					</tr>
+
+				</table>
+			</div>
+		</div>
+	</div>
+
+</div>

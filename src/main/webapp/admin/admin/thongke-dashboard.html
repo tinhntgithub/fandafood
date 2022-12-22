@@ -1,0 +1,66 @@
+<div class="container">
+	<div class="card">
+		<div class="card-body">
+			<h3 class="mb-4">
+			Thống kê
+			</h3>
+			<div class="row">		
+				<h4 class="mb-4">Tên nhà hàng</h4>
+				<select name="restaurant"
+								class="form-control wide mb-3 ms-0" required="required"
+								id="restaurantId">
+								<option ng-repeat="y in restaurant" ng-value="y.restaurantId">{{y.name}}
+								</option>	</select>	
+			</div>
+			<div class="row">
+				<div class="col-xl-2 col-sm-3">
+					<label for="exampleInputtext" class="form-label">Ngày bắt đầu</label>
+					<input class="form-control w-auto" id="startDate" type="date" ng-value="startDate">
+				
+			
+				</div>
+				<div class="col-xl-2 col-sm-3">
+					<label for="exampleInputtext" class="form-label">Ngày kết thúc</label>
+					
+					<input class="form-control w-auto" id="endDate" type="date" ng-value="endDate">
+				
+				</div>
+					
+					<div class="col-xl-2 col-sm-3">
+				<button ng-click="getOrderByRestAndDate()" class="btn btn-primary" style="width:170px;margin-top: 29px;">Thống kê</button>
+			</div>
+			<div class="col-xl-2 col-sm-3">
+			<button ng-click="getStatistical()" class="btn btn-primary" style="margin-top: 29px;">Thống kê tất cả</button>
+			</div>
+			
+					</div>
+			<br>
+			
+		<div class="row">
+		<table>
+			<tr>
+				<th>Mã hóa đơn</th>
+				<th>Người mua</th>
+				<th>Liên hệ</th>
+				<th>Giảm giá</th>
+				<th>Tổng tiền</th>
+				<th>Ngày mua</th>
+			</tr>
+			<tr dir-paginate="i in items |filter:search | itemsPerPage:8"
+						style="border-bottom: 1px solid black; height: 40px">
+				<td>{{i.id}}</td>
+				<td>{{i.account.username}}</td>
+				<td>{{i.account.phone}}</td>
+				<td>{{i.voucher.discount}}</td>
+				<td>{{i.total}}</td>
+				<td>{{i.date}}</td>
+			</tr>
+		
+		</table>
+			
+			</div>
+		</div>
+	
+	</div>
+
+</div>

@@ -1,0 +1,67 @@
+<div class="container">
+	<div class="card">
+		<div class="card-body">	
+			<div class="row">			
+				<h3 class="mb-4" >Quản Lý Khu Vực</h3>
+			</div>
+			
+			<form class="forms-sample" name="myForm">
+			<div class="row">
+				<div class="row">
+														<label for="exampleInputtext" class="form-label">Tên khu vực</label>
+														<input type="text" name="location" required="required" class="form-control" id="exampleInputtext" ng-model="formLoca.location" placeholder="Cần Thơ">
+														<label  ng-hide="myForm.location.$valid" class="text-danger">Nhập Vào Khu Vực</label>
+													</div>
+			
+			</div>
+												<br>
+													
+													
+				<div class="row">
+				<div class="col-sm-4"></div>
+					<div class="col-sm-4" style="align-items: center;">
+				<button class="btn btn-primary" ng-click="create()" ng-show="myForm.$valid">Tạo / Cập nhật</button>
+					
+					<button class="btn btn-primary" ng-click="reset()">Làm mới</button>
+					</div>
+					<div class="col-sm-4"></div>
+				</div>
+				</form>
+		</div>
+	</div>
+	
+	<div class="card">
+		<div class="card-body">
+	<h3 class="mb-4" >Danh Sách Địa Điểm</h3>
+			<div class="row">
+				<table>
+					<tr>
+						<th>ID</th>
+						<th>Khu vực</th>
+						<th>Sửa</th>
+						<th>Xóa</th>
+					</tr>
+					<tr ng-repeat="i in items" style="border-bottom: 1px solid #FC8019; align-items: center;">
+						<td>{{i.id}}</td>
+						<td>{{i.location}}</td>
+						<td style="width: 100px;">
+						<button ng-click="edit(i.id)"
+									class="btn tp-btn-light btn-light" style="margin-right: 5px">
+									<i class="fas fa-pencil-alt"></i>
+								</button>
+						</td>
+						<td style="width: 100px;">
+						
+						<button class="btn tp-btn-light btn-light" ng-click="delete(i.id, i.location)"><i class="bi bi-trash"></i></button>
+					
+						</td>
+					</tr>
+				</table>
+			
+				
+			</div>
+	
+	</div>
+</div>
+
+</div>

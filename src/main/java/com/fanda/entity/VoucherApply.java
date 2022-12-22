@@ -1,5 +1,7 @@
 package com.fanda.entity;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -23,11 +25,6 @@ public class VoucherApply {
 	@JoinColumn(name= "voucher_id")
 	Voucher voucher;
 
-    @ManyToOne
-	@JoinColumn(name= "restaurant_id")
-	Restaurant restaurant;
-
-    @ManyToOne
-	@JoinColumn(name= "food_id")
-	Food food;
+	Date end_date;
+	Date start_date;
 }

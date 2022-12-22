@@ -3,6 +3,8 @@ package com.fanda.rest;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,8 @@ public class RestaurantRestController {
 	RestaurantServ rServ;
 	@Autowired
 	RestaurantDAO dao;
+	@Autowired
+	HttpServletRequest request;
 	
 	
 	@GetMapping()
@@ -35,13 +39,20 @@ public class RestaurantRestController {
 	public Optional<Restaurant> getById(@PathVariable("id") int id) {
 		return dao.findById(id);
 	}
+	
+	@GetMapping("/search/{name}")
+	public List<Restaurant> getByName(@PathVariable("name") String id) {
+		return dao.findkeys("%"+id+"%");
+	}
 	@PostMapping
 	public Restaurant create(@RequestBody Restaurant o) {
-		return dao.saveAndFlush(o);
+		dao.saveAndFlush(o);
+
+		return rServ.findById(o.getRestaurantId()).get();
 	}
 	
-	@PutMapping("{id}")
-	public Restaurant update(@PathVariable("id") String id, @RequestBody Restaurant o) {
+	@PutMapping
+	public Restaurant update(@RequestBody Restaurant o) {
 		return  dao.saveAndFlush(o);
 	}
 	
@@ -49,5 +60,12 @@ public class RestaurantRestController {
 	@DeleteMapping("{id}")
 	public void delete(@PathVariable("id") int id) {
 		dao.deleteById(id);
+	}
+	
+	//duyên đã update cái này
+	@GetMapping("/myRestaurant")
+	public Optional<Restaurant> getMyRestaurant() {
+		
+		return dao.findByUser(request.getRemoteUser());
 	}
 }

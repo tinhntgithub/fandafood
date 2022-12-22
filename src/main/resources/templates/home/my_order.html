@@ -1,11 +1,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{/layout/layout.html :: dynamic(~{::body})}">
 
-<body class="fixed-bottom-bar">
+<body class="fixed-bottom-bar" ng-app="myApp"
+	ng-controller="Food_Detail_Controller">
 	<div class="d-none">
-		<div class="bg-primary border-bottom p-3 d-flex align-items-center">
+		<div
+			class="bg-primary-style2 border-bottom p-3 d-flex align-items-center">
 			<a class="toggle togglew toggle-2" href="#"><span></span></a>
-			<h4 class="font-weight-bold m-0 text-white">My Order</h4>
+			<h4 class="font-weight-bold m-0 text-white">Đơn hàng của tôi</h4>
 		</div>
 	</div>
 	<section class="py-4 osahan-main-body">
@@ -16,340 +18,593 @@
 						class="nav nav-tabsa custom-tabsa border-0 flex-column bg-white rounded overflow-hidden shadow-sm p-2 c-t-order"
 						id="myTab" role="tablist">
 						<li class="nav-item" role="presentation"><a
+							ng-click="getStatusOrder(1)"
 							class="nav-link border-0 text-dark py-3 active"
 							id="completed-tab" data-toggle="tab" href="#completed" role="tab"
 							aria-controls="completed" aria-selected="true"> <i
-								class="feather-check mr-2 text-success mb-0"></i> Completed
+								class="feather-check mr-2 text-success mb-0"></i> Đã giao
 						</a></li>
 						<li class="nav-item border-top" role="presentation"><a
+							ng-click="getStatusOrder(0)"
 							class="nav-link border-0 text-dark py-3" id="progress-tab"
 							data-toggle="tab" href="#progress" role="tab"
 							aria-controls="progress" aria-selected="false"> <i
-								class="feather-clock mr-2 text-warning mb-0"></i> On Progress
+								class="feather-clock mr-2 text-warning mb-0"></i> Đang giao
 						</a></li>
 						<li class="nav-item border-top" role="presentation"><a
+							ng-click="getStatusOrder(3)"
 							class="nav-link border-0 text-dark py-3" id="canceled-tab"
 							data-toggle="tab" href="#canceled" role="tab"
 							aria-controls="canceled" aria-selected="false"> <i
-								class="feather-x-circle mr-2 text-danger mb-0"></i> Canceled
+								class="feather-x-circle mr-2 text-danger mb-0"></i> Đã hủy
+						</a></li>
+
+						<li class="nav-item border-top" role="presentation"><a
+							ng-click="getStatusOrder(4)"
+							class="nav-link border-0 text-dark py-3" id="message-tab"
+							data-toggle="tab" href="#message" role="tab"
+							aria-controls="message" aria-selected="false"> <i
+								class="feather-message-circle mr-2 text-success mb-0"></i>Đã
+								đánh giá
 						</a></li>
 					</ul>
 				</div>
-				<div class="tab-content col-md-9" id="myTabContent">
+
+				<div class="tab-content col-md-9" id="myTabContent"
+					style="padding-bottom: 150px;">
+
+
+
 					<div class="tab-pane fade show active" id="completed"
 						role="tabpanel" aria-labelledby="completed-tab">
 						<div class="order-body">
-							<div class="pb-3">
-								<div class="p-3 rounded shadow-sm bg-white">
-									<div class="d-flex border-bottom pb-3">
-										<div class="text-muted mr-3">
-											<img alt="#" src="/img/popular5.png"
-												class="img-fluid order_img rounded">
-										</div>
-										<div>
-											<p class="mb-0 font-weight-bold">
-												<a href="restaurant.html" class="text-dark">Conrad
-													Chicago Restaurant</a>
-											</p>
-											<p class="mb-0">Punjab, India</p>
-											<p>ORDER #321DERS</p>
-											<p class="mb-0 small">
-												<a href="status_complete.html">View Details</a>
-											</p>
-										</div>
-										<div class="ml-auto">
-											<p class="bg-success text-white py-1 px-2 rounded small mb-1">Delivered</p>
-											<p class="small font-weight-bold text-center">
-												<i class="feather-clock"></i> 06/04/2020
-											</p>
-										</div>
+							<div ng-if="list == 0" id="no_content"
+								class="row d-flex align-items-center justify-content-center py-5">
+								<div class="col-md-4 py-5">
+									<div class="text-center py-5">
+										<p class="h4 mb-4">
+											<img
+												src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg//assets/a60759ad1dabe909c46a817ecbf71878.png"
+												style="width: 8.375rem;"
+												class="shopee-search-empty-result-section__icon">
+										</p>
+										<p class="font-weight-bold text-dark h5">Chưa có đơn hàng
+											nào đã giao</p>
+										<p>Hãy trải nghiệm và có cho mình những món ăn thuyệt vời
+											đến từ các cửa hàng nhé</p>
 									</div>
-									<div class="d-flex pt-3">
-										<div class="small">
-											<p class="text- font-weight-bold mb-0">Kesar Sweet x 1</p>
-											<p class="text- font-weight-bold mb-0">Gulab Jamun x 4</p>
+								</div>
+
+							</div>
+
+
+							<!-- Modal -->
+							<div class="modal fade" id="exampleModal" tabindex="-1"
+								aria-labelledby="exampleModalLabel" aria-hidden="true"
+								data-backdrop="static">
+								<div
+									class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Đánh giá
+												sản phẩm</h5>
+
 										</div>
-										<div class="text-muted m-0 ml-auto mr-3 small">
-											Total Payment<br> <span
-												class="text-dark font-weight-bold">$12.74</span>
+										<div class="modal-body">
+											<div ng-repeat="f in itemss">
+												<table style="margin-bottom: 15px">
+													<tr>
+														<td style="padding-right: 20px"><img
+															src="/user/img/food/{{f.food.image}}" alt="..."
+															width="70" height="70" style="object-fit: cover;">
+														</td>
+														<td>
+															<h5 class="card-title">{{f.food.name}}</h5>
+														</td>
+													</tr>
+
+												</table>
+
+												<table style="margin-bottom: 10px">
+													<tr>
+														<td style="padding: 0 10px 0 0">Chất lượng sản phẩm</td>
+														<td style="vertical-align: bottom;"><input
+															data-role="rating" data-value="5" data-star-color="red"
+															data-stared-color="red"></td>
+													</tr>
+												</table>
+												<textarea class="form-control desc" id="{{f.food.food_id}}"
+													rows="5"
+													placeholder="Hãy chia sẻ những điều bạn thích về sản phẩm này với những người mua khác nhé."></textarea>
+												<hr>
+
+
+											</div>
+
+
 										</div>
-										<div class="text-right">
-											<a href="checkout.html" class="btn btn-primary px-3">Reorder</a>
-											<a href="contact-us.html"
-												class="btn btn-outline-primary px-3">Help</a>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Trở lại</button>
+											<button type="button" class="btn btn-primary"
+												ng-click="danhGia()">Hoàn thành</button>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="pb-3">
-								<div class="p-3 rounded shadow-sm bg-white">
-									<div class="d-flex border-bottom pb-3">
-										<div class="text-muted mr-3">
-											<img alt="#" src="/img/popular4.png"
-												class="img-fluid order_img rounded">
-										</div>
+							<!-- Modal -->
+							<div class="" ng-repeat="i in list"
+								style="background-color: white;">
+								<div style="margin-bottom: 10px">
+									<div class="tF2pJg">
 										<div>
-											<p class="mb-0 font-weight-bold">
-												<a href="restaurant.html" class="text-dark">Conrad
-													Chicago Restaurant</a>
-											</p>
-											<p class="mb-0">Punjab, India</p>
-											<p>ORDER #321DERS</p>
-											<p class="mb-0 small">
-												<a href="status_complete.html">View Details</a>
-											</p>
+											<div class="_6nAGBW">
+												<div class="_1ox39j">
+													<div class="_9bLyA+">
+
+														<div class="mzsqa6" style="color: #ee4d2d;">{{i.restaurant.name}}</div>
+
+														<a class="+aYsWZ"
+															ng-href="/home/restaurant/{{i.restaurant.restaurantId}}"><button
+																class="stardust-button">
+																<svg enable-background="new 0 0 15 15"
+																	viewBox="0 0 15 15" x="0" y="0"
+																	class="shopee-svg-icon icon-btn-shop">
+									<path
+																		d="m15 4.8c-.1-1-.8-2-1.6-2.9-.4-.3-.7-.5-1-.8-.1-.1-.7-.5-.7-.5h-8.5s-1.4 1.4-1.6 1.6c-.4.4-.8 1-1.1 1.4-.1.4-.4.8-.4 1.1-.3 1.4 0 2.3.6 3.3l.3.3v3.5c0 1.5 1.1 2.6 2.6 2.6h8c1.5 0 2.5-1.1 2.5-2.6v-3.7c.1-.1.1-.3.3-.3.4-.8.7-1.7.6-3zm-3 7c0 .4-.1.5-.4.5h-8c-.3 0-.5-.1-.5-.5v-3.1c.3 0 .5-.1.8-.4.1 0 .3-.1.3-.1.4.4 1 .7 1.5.7.7 0 1.2-.1 1.6-.5.5.3 1.1.4 1.6.4.7 0 1.2-.3 1.8-.7.1.1.3.3.5.4.3.1.5.3.8.3zm.5-5.2c0 .1-.4.7-.3.5l-.1.1c-.1 0-.3 0-.4-.1s-.3-.3-.5-.5l-.5-1.1-.5 1.1c-.4.4-.8.7-1.4.7-.5 0-.7 0-1-.5l-.6-1.1-.5 1.1c-.3.5-.6.6-1.1.6-.3 0-.6-.2-.9-.8l-.5-1-.7 1c-.1.3-.3.4-.4.6-.1 0-.3.1-.3.1s-.4-.4-.4-.5c-.4-.5-.5-.9-.4-1.5 0-.1.1-.4.3-.5.3-.5.4-.8.8-1.2.7-.8.8-1 1-1h7s .3.1.8.7c.5.5 1.1 1.2 1.1 1.8-.1.7-.2 1.2-.5 1.5z"></path></svg>
+																<span>xem shop</span>
+															</button></a>
+													</div>
+													<div class="WPNwG4">
+
+														<div class="trangthai">ĐÃ GIAO</div>
+													</div>
+												</div>
+												<div class="_60q+NM"></div>
+												<div class="giUtSy">
+
+													<div class="vdofqJ" ng-repeat="d in list_detail">
+
+														<div ng-if="i.id == d.order.id">
+															<div class="thanhngang"></div>
+															<span class="QkIuzE">
+																<div class="hDGdsD">
+																	<div class="_50XPwl">
+																		<div class="shopee-image__wrapper">
+
+																			<div class="shopee-image__content"
+																				style="background-image: url(/user/img/food/{{d.food.image}});">
+																				<div class="shopee-image__content--blur"></div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="tODfT4">
+																		<div>
+																			<div class="QJqUaT">
+																				<span class="WVc4Oc">{{d.food.name}}</span>
+																			</div>
+																		</div>
+																		<div>
+																			<div class="_9ca9GU">Thực đơn:
+																				{{d.food.menu_cate.cate_name}}</div>
+																			<div class="qGisqd">x{{d.quantity}}</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="+QRFJX">
+																	<div>
+																		<!-- <span class="d12Axb">₫99.000</span> -->
+																		<span class="ghw9hb igidiy">₫{{d.price |
+																			number}}</span>
+																	</div>
+																</div>
+															</span>
+
+														</div>
+
+													</div>
+												</div>
+												<div class="oPVPPp"></div>
+											</div>
 										</div>
-										<div class="ml-auto">
-											<p class="bg-success text-white py-1 px-2 rounded small mb-1">Delivered</p>
-											<p class="small font-weight-bold text-center">
-												<i class="feather-clock"></i> 06/04/2020
-											</p>
+										<div class="CqYika">
+											<div class="oDBmi- n012K3"></div>
+											<div class="oDBmi- b-VPB8"></div>
+										</div>
+										<div class="KinvoL">
+											<div class="BAMNqz">
+
+												<div class="Ge6yU5">Tổng số tiền:</div>
+												<div class="TDMlX1">₫{{i.total | number}}</div>
+											</div>
+										</div>
+										<div class="_1ERzqw">
+											<div class="cLwmWY"></div>
+											<div class="NIZAp8 pw0xMx">
+												<div class="_8vTqu9">
+													<button data-toggle="modal" data-target="#exampleModal"
+														ng-click="getRiewFood(i.id)"
+														class="stardust-button stardust-button--primary Kz9HeM">Đánh
+														giá</button>
+												</div>
+												<!-- <div class="VN6h8+">
+					<button class="stardust-button stardust-button--secondary Kz9HeM">Liên
+						hệ Người bán</button>
+				</div> -->
+
+											</div>
 										</div>
 									</div>
-									<div class="d-flex pt-3">
-										<div class="small">
-											<p class="text- font-weight-bold mb-0">Kesar Sweet x 1</p>
-											<p class="text- font-weight-bold mb-0">Gulab Jamun x 4</p>
-										</div>
-										<div class="text-muted m-0 ml-auto mr-3 small">
-											Total Payment<br> <span
-												class="text-dark font-weight-bold">$12.74</span>
-										</div>
-										<div class="text-right">
-											<a href="checkout.html" class="btn btn-primary px-3">Reorder</a>
-											<a href="contact-us.html"
-												class="btn btn-outline-primary px-3">Help</a>
-										</div>
-									</div>
+
 								</div>
 							</div>
+
 						</div>
 					</div>
+
+
+
+
+
+
+
 					<div class="tab-pane fade" id="progress" role="tabpanel"
 						aria-labelledby="progress-tab">
 						<div class="order-body">
-							<div class="pb-3">
-								<div class="p-3 rounded shadow-sm bg-white">
-									<div class="d-flex border-bottom pb-3">
-										<div class="text-muted mr-3">
-											<img alt="#" src="/img/popular1.png"
-												class="img-fluid order_img rounded">
-										</div>
-										<div>
-											<p class="mb-0 font-weight-bold">
-												<a href="restaurant.html" class="text-dark">Conrad
-													Chicago Restaurant</a>
-											</p>
-											<p class="mb-0">Punjab, India</p>
-											<p>ORDER #321DERS</p>
-											<p class="mb-0 small">
-												<a href="status_onprocess.html">View Details</a>
-											</p>
-										</div>
-										<div class="ml-auto">
-											<p class="bg-warning text-white py-1 px-2 rounded small mb-1">On
-												Process</p>
-											<p class="small font-weight-bold text-center">
-												<i class="feather-clock"></i> 06/04/2020
-											</p>
-										</div>
-									</div>
-									<div class="d-flex pt-3">
-										<div class="small">
-											<p class="text- font-weight-bold mb-0">Kesar Sweet x 1</p>
-											<p class="text- font-weight-bold mb-0">Gulab Jamun x 4</p>
-										</div>
-										<div class="text-muted m-0 ml-auto mr-3 small">
-											Total Payment<br> <span
-												class="text-dark font-weight-bold">$12.74</span>
-										</div>
-										<div class="text-right">
-											<a href="status_onprocess.html" class="btn btn-primary px-3">Track</a>
-											<a href="contact-us.html"
-												class="btn btn-outline-primary px-3">Help</a>
-										</div>
+							<div ng-if="list == 0" id="no_content"
+								class="row d-flex align-items-center justify-content-center py-5">
+								<div class="col-md-4 py-5">
+									<div class="text-center py-5">
+										<p class="h4 mb-4">
+											<img
+												src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg//assets/a60759ad1dabe909c46a817ecbf71878.png"
+												style="width: 8.375rem;"
+												class="shopee-search-empty-result-section__icon">
+										</p>
+										<p class="font-weight-bold text-dark h5">Chưa có đơn hàng
+											nào đang</p>
+										<p>Hãy trải nghiệm và có cho mình những món ăn thuyệt vời
+											đến từ các cửa hàng nhé</p>
 									</div>
 								</div>
+
 							</div>
-							<div class="pb-3">
-								<div class="p-3 rounded shadow-sm bg-white">
-									<div class="d-flex border-bottom pb-3">
-										<div class="text-muted mr-3">
-											<img alt="#" src="/img/popular2.png"
-												class="img-fluid order_img rounded">
-										</div>
+
+							<div class="" ng-repeat="i in list"
+								style="background-color: white;">
+								<div style="margin-bottom: 10px">
+									<div class="tF2pJg">
 										<div>
-											<p class="mb-0 font-weight-bold">
-												<a href="restaurant.html" class="text-dark">Conrad
-													Chicago Restaurant</a>
-											</p>
-											<p class="mb-0">Punjab, India</p>
-											<p>ORDER #321DERS</p>
-											<p class="mb-0 small">
-												<a href="status_onprocess.html">View Details</a>
-											</p>
+											<div class="_6nAGBW">
+												<div class="_1ox39j">
+													<div class="_9bLyA+">
+
+														<div class="mzsqa6" style="color: #ee4d2d;">{{i.restaurant.name}}</div>
+
+														<a class="+aYsWZ"
+															ng-href="/home/restaurant/{{i.restaurant.restaurantId}}"><button
+																class="stardust-button">
+																<svg enable-background="new 0 0 15 15"
+																	viewBox="0 0 15 15" x="0" y="0"
+																	class="shopee-svg-icon icon-btn-shop">
+									<path
+																		d="m15 4.8c-.1-1-.8-2-1.6-2.9-.4-.3-.7-.5-1-.8-.1-.1-.7-.5-.7-.5h-8.5s-1.4 1.4-1.6 1.6c-.4.4-.8 1-1.1 1.4-.1.4-.4.8-.4 1.1-.3 1.4 0 2.3.6 3.3l.3.3v3.5c0 1.5 1.1 2.6 2.6 2.6h8c1.5 0 2.5-1.1 2.5-2.6v-3.7c.1-.1.1-.3.3-.3.4-.8.7-1.7.6-3zm-3 7c0 .4-.1.5-.4.5h-8c-.3 0-.5-.1-.5-.5v-3.1c.3 0 .5-.1.8-.4.1 0 .3-.1.3-.1.4.4 1 .7 1.5.7.7 0 1.2-.1 1.6-.5.5.3 1.1.4 1.6.4.7 0 1.2-.3 1.8-.7.1.1.3.3.5.4.3.1.5.3.8.3zm.5-5.2c0 .1-.4.7-.3.5l-.1.1c-.1 0-.3 0-.4-.1s-.3-.3-.5-.5l-.5-1.1-.5 1.1c-.4.4-.8.7-1.4.7-.5 0-.7 0-1-.5l-.6-1.1-.5 1.1c-.3.5-.6.6-1.1.6-.3 0-.6-.2-.9-.8l-.5-1-.7 1c-.1.3-.3.4-.4.6-.1 0-.3.1-.3.1s-.4-.4-.4-.5c-.4-.5-.5-.9-.4-1.5 0-.1.1-.4.3-.5.3-.5.4-.8.8-1.2.7-.8.8-1 1-1h7s .3.1.8.7c.5.5 1.1 1.2 1.1 1.8-.1.7-.2 1.2-.5 1.5z"></path></svg>
+																<span>xem shop</span>
+															</button></a>
+													</div>
+													<div class="WPNwG4">
+
+														<div class="trangthai">ĐANG ĐẾN</div>
+													</div>
+												</div>
+												<div class="_60q+NM"></div>
+												<div class="giUtSy">
+
+													<div class="vdofqJ" ng-repeat="d in list_detail">
+
+														<div ng-if="i.id == d.order.id">
+															<div class="thanhngang"></div>
+															<span class="QkIuzE">
+																<div class="hDGdsD">
+																	<div class="_50XPwl">
+																		<div class="shopee-image__wrapper">
+
+																			<div class="shopee-image__content"
+																				style="background-image: url(/user/img/food/{{d.food.image}});">
+																				<div class="shopee-image__content--blur"></div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="tODfT4">
+																		<div>
+																			<div class="QJqUaT">
+																				<span class="WVc4Oc">{{d.food.name}}</span>
+																			</div>
+																		</div>
+																		<div>
+																			<div class="_9ca9GU">Phân loại hàng: Túi bút
+																				TouchFly</div>
+																			<div class="qGisqd">x{{d.quantity}}</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="+QRFJX">
+																	<div>
+																		<!-- <span class="d12Axb">₫99.000</span> -->
+																		<span class="ghw9hb igidiy">₫{{d.price |
+																			number}}</span>
+																	</div>
+																</div>
+															</span>
+
+														</div>
+
+													</div>
+												</div>
+												<div class="oPVPPp"></div>
+											</div>
 										</div>
-										<div class="ml-auto">
-											<p class="bg-warning text-white py-1 px-2 rounded small mb-1">On
-												Process</p>
-											<p class="small font-weight-bold text-center">
-												<i class="feather-clock"></i> 06/04/2020
-											</p>
+										<div class="CqYika">
+											<div class="oDBmi- n012K3"></div>
+											<div class="oDBmi- b-VPB8"></div>
 										</div>
+										<div class="KinvoL">
+											<div class="BAMNqz">
+
+												<div class="Ge6yU5">Tổng số tiền:</div>
+												<div class="TDMlX1">₫{{i.total | number}}</div>
+											</div>
+										</div>
+										<div class="_1ERzqw"></div>
 									</div>
-									<div class="d-flex pt-3">
-										<div class="small">
-											<p class="text- font-weight-bold mb-0">Kesar Sweet x 1</p>
-											<p class="text- font-weight-bold mb-0">Gulab Jamun x 4</p>
-										</div>
-										<div class="text-muted m-0 ml-auto mr-3 small">
-											Total Payment<br> <span
-												class="text-dark font-weight-bold">$12.74</span>
-										</div>
-										<div class="text-right">
-											<a href="status_onprocess.html" class="btn btn-primary px-3">Track</a>
-											<a href="contact-us.html"
-												class="btn btn-outline-primary px-3">Help</a>
-										</div>
-									</div>
+
 								</div>
 							</div>
-							<div class="pb-3">
-								<div class="p-3 rounded shadow-sm bg-white">
-									<div class="d-flex border-bottom pb-3">
-										<div class="text-muted mr-3">
-											<img alt="#" src="/img/popular3.png"
-												class="img-fluid order_img rounded">
-										</div>
-										<div>
-											<p class="mb-0 font-weight-bold">
-												<a href="restaurant.html" class="text-dark">Conrad
-													Chicago Restaurant</a>
-											</p>
-											<p class="mb-0">Punjab, India</p>
-											<p>ORDER #321DERS</p>
-											<p class="mb-0 small">
-												<a href="status_onprocess.html">View Details</a>
-											</p>
-										</div>
-										<div class="ml-auto">
-											<p class="bg-warning text-white py-1 px-2 rounded small mb-1">On
-												Process</p>
-											<p class="small font-weight-bold text-center">
-												<i class="feather-clock"></i> 06/04/2020
-											</p>
-										</div>
-									</div>
-									<div class="d-flex pt-3">
-										<div class="small">
-											<p class="text- font-weight-bold mb-0">Kesar Sweet x 1</p>
-											<p class="text- font-weight-bold mb-0">Gulab Jamun x 4</p>
-										</div>
-										<div class="text-muted m-0 ml-auto mr-3 small">
-											Total Payment<br> <span
-												class="text-dark font-weight-bold">$12.74</span>
-										</div>
-										<div class="text-right">
-											<a href="status_onprocess.html" class="btn btn-primary px-3">Track</a>
-											<a href="contact-us.html"
-												class="btn btn-outline-primary px-3">Help</a>
-										</div>
-									</div>
-								</div>
-							</div>
+
+
+
 						</div>
 					</div>
+
+
 					<div class="tab-pane fade" id="canceled" role="tabpanel"
 						aria-labelledby="canceled-tab">
+
 						<div class="order-body">
-							<div class="pb-3">
-								<div class="p-3 rounded shadow-sm bg-white">
-									<div class="d-flex border-bottom pb-3">
-										<div class="text-muted mr-3">
-											<img alt="#" src="/img/popular6.png"
-												class="img-fluid order_img rounded">
-										</div>
-										<div>
-											<p class="mb-0 font-weight-bold">
-												<a href="restaurant.html" class="text-dark">Conrad
-													Chicago Restaurant</a>
-											</p>
-											<p class="mb-0">Punjab, India</p>
-											<p>ORDER #321DERS</p>
-											<p class="mb-0 small">
-												<a href="status_canceled.html">View Details</a>
-											</p>
-										</div>
-										<div class="ml-auto">
-											<p class="bg-danger text-white py-1 px-2 rounded small mb-1">Payment
-												failed</p>
-											<p class="small font-weight-bold text-center">
-												<i class="feather-clock"></i> 06/04/2020
-											</p>
-										</div>
-									</div>
-									<div class="d-flex pt-3">
-										<div class="small">
-											<p class="text- font-weight-bold mb-0">Kesar Sweet x 1</p>
-											<p class="text- font-weight-bold mb-0">Gulab Jamun x 4</p>
-										</div>
-										<div class="text-muted m-0 ml-auto mr-3 small">
-											Total Payment<br> <span
-												class="text-dark font-weight-bold">$12.74</span>
-										</div>
-										<div class="text-right">
-											<a href="contact-us.html"
-												class="btn btn-outline-primary px-3">Help</a>
-										</div>
+
+							<div ng-if="list == 0" id="no_content"
+								class="row d-flex align-items-center justify-content-center py-5">
+								<div class="col-md-4 py-5">
+									<div class="text-center py-5">
+										<p class="h4 mb-4">
+											<img
+												src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg//assets/a60759ad1dabe909c46a817ecbf71878.png"
+												style="width: 8.375rem;"
+												class="shopee-search-empty-result-section__icon">
+										</p>
+										<p class="font-weight-bold text-dark h5">Chưa có đơn hàng
+											nào đã hủy</p>
+										<p>Hãy trải nghiệm và có cho mình những món ăn thuyệt vời
+											đến từ các cửa hàng nhé</p>
 									</div>
 								</div>
+
 							</div>
-							<div class="pb-3">
-								<div class="p-3 rounded shadow-sm bg-white">
-									<div class="d-flex border-bottom pb-3">
-										<div class="text-muted mr-3">
-											<img alt="#" src="/img/popular6.png"
-												class="img-fluid order_img rounded">
+
+							<div class="" ng-if="list.length > 0">
+
+
+
+
+								<div class="" ng-repeat="i in list"
+									style="background-color: white;">
+									<div style="margin-bottom: 10px">
+										<div class="tF2pJg">
+											<div>
+												<div class="_6nAGBW">
+													<div class="_1ox39j">
+														<div class="_9bLyA+">
+
+															<div class="mzsqa6" style="color: #ee4d2d;">{{i.restaurant.name}}</div>
+
+															<a class="+aYsWZ"
+																ng-href="/home/restaurant/{{i.restaurant.restaurantId}}"><button
+																	class="stardust-button">
+																	<svg enable-background="new 0 0 15 15"
+																		viewBox="0 0 15 15" x="0" y="0"
+																		class="shopee-svg-icon icon-btn-shop">
+									<path
+																			d="m15 4.8c-.1-1-.8-2-1.6-2.9-.4-.3-.7-.5-1-.8-.1-.1-.7-.5-.7-.5h-8.5s-1.4 1.4-1.6 1.6c-.4.4-.8 1-1.1 1.4-.1.4-.4.8-.4 1.1-.3 1.4 0 2.3.6 3.3l.3.3v3.5c0 1.5 1.1 2.6 2.6 2.6h8c1.5 0 2.5-1.1 2.5-2.6v-3.7c.1-.1.1-.3.3-.3.4-.8.7-1.7.6-3zm-3 7c0 .4-.1.5-.4.5h-8c-.3 0-.5-.1-.5-.5v-3.1c.3 0 .5-.1.8-.4.1 0 .3-.1.3-.1.4.4 1 .7 1.5.7.7 0 1.2-.1 1.6-.5.5.3 1.1.4 1.6.4.7 0 1.2-.3 1.8-.7.1.1.3.3.5.4.3.1.5.3.8.3zm.5-5.2c0 .1-.4.7-.3.5l-.1.1c-.1 0-.3 0-.4-.1s-.3-.3-.5-.5l-.5-1.1-.5 1.1c-.4.4-.8.7-1.4.7-.5 0-.7 0-1-.5l-.6-1.1-.5 1.1c-.3.5-.6.6-1.1.6-.3 0-.6-.2-.9-.8l-.5-1-.7 1c-.1.3-.3.4-.4.6-.1 0-.3.1-.3.1s-.4-.4-.4-.5c-.4-.5-.5-.9-.4-1.5 0-.1.1-.4.3-.5.3-.5.4-.8.8-1.2.7-.8.8-1 1-1h7s .3.1.8.7c.5.5 1.1 1.2 1.1 1.8-.1.7-.2 1.2-.5 1.5z"></path></svg>
+																	<span>xem shop</span>
+																</button></a>
+														</div>
+														<div class="WPNwG4">
+
+															<div class="trangthai" style="color: #ee4d2d">ĐÃ
+																HỦY</div>
+														</div>
+													</div>
+													<div class="_60q+NM"></div>
+													<div class="giUtSy">
+
+														<div class="vdofqJ" ng-repeat="d in list_detail">
+
+															<div ng-if="i.id == d.order.id">
+																<div class="thanhngang"></div>
+																<span class="QkIuzE">
+																	<div class="hDGdsD">
+																		<div class="_50XPwl">
+																			<div class="shopee-image__wrapper">
+
+																				<div class="shopee-image__content"
+																					style="background-image: url(/user/img/food/{{d.food.image}});">
+																					<div class="shopee-image__content--blur"></div>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="tODfT4">
+																			<div>
+																				<div class="QJqUaT">
+																					<span class="WVc4Oc">{{d.food.name}}</span>
+																				</div>
+																			</div>
+																			<div>
+																				<div class="_9ca9GU">Phân loại hàng: Túi bút
+																					TouchFly</div>
+																				<div class="qGisqd">x{{d.quantity}}</div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="+QRFJX">
+																		<div>
+																			<!-- <span class="d12Axb">₫99.000</span> -->
+																			<span class="ghw9hb igidiy">₫{{d.price |
+																				number}}</span>
+																		</div>
+																	</div>
+																</span>
+
+															</div>
+
+														</div>
+													</div>
+													<div class="oPVPPp"></div>
+												</div>
+											</div>
+											<div class="CqYika">
+												<div class="oDBmi- n012K3"></div>
+												<div class="oDBmi- b-VPB8"></div>
+											</div>
+											<div class="KinvoL">
+												<div class="BAMNqz">
+
+													<div class="Ge6yU5">Tổng số tiền:</div>
+													<div class="TDMlX1">₫{{i.total | number}}</div>
+												</div>
+											</div>
+											<div class="_1ERzqw"></div>
 										</div>
-										<div>
-											<p class="mb-0 font-weight-bold">
-												<a href="restaurant.html" class="text-dark">Conrad
-													Chicago Restaurant</a>
-											</p>
-											<p class="mb-0">Punjab, India</p>
-											<p>ORDER #321DERS</p>
-											<p class="mb-0 small">
-												<a href="status_canceled.html">View Details</a>
-											</p>
-										</div>
-										<div class="ml-auto">
-											<p class="bg-danger text-white py-1 px-2 rounded small mb-1">Canceled</p>
-											<p class="small font-weight-bold text-center">
-												<i class="feather-clock"></i> 06/04/2020
-											</p>
-										</div>
-									</div>
-									<div class="d-flex pt-3">
-										<div class="small">
-											<p class="text- font-weight-bold mb-0">Kesar Sweet x 1</p>
-											<p class="text- font-weight-bold mb-0">Gulab Jamun x 4</p>
-										</div>
-										<div class="text-muted m-0 ml-auto mr-3 small">
-											Total Payment<br> <span
-												class="text-dark font-weight-bold">$12.74</span>
-										</div>
-										<div class="text-right">
-											<a href="contact-us.html"
-												class="btn btn-outline-primary px-3">Help</a>
-										</div>
+
 									</div>
 								</div>
+
 							</div>
 						</div>
 					</div>
+
+
+
+
+
+
+
+
+
+					<div class="tab-pane fade show active" id="message" role="tabpanel"
+						aria-labelledby="message-tab">
+						<div class="order-body">
+
+
+
+							<div class="" ng-repeat="i in list" ng-if=" i.status === 4"
+								style="background-color: white;">
+								<div style="margin-bottom: 10px">
+									<div class="tF2pJg">
+										<div>
+											<div class="_6nAGBW">
+												<div class="_1ox39j">
+													<div class="_9bLyA+">
+
+														<div class="mzsqa6" style="color: #ee4d2d;">{{i.restaurant.name}}</div>
+
+														<a class="+aYsWZ"
+															ng-href="/home/restaurant/{{i.restaurant.restaurantId}}"><button
+																class="stardust-button">
+																<svg enable-background="new 0 0 15 15"
+																	viewBox="0 0 15 15" x="0" y="0"
+																	class="shopee-svg-icon icon-btn-shop">
+									<path
+																		d="m15 4.8c-.1-1-.8-2-1.6-2.9-.4-.3-.7-.5-1-.8-.1-.1-.7-.5-.7-.5h-8.5s-1.4 1.4-1.6 1.6c-.4.4-.8 1-1.1 1.4-.1.4-.4.8-.4 1.1-.3 1.4 0 2.3.6 3.3l.3.3v3.5c0 1.5 1.1 2.6 2.6 2.6h8c1.5 0 2.5-1.1 2.5-2.6v-3.7c.1-.1.1-.3.3-.3.4-.8.7-1.7.6-3zm-3 7c0 .4-.1.5-.4.5h-8c-.3 0-.5-.1-.5-.5v-3.1c.3 0 .5-.1.8-.4.1 0 .3-.1.3-.1.4.4 1 .7 1.5.7.7 0 1.2-.1 1.6-.5.5.3 1.1.4 1.6.4.7 0 1.2-.3 1.8-.7.1.1.3.3.5.4.3.1.5.3.8.3zm.5-5.2c0 .1-.4.7-.3.5l-.1.1c-.1 0-.3 0-.4-.1s-.3-.3-.5-.5l-.5-1.1-.5 1.1c-.4.4-.8.7-1.4.7-.5 0-.7 0-1-.5l-.6-1.1-.5 1.1c-.3.5-.6.6-1.1.6-.3 0-.6-.2-.9-.8l-.5-1-.7 1c-.1.3-.3.4-.4.6-.1 0-.3.1-.3.1s-.4-.4-.4-.5c-.4-.5-.5-.9-.4-1.5 0-.1.1-.4.3-.5.3-.5.4-.8.8-1.2.7-.8.8-1 1-1h7s .3.1.8.7c.5.5 1.1 1.2 1.1 1.8-.1.7-.2 1.2-.5 1.5z"></path></svg>
+																<span>xem shop</span>
+															</button></a>
+													</div>
+													<div class="WPNwG4">
+
+														<div class="trangthai">ĐÃ ĐÁNH GIÁ</div>
+													</div>
+												</div>
+												<div class="_60q+NM"></div>
+												<div class="giUtSy">
+
+													<div class="vdofqJ" ng-repeat="d in list_detail">
+
+														<div ng-if="i.id == d.order.id">
+															<div class="thanhngang"></div>
+															<span class="QkIuzE">
+																<div class="hDGdsD">
+																	<div class="_50XPwl">
+																		<div class="shopee-image__wrapper">
+
+																			<div class="shopee-image__content"
+																				style="background-image: url(/user/img/food/{{d.food.image}});">
+																				<div class="shopee-image__content--blur"></div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="tODfT4">
+																		<div>
+																			<div class="QJqUaT">
+																				<span class="WVc4Oc">{{d.food.name}}</span>
+																			</div>
+																		</div>
+																		<div>
+																			<div class="_9ca9GU">Phân loại hàng: Túi bút
+																				TouchFly</div>
+																			<div class="qGisqd">x{{d.quantity}}</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="+QRFJX">
+																	<div>
+																		<!-- <span class="d12Axb">₫99.000</span> -->
+																		<span class="ghw9hb igidiy">₫{{d.price |
+																			number}}</span>
+																	</div>
+																</div>
+															</span>
+
+														</div>
+
+													</div>
+												</div>
+												<div class="oPVPPp"></div>
+											</div>
+										</div>
+										<div class="CqYika">
+											<div class="oDBmi- n012K3"></div>
+											<div class="oDBmi- b-VPB8"></div>
+										</div>
+										<div class="KinvoL">
+											<div class="BAMNqz">
+
+												<div class="Ge6yU5">Tổng số tiền:</div>
+												<div class="TDMlX1">₫{{i.total | number}}</div>
+											</div>
+										</div>
+										<div class="_1ERzqw"></div>
+									</div>
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+
+
+
 				</div>
 			</div>
-		</div>
 	</section>
 
 </body>

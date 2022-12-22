@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fanda.dao.AccountDAO;
 import com.fanda.dao.CartDAO;
+import com.fanda.dao.RestaurantDAO;
 import com.fanda.entity.Account;
 import com.fanda.entity.Cart;
 import com.fanda.entity.Food;
+import com.fanda.entity.Restaurant;
 import com.fanda.service.CartServ;
 import com.fanda.serviceImpl.CartServImpl;
 import com.fasterxml.jackson.core.JsonParser;
@@ -42,7 +44,8 @@ public class CartRestController {
 	HttpServletRequest request;
 	@Autowired
 	AccountDAO acc_dao;
-
+	@Autowired
+	RestaurantDAO ressRestaurantDAO;
 	@GetMapping()
 	public List<Cart> getAllCart(Optional<Account> accounts) {
 			if(request.getRemoteUser() != null) {
@@ -51,6 +54,17 @@ public class CartRestController {
 		
 		return dao.listCart(accounts.get().getUsername());
 	}
+	
+	@GetMapping("/restaraunt/{id}")
+	public List<Cart> getAllCart_restaraunt(@PathVariable("id") int id ,Optional<Account> accounts) {
+			if(request.getRemoteUser() != null) {
+				accounts = acc_dao.findById(request.getRemoteUser());
+			}
+		
+		return dao.AccountCart_Restaraunt(accounts.get().getUsername(),id);
+	}
+	
+	
 
 	@GetMapping("{id}")
 	public Optional<Cart> getById(@PathVariable("id") int id) {
@@ -61,35 +75,33 @@ public class CartRestController {
 	public ResponseEntity<Object> create(
 			/* @RequestBody List<Food> node */
 			@RequestBody Cart cart) throws IOException {
+
 		try {
 			
 		
 				Account account = acc_dao.findById(request.getRemoteUser()).get();
-				Optional<Cart> op = dao.listCart(account.getUsername(), cart.getFood().getFood_id());
+			//	Restaurant restaurant = ressRestaurantDAO.findById(cart.getRestaurant().getRestaurantId()).get();
+				Optional<Cart> op = dao.listCart(account.getUsername(), cart.getFood().getFood_id() , cart.getRestaurant().getRestaurantId());
+				
 				if (op.isEmpty()) {
 					cart.setAccount(account);
 					cart.setFood(cart.getFood());
 					cart.setQty(cart.getQty());
+					//cart.setRestaurant(restaurant);
 					dao.saveAndFlush(cart);
 					
 				}else {
-				
+					
 					op.get().setQty(cart.getQty()+op.get().getQty());
 					dao.saveAndFlush(op.get());
 				
 				}
 				return ResponseEntity.noContent().build();
 				
-		
-				
-			
-			
-			
-			
 			
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("Lỗi server");
+			System.out.println("Lỗi server" + e);
 			return ResponseEntity.notFound().build();
 		}
 		
@@ -111,8 +123,16 @@ public class CartRestController {
 	public void delete(@PathVariable("id") int id) {
 		dao.deleteById(id);
 	}
-	@GetMapping("/sum")
-	public Double sumCart() {
-		return dao.sumCarts(request.getRemoteUser());
+	@DeleteMapping("/clearCart/{username}")
+	public void delete(@PathVariable("username") String username) {
+		List<Cart> op = dao.AccountCart(username);
+			for (Cart cart : op) {
+				dao.deleteById(cart.getId());
+			}
+	}
+	
+	@GetMapping("/sum/{id}")
+	public Double sumCart(@PathVariable("id") Integer id) {
+		return dao.sumCarts(request.getRemoteUser(),id);
 	}
 }

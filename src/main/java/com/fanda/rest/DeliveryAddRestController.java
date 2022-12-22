@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,8 @@ import com.fanda.entity.Account;
 import com.fanda.entity.Delivery_address;
 import com.fanda.service.DeliAddServ;
 import com.fanda.serviceImpl.DeliAddServImpl;
+
+
 
 
 
@@ -45,6 +48,14 @@ public class DeliveryAddRestController {
 		return dao.findAll();
 	}
 	
+	
+	@GetMapping("/address_true")
+	public Optional<Delivery_address> getAddress_true() {
+		return dao.findAddressTrue(request.getRemoteUser());
+	}
+	
+	
+	
 	@GetMapping("{id}")
 	public Optional<Delivery_address> getById(@PathVariable("id") int id) {
 		return deliAddServ.findById(id);
@@ -68,6 +79,7 @@ public class DeliveryAddRestController {
 			
 		}else {
 			Optional<Account> account = accountDao.findById(request.getRemoteUser());
+			
 			deli.setAccount(account.get());
 			deli.setActive(true);
 			dao.saveAndFlush(deli);
@@ -82,17 +94,63 @@ public class DeliveryAddRestController {
 	@PutMapping("{id}")
 	public Delivery_address update(@PathVariable("id") int id, @RequestBody Delivery_address deli) {
 		Optional<Delivery_address> optional = dao.findById(id);
-		optional.get().setAddress(deli.getAddress());
-		optional.get().setPhone(deli.getPhone());
-		dao.saveAndFlush(optional.get());
+		if (deli.getCity() == "" && deli.getDistricts() == "" && deli.getWards() == "") {
+			optional.get().setName(deli.getName());
+			optional.get().setCity(optional.get().getCity());
+			optional.get().setDistricts(optional.get().getDistricts());
+			optional.get().setWards(optional.get().getWards());
+			optional.get().setPhone(deli.getPhone());
+			dao.saveAndFlush(optional.get());
+		}else {
+			optional.get().setName(deli.getName());
+			optional.get().setCity(deli.getCity());
+			optional.get().setDistricts(deli.getDistricts());
+			optional.get().setWards(deli.getWards());
+			optional.get().setPhone(deli.getPhone());
+			dao.saveAndFlush(optional.get());
+		}
+		
+
 		
 		return optional.get();
 		
 	}
 	
+	@GetMapping("/choose/{id}")
+	public Delivery_address choose(@PathVariable("id") int id) {
+
+	
+		Optional<Delivery_address> list = dao.findById(id);
+		Optional<Delivery_address> aList = dao.findAddressTrue(request.getRemoteUser());
+		if (list.get().getActive() == false) { // nếu là false thì set nó thành true
+			list.get().setActive(true);
+			aList.get().setActive(false);// set cái true hiện tại thành false
+			dao.saveAndFlush(list.get());
+		}
+		return list.get();
+		
+	}
+	
+	
+	
 
 	@DeleteMapping("{id}")
-	public void delete(@PathVariable("id") int id) {
-		deliAddServ.delete(id);
+	public ResponseEntity<String> delete(@PathVariable("id") int id) {
+		try {
+			Optional<Delivery_address> aList = dao.findAddressTrue_address(id,request.getRemoteUser());
+			
+			if(aList.isPresent()) {
+				
+				return ResponseEntity.status(400).body("Bạn không thể xóa địa chỉ được sử dụng");
+			}else {
+				dao.deleteById(id);
+				return ResponseEntity.noContent().build();
+			}
+				
+			
+		} catch (Exception e) {
+			return ResponseEntity.status(500).body("Bạn không thể xóa địa chỉ này");
+		}
+		
 	}
 }

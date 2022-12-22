@@ -2,328 +2,75 @@
 	th:replace="~{/layout/layout.html :: dynamic(~{::body})}">
 
 
-<body class="fixed-bottom-bar">
-	
+<body class="fixed-bottom-bar"  ng-app="mySearch"
+	ng-controller="search_controller">
+
 	<div class="osahan-favorites">
 		<div class="d-none">
 			<div class="bg-primary border-bottom p-3 d-flex align-items-center">
 				<a class="toggle togglew toggle-2" href="#"><span></span></a>
-				<h4 class="font-weight-bold m-0 text-white">Favorites</h4>
+				<h4 class="font-weight-bold m-0 text-white">Y√™u th√≠ch</h4>
 			</div>
 		</div>
 
 		<div class="container most_popular py-5">
-			<h2 class="font-weight-bold mb-3">Favorites</h2>
-			<div class="row">
-				<div class="col-md-4 mb-3">
-					<div
-						class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm grid-card">
-						<div class="list-card-image">
-							<div class="star position-absolute">
-								<span class="badge badge-success"><i class="feather-star"></i>
-									3.1 (300+)</span>
-							</div>
-							<div class="favourite-heart text-danger position-absolute">
-								<a href="#"><i class="feather-heart"></i></a>
-							</div>
-							<div class="member-plan position-absolute">
-								<span class="badge badge-dark">Promoted</span>
-							</div>
-							<a href="restaurant.html"> <img alt="#"
-								src="/img/trending1.png" class="img-fluid item-img w-100">
-							</a>
-						</div>
-						<div class="p-3 position-relative">
-							<div class="list-card-body">
-								<h6 class="mb-1">
-									<a href="restaurant.html" class="text-black">The osahan
-										Restaurant </a>
-								</h6>
-								<p class="text-gray mb-3">North ï Hamburgers ï Pure veg</p>
-								<p class="text-gray mb-3 time">
-									<span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i
-										class="feather-clock"></i> 15ñ25 min</span> <span
-										class="float-right text-black-50"> $500 FOR TWO</span>
+			<h2 class="font-weight-bold mb-3">Y√™u th√≠ch </h2>
+			
+			
+			
+			
+			
+			
+        	<div ng-if="list_your_favorite == 0"
+						class="row d-flex align-items-center justify-content-center py-5">
+						<div class="col-md-4 py-5">
+							<div class="text-center py-5">
+								<p class="h4 mb-4">
+									<img
+										src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg//assets/a60759ad1dabe909c46a817ecbf71878.png"
+										style="width: 8.375rem;"
+										class="shopee-search-empty-result-section__icon">
 								</p>
-							</div>
-							<div class="list-card-badge">
-								<span class="badge badge-danger">OFFER</span> <small>65%
-									OSAHAN50</small>
+								<p class="font-weight-bold text-dark h5">B·∫°n ch∆∞a y√™u th√≠ch m√≥n ƒÉn n√†o? </p>
+								<p>H√£y tr·∫£i nghi·ªám v√† c√≥ cho m√¨nh nh·ªØng m√≥n ƒÉn thuy·ªát v·ªùi ƒë·∫øn t·ª´ c√°c c·ª≠a h√†ng nh√©</p>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class="col-md-4 mb-3">
-					<div
-						class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm grid-card">
-						<div class="list-card-image">
-							<div class="star position-absolute">
-								<span class="badge badge-success"><i class="feather-star"></i>
-									3.1 (300+)</span>
-							</div>
-							<div class="favourite-heart text-danger position-absolute">
-								<a href="#"><i class="feather-heart"></i></a>
-							</div>
-							<div class="member-plan position-absolute">
-								<span class="badge badge-dark">Promoted</span>
-							</div>
-							<a href="restaurant.html"> <img alt="#"
-								src="/img/trending2.png" class="img-fluid item-img w-100">
-							</a>
-						</div>
-						<div class="p-3 position-relative">
-							<div class="list-card-body">
-								<h6 class="mb-1">
-									<a href="restaurant.html" class="text-black">Thai Famous
-										Cuisine</a>
-								</h6>
-								<p class="text-gray mb-3">North Indian ï Indian ï Pure veg</p>
-								<p class="text-gray mb-3 time">
-									<span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i
-										class="feather-clock"></i> 30ñ35 min</span> <span
-										class="float-right text-black-50"> $250 FOR TWO</span>
-								</p>
-							</div>
-							<div class="list-card-badge">
-								<span class="badge badge-success">OFFER</span> <small>65%
-									off</small>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 mb-3">
-					<div
-						class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm grid-card">
-						<div class="list-card-image">
-							<div class="star position-absolute">
-								<span class="badge badge-success"><i class="feather-star"></i>
-									3.1 (300+)</span>
-							</div>
-							<div class="favourite-heart text-danger position-absolute">
-								<a href="#"><i class="feather-heart"></i></a>
-							</div>
-							<div class="member-plan position-absolute">
-								<span class="badge badge-dark">Promoted</span>
-							</div>
-							<a href="restaurant.html"> <img alt="#"
-								src="/img/trending3.png" class="img-fluid item-img w-100">
-							</a>
-						</div>
-						<div class="p-3 position-relative">
-							<div class="list-card-body">
-								<h6 class="mb-1">
-									<a href="restaurant.html" class="text-black">The osahan
-										Restaurant </a>
-								</h6>
-								<p class="text-gray mb-3">North ï Hamburgers ï Pure veg</p>
-								<p class="text-gray mb-3 time">
-									<span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i
-										class="feather-clock"></i> 15ñ25 min</span> <span
-										class="float-right text-black-50"> $500 FOR TWO</span>
-								</p>
-							</div>
-							<div class="list-card-badge">
-								<span class="badge badge-danger">OFFER</span> <small>65%
-									OSAHAN50</small>
-							</div>
-						</div>
-					</div>
-				</div>
+					
 			</div>
-			<div class="row">
-				<div class="col-md-4 mb-3">
-					<div
-						class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm grid-card">
-						<div class="list-card-image">
-							<div class="star position-absolute">
-								<span class="badge badge-success"><i class="feather-star"></i>
-									3.1 (300+)</span>
-							</div>
-							<div class="favourite-heart text-danger position-absolute">
-								<a href="#"><i class="feather-heart"></i></a>
-							</div>
-							<div class="member-plan position-absolute">
-								<span class="badge badge-dark">Promoted</span>
-							</div>
-							<a href="restaurant.html"> <img alt="#"
-								src="/img/trending5.png" class="img-fluid item-img w-100">
-							</a>
-						</div>
-						<div class="p-3 position-relative">
-							<div class="list-card-body">
-								<h6 class="mb-1">
-									<a href="restaurant.html" class="text-black">The osahan
-										Restaurant </a>
-								</h6>
-								<p class="text-gray mb-3">North ï Hamburgers ï Pure veg</p>
-								<p class="text-gray mb-3 time">
-									<span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i
-										class="feather-clock"></i> 15ñ25 min</span> <span
-										class="float-right text-black-50"> $500 FOR TWO</span>
-								</p>
-							</div>
-							<div class="list-card-badge">
-								<span class="badge badge-danger">OFFER</span> <small>65%
-									OSAHAN50</small>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 mb-3">
-					<div
-						class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm grid-card">
-						<div class="list-card-image">
-							<div class="star position-absolute">
-								<span class="badge badge-success"><i class="feather-star"></i>
-									3.1 (300+)</span>
-							</div>
-							<div class="favourite-heart text-danger position-absolute">
-								<a href="#"><i class="feather-heart"></i></a>
-							</div>
-							<div class="member-plan position-absolute">
-								<span class="badge badge-dark">Promoted</span>
-							</div>
-							<a href="restaurant.html"> <img alt="#"
-								src="/img/trending6.png" class="img-fluid item-img w-100">
-							</a>
-						</div>
-						<div class="p-3 position-relative">
-							<div class="list-card-body">
-								<h6 class="mb-1">
-									<a href="restaurant.html" class="text-black">Bite Me
-										Sandwiches</a>
-								</h6>
-								<p class="text-gray mb-3">North Indian ï American ï Pure veg</p>
-								<p class="text-gray mb-3 time">
-									<span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i
-										class="feather-clock"></i> 30ñ35 min</span> <span
-										class="float-right text-black-50"> $250 FOR TWO</span>
-								</p>
-							</div>
-							<div class="list-card-badge">
-								<span class="badge badge-success">OFFER</span> <small>65%
-									off</small>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 mb-3">
-					<div
-						class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm grid-card">
-						<div class="list-card-image">
-							<div class="star position-absolute">
-								<span class="badge badge-success"><i class="feather-star"></i>
-									3.1 (300+)</span>
-							</div>
-							<div class="favourite-heart text-danger position-absolute">
-								<a href="#"><i class="feather-heart"></i></a>
-							</div>
-							<div class="member-plan position-absolute">
-								<span class="badge badge-dark">Promoted</span>
-							</div>
-							<a href="restaurant.html"> <img alt="#"
-								src="/img/trending7.png" class="img-fluid item-img w-100">
-							</a>
-						</div>
-						<div class="p-3 position-relative">
-							<div class="list-card-body">
-								<h6 class="mb-1">
-									<a href="restaurant.html" class="text-black">The osahan
-										Restaurant </a>
-								</h6>
-								<p class="text-gray mb-3">North ï Hamburgers ï Pure veg</p>
-								<p class="text-gray mb-3 time">
-									<span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i
-										class="feather-clock"></i> 15ñ25 min</span> <span
-										class="float-right text-black-50"> $500 FOR TWO</span>
-								</p>
-							</div>
-							<div class="list-card-badge">
-								<span class="badge badge-danger">OFFER</span> <small>65%
-									OSAHAN50</small>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4 mb-3">
-					<div
-						class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm grid-card">
-						<div class="list-card-image">
-							<div class="star position-absolute">
-								<span class="badge badge-success"><i class="feather-star"></i>
-									3.1 (300+)</span>
-							</div>
-							<div class="favourite-heart text-danger position-absolute">
-								<a href="#"><i class="feather-heart"></i></a>
-							</div>
-							<div class="member-plan position-absolute">
-								<span class="badge badge-dark">Promoted</span>
-							</div>
-							<a href="restaurant.html"> <img alt="#"
-								src="/img/trending4.png" class="img-fluid item-img w-100">
-							</a>
-						</div>
-						<div class="p-3 position-relative">
-							<div class="list-card-body">
-								<h6 class="mb-1">
-									<a href="restaurant.html" class="text-black">Bite Me
-										Sandwiches</a>
-								</h6>
-								<p class="text-gray mb-3">North Indian ï American ï Pure veg</p>
-								<p class="text-gray mb-3 time">
-									<span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i
-										class="feather-clock"></i> 30ñ35 min</span> <span
-										class="float-right text-black-50"> $250 FOR TWO</span>
-								</p>
-							</div>
-							<div class="list-card-badge">
-								<span class="badge badge-success">OFFER</span> <small>65%
-									off</small>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 mb-3">
-					<div
-						class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm grid-card">
-						<div class="list-card-image">
-							<div class="star position-absolute">
-								<span class="badge badge-success"><i class="feather-star"></i>
-									3.1 (300+)</span>
-							</div>
-							<div class="favourite-heart text-danger position-absolute">
-								<a href="#"><i class="feather-heart"></i></a>
-							</div>
-							<div class="member-plan position-absolute">
-								<span class="badge badge-dark">Promoted</span>
-							</div>
-							<a href="restaurant.html"> <img alt="#"
-								src="/img/trending8.png" class="img-fluid item-img w-100">
-							</a>
-						</div>
-						<div class="p-3 position-relative">
-							<div class="list-card-body">
-								<h6 class="mb-1">
-									<a href="restaurant.html" class="text-black">Bite Me
-										Sandwiches</a>
-								</h6>
-								<p class="text-gray mb-3">North Indian ï American ï Pure veg</p>
-								<p class="text-gray mb-3 time">
-									<span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i
-										class="feather-clock"></i> 30ñ35 min</span> <span
-										class="float-right text-black-50"> $250 FOR TWO</span>
-								</p>
-							</div>
-							<div class="list-card-badge">
-								<span class="badge badge-success">OFFER</span> <small>65%
-									off</small>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div class="row row-cols-5">
+        <div class="col mb-3" id="responsive" ng-repeat = "i in list_your_favorite">
+        
+          <div class="product-grid">
+                <div class="product-image">
+                    <a href="/home/food/detail/{{i.food.food_id}}" class="image">
+                        <img class="pic-1" src="/user/img/food/{{i.food.image}}">
+                    </a>
+                  <!--   <span class="product-hot-label">Hot</span> -->
+                    <span class="lable_like" ng-click="dislike(i.favoriteId)"><i class="fa-solid fa-heart"></i></span>
+                    
+                    <a class="quick-view" href="" ng-click="cart.add(i.food.food_id , i.food.menu_cate.restaurant_id)">Th√™m v√†o gi·ªè </a>
+                </div>
+                <div class="product-content">
+                		
+                    <h3 class="name2"><a href="/home/food/detail/{{i.food.food_id}}">{{i.food.name}}</a></h3>
+                  
+                    <div class="address">Gi√° : {{i.food.price | number}}</div>
+                    
+               
+                </div>
+            </div>
+        
+        <!--  -->
+									<div id="toast">{{alert_text}}</div>
+									<div id="toast_error">{{alert_error}}</div>
+									<!--  -->
+        </div>
+        
+         
+      
+    </div>
+
+
 		</div>
 
 		<div
@@ -373,5 +120,5 @@
 		</div>
 	</div>
 
-	
+
 </body>

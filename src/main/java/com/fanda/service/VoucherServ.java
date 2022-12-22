@@ -8,8 +8,8 @@ import com.fanda.entity.Voucher;
 
 public interface VoucherServ {
 	public List<Voucher> findAll();
-	public Optional<Voucher> findById(int id);
+	public Optional<Voucher> findById(String id);
 	public Voucher create(Voucher Voucher);
 	public Voucher update (Voucher Voucher);	
-	public void delete(int Voucher);
+	public void delete(String Voucher);
 }

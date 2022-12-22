@@ -3,6 +3,8 @@ package com.fanda.rest;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fanda.dao.FoodDAO;
+import com.fanda.dao.RestaurantDAO;
 import com.fanda.entity.Food;
+import com.fanda.entity.Restaurant;
 import com.fanda.service.FoodServ;
 
 @RestController
@@ -25,6 +29,10 @@ public class FoodRestController {
 	FoodServ fServ;	
 	@Autowired
 	FoodDAO dao;
+	@Autowired
+	RestaurantDAO daoRes;
+	@Autowired
+	HttpServletRequest request;
 	
 	@GetMapping()
 	public List<Food> getAll() {
@@ -34,6 +42,13 @@ public class FoodRestController {
 	public Optional<Food> getById(@PathVariable("id") int id) {
 		
 		return dao.findById(id);
+	}
+	
+	
+	@GetMapping("/search/{name}")
+	public List<Food> getByname(@PathVariable("name") String id) {
+		
+		return dao.findkeys("%"+id+"%");
 	}
 	@PostMapping
 	public Food create(@RequestBody Food f) {
@@ -50,4 +65,11 @@ public class FoodRestController {
 	public void delete(@PathVariable("id") int id) {
 		fServ.delete(id);
 	}
+	
+	@GetMapping("/restaurant")
+	public List<Food> getByRes() {
+		Restaurant res = daoRes.findByUser(request.getRemoteUser()).get();
+		return dao.getListFoodByResId(res.getRestaurantId());
+	}
+	
 }

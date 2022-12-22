@@ -27,12 +27,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "order")
+@Table(name = "orders")
 public class Order implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3398429331657279447L;
+
 	@Id
 	@Column(name="order_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +42,7 @@ public class Order implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date")
 	Date date = new Date();
-	Boolean status;
+	Integer status;
 
 	@ManyToOne
 	@JoinColumn(name = "username")
@@ -51,6 +51,10 @@ public class Order implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "voucher_id")
 	Voucher voucher;
+	
+	@ManyToOne
+	@JoinColumn(name = "restaraunt_id")
+	Restaurant restaurant;
 
 	@ManyToOne @JoinColumn(name = "address_id")
 	Delivery_address address;
@@ -58,4 +62,5 @@ public class Order implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "order")
 	List<Order_detail> orderDetails;
+
 }

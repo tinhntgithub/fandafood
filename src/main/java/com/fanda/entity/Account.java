@@ -30,7 +30,6 @@ import lombok.NoArgsConstructor;
 public class Account implements Serializable{
 	@Id
 	String username;
-    @JsonIgnore
 	String password;
 	@Column(name="first_name")
 	String firstname;
@@ -39,6 +38,10 @@ public class Account implements Serializable{
 	@Column(name="phone_number")
 	String phone;
 	String email;
+	@Column(name="avt")
+	String avatar;
+	@Column(name="reset_password_token")
+	String tokenReset;
 	boolean active;
 	boolean gender;
 	@Temporal(TemporalType.DATE)
@@ -56,6 +59,10 @@ public class Account implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy = "account")
 	List<Cart> cart;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "account")
+	List<Favorite> favorites;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "account")

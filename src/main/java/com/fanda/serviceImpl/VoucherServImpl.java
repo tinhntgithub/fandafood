@@ -19,11 +19,7 @@ public class VoucherServImpl implements VoucherServ {
 		return dao.findAll();
 	}
 
-	@Override
-	public Optional<Voucher> findById(int id) {
-		// TODO Auto-generated method stub
-		return dao.findById(id);
-	}
+
 
 	@Override
 	public Voucher create(Voucher Voucher) {
@@ -37,10 +33,22 @@ public class VoucherServImpl implements VoucherServ {
 		return dao.saveAndFlush(Voucher);
 	}
 
+
+
 	@Override
-	public void delete(int Voucher) {
+	public Optional<Voucher> findById(String id) {
 		// TODO Auto-generated method stub
-		dao.deleteById(Voucher);
+		return null;
 	}
+
+
+
+	@Override
+	public void delete(String Voucher) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fanda.dao.OrderDetailDAO;
 import com.fanda.entity.Order_detail;
 import com.fanda.service.OrderDetailServ;
 import com.fanda.serviceImpl.OderDetailServImpl;
@@ -22,15 +23,18 @@ import com.fanda.serviceImpl.OderDetailServImpl;
 public class OrderDetailRestController {
 	@Autowired
 	OrderDetailServ odServ;
+	@Autowired
+	OrderDetailDAO dao ;
 	
 	
 	@GetMapping()
 	public List<Order_detail> getAll() {
-		return odServ.findAll();
+		
+		return dao.findAll();
 	}
 	@GetMapping("{id}")
-	public Optional<Order_detail> getById(@PathVariable("id") int id) {
-		return odServ.findById(id);
+	public List<Order_detail> getById(@PathVariable("id") int id) {
+		return dao.findDetails(id);
 	}
 	@PostMapping
 	public Order_detail create(@RequestBody Order_detail o) {

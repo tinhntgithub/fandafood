@@ -57,7 +57,5 @@ public class Food implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "food")
 	List<Review> review;
-	@JsonIgnore
-	@OneToMany(mappedBy = "food" )
-	List<VoucherApply> voucherApplyto  ;
+
 }

@@ -1,16 +1,17 @@
 package com.fanda.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,11 +26,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Restaurant implements Serializable {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "restaurant_id")
 	Integer restaurantId;
 	
 	@Column (name = "name")
 	String name;
+	
+	@Column (name = "address")
+	String address;
 	
 	@Column(name = "main_image")
 	String mainImage;
@@ -37,29 +42,34 @@ public class Restaurant implements Serializable {
 	@Column(name = "total_rate")
 	Double totalRate;
 	
+	boolean active;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name = "open_time")
-	Date openTime;
+	String openTime;
 	
-	@Temporal(TemporalType.DATE)
+	
 	@Column(name = "close_time")
-	Date closeTime;
+	String closeTime;
+	
+	@ManyToOne
+	@JoinColumn(name= "user_id")
+	Account account;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "restaurantId" )
-	List<RestaurantLocation> listLocation;
+	@OneToMany(mappedBy = "restaurantMenu" )
+	List<Menu_cate> listMenucate;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "restaurant" )
-	List<Favorite> favorite ;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "restaurant" )
 	List<Review> review  ;
-
+	
 	@JsonIgnore
-	@OneToMany(mappedBy = "restaurant" )
-	List<VoucherApply> voucherApplyto  ;
+	@OneToMany(mappedBy = "voucherResId" )
+	List<Voucher> getlistVoucher  ;
+
+	@ManyToOne
+	@JoinColumn(name = "location_id")
+	RestaurantLocation locationId;
 	
 }

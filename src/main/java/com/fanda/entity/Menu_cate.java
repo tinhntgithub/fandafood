@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -24,6 +26,10 @@ public class Menu_cate implements Serializable  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "menu_id")
 	int Id ;
-	Integer restaurant_id;
+	
 	String cate_name;
+	
+	@ManyToOne
+	@JoinColumn(name = "restaurant_id")
+	Restaurant restaurantMenu;
 }

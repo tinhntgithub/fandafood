@@ -10,12 +10,14 @@ import javax.persistence.Table;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Table(name="prioritized")
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Data
 public class Prioritized {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,5 +29,7 @@ public class Prioritized {
 	Date end_date;
 	
 	Boolean active;
+
+
 	
 }

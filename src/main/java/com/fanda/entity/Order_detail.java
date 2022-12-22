@@ -18,7 +18,7 @@ import lombok.Data;
 public class Order_detail implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer oder_detail_id;
+	Integer order_detail_id;
 	Double price;
 	Integer quantity;
 	@ManyToOne

@@ -3,6 +3,8 @@ package com.fanda.rest;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +30,8 @@ public class AccountRestController {
 	@Autowired
 	AccountDAO accDao;
 	
+	@Autowired
+	HttpServletRequest resp;
 	
 	@GetMapping()
 	public List<Account> getAllAccount() {
@@ -43,6 +47,10 @@ public class AccountRestController {
 		}
 	}
 	
+	@GetMapping("/current")
+	public Account curentUser() {
+		return accServ.findById(resp.getRemoteUser()).get();
+	}
 
 	@PostMapping
 	public Account create(@RequestBody Account acc) {
@@ -50,8 +58,8 @@ public class AccountRestController {
 		
 	}
 	
-	@PutMapping("{id}")
-	public Account update(@PathVariable("id") String id, @RequestBody Account acc) {
+	@PutMapping
+	public Account update(@RequestBody Account acc) {
 		return accServ.update(acc);
 	}
 	
