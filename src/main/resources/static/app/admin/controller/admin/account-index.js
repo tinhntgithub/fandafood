@@ -1,6 +1,5 @@
 app.controller("accountController", function($scope, $http, $document)
 {
-<<<<<<< HEAD
 	$scope.getUser= function() {
 		//$hhtp giống axios
 		$http.get("/rest/user/current").then(function(response) {
@@ -12,8 +11,6 @@ app.controller("accountController", function($scope, $http, $document)
 		
 	$scope.getUser();	
 	
-=======
->>>>>>> 0da8e6354590aa75b65d971f44ab9387520b3144
 	$document.ready(function(){
 				function readURL(input) {
     if (input.files && input.files[0]) {
@@ -161,20 +158,12 @@ $scope.image_new = ""
             })
 			
 		}
-<<<<<<< HEAD
 		$scope.image = "a";
 		//Cập nhật
 			$scope.update = function(){
 
 		var data = new FormData();
 		if($scope.image == ""){ 
-=======
-		
-		//Cập nhật
-			$scope.update = function(){
-	
-		var data = new FormData();
->>>>>>> 0da8e6354590aa75b65d971f44ab9387520b3144
 		data.append('file', $scope.avatar[0]);
 
 		$http.post("/rest/img/user", data, {
@@ -188,10 +177,7 @@ $scope.image_new = ""
 		$http.put(`/rest/user`,item).then(function(response) {
 		
 			alert('Cập nhật thành công');
-<<<<<<< HEAD
 			$scope.getUser();
-=======
->>>>>>> 0da8e6354590aa75b65d971f44ab9387520b3144
 		$scope.getAllAccount();
 		}).catch(function(error) {
 			console.log(error);
@@ -204,7 +190,6 @@ $scope.image_new = ""
 			console.log("Error", error);
 		});
 		
-<<<<<<< HEAD
 		}else{
 			var item = angular.copy($scope.formUser);
 			$http.put(`/rest/user`,item).then(function(response) {
@@ -213,8 +198,6 @@ $scope.image_new = ""
 		})
 		}
 		
-=======
->>>>>>> 0da8e6354590aa75b65d971f44ab9387520b3144
 		
 	
 	}

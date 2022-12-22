@@ -28,10 +28,6 @@ public class AdminController {
 	@RequestMapping("/restaurant/index")
 	public String restaurantIndex(Model model) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-<<<<<<< HEAD
-=======
-		System.out.println(principal);
->>>>>>> 0da8e6354590aa75b65d971f44ab9387520b3144
 		String username;
 		if (principal instanceof UserDetails) {
 			username = ((UserDetails) principal).getUsername();

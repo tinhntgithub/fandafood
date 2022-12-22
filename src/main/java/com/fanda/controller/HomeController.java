@@ -1,13 +1,9 @@
 package com.fanda.controller;
 
 
-<<<<<<< HEAD
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
-=======
-import java.util.List;
->>>>>>> 0da8e6354590aa75b65d971f44ab9387520b3144
 
 import javax.servlet.http.HttpServletRequest;
 
