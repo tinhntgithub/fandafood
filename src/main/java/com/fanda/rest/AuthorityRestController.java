@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fanda.dao.RoleDAO;
 import com.fanda.entity.Authority;
 import com.fanda.service.AuthorityServ;
-import com.fanda.serviceImpl.AccountServImpl;
-import com.fanda.serviceImpl.AuthorityServImpl;
 
 @RestController
 @RequestMapping("/rest/auth")
@@ -24,6 +23,8 @@ public class AuthorityRestController {
 	@Autowired
 	AuthorityServ authServ;
 	
+	@Autowired 
+	RoleDAO rDao;
 	
 	@GetMapping()
 	public List<Authority> getAllAuthority() {
@@ -42,7 +43,11 @@ public class AuthorityRestController {
 	public Authority update(@PathVariable("id") int id, @RequestBody Authority acc) {
 		return authServ.update(acc);
 	}
-	
+	@PostMapping("/seller")
+	public Authority createSeller(@RequestBody Authority auth) {
+		auth.setRole(rDao.getSellerRole("SELLER").get());
+		return authServ.create(auth);
+	}
 
 	@DeleteMapping("{id}")
 	public void delete(@PathVariable("id") int id) {

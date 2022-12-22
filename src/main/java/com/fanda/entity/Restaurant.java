@@ -42,7 +42,7 @@ public class Restaurant implements Serializable {
 	@Column(name = "total_rate")
 	Double totalRate;
 	
-	boolean active;
+	
 
 	@Column(name = "open_time")
 	String openTime;
@@ -71,5 +71,5 @@ public class Restaurant implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "location_id")
 	RestaurantLocation locationId;
-	
+	boolean active;
 }
