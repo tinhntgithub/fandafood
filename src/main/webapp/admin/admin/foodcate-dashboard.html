@@ -10,7 +10,8 @@
 			<div class="row">
 				<div class="row">
 														<label for="exampleInputtext" class="form-label">Tên thể loại</label>
-														<input type="text" class="form-control" id="exampleInputtext" ng-model="formFoodcate.name" placeholder="Cafee">
+														<input type="text" name="foodcate" required="required" class="form-control" id="exampleInputtext" ng-model="formFoodcate.name" placeholder="Cafee">
+													<label  ng-hide="myForm.foodcate.$valid" class="text-danger">Nhập Vào Thể Loại</label>
 													</div>
 			
 			</div>
@@ -20,11 +21,7 @@
 				<div class="row">
 				<div class="col-sm-4"></div>
 					<div class="col-sm-4" style="align-items: center;">
-<<<<<<< HEAD
 				<button class="btn btn-primary" ng-click="create()" ng-show="myForm.$valid">Tạo / Cập nhật</button>
-=======
-				<button class="btn btn-primary" ng-click="create()">Tạo / Cập nhật</button>
->>>>>>> 0da8e6354590aa75b65d971f44ab9387520b3144
 					
 					<button class="btn btn-primary" ng-click="reset()">Làm mới</button>
 					</div>
@@ -39,15 +36,12 @@
 		<div class="card-body">
 		<div class="row">
 		<h3 class="mb-4">Danh sách thể loại món ăn</h3>
-<<<<<<< HEAD
 		<p class="card-description fw-bold"> Tìm Kiếm
 		<div class="row">        
 		<input type="text" class="form-control" ng-model ="search" style="margin: 0 0 0 0;">
 		
 		</div>
 		</p>
-=======
->>>>>>> 0da8e6354590aa75b65d971f44ab9387520b3144
 		</div>
 		
 		<div class="row">

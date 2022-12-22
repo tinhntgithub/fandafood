@@ -31,7 +31,10 @@ public interface OrderDAO extends JpaRepository<Order, Integer>{
 	
 	@Query(value="SELECT * FROM fandafood.orders where restaraunt_id = ?1 and status = 2 and date >= ?2 and date <= ?3 ",nativeQuery=true)
 	List<Order> getOrderByRestaurantAndByStatusAndByDate(Integer restaurantId, String startDate, String endDate);
+<<<<<<< HEAD
 	
+=======
+>>>>>>> c7a68e5d1e6a4b635a36378809b99ed8469693ea
 	
 	
 }

@@ -158,11 +158,12 @@ $scope.image_new = ""
             })
 			
 		}
-		
+		$scope.image = "a";
 		//Cập nhật
 			$scope.update = function(){
-	
+
 		var data = new FormData();
+		if($scope.image == ""){ 
 		data.append('file', $scope.avatar[0]);
 
 		$http.post("/rest/img/user", data, {
@@ -176,6 +177,7 @@ $scope.image_new = ""
 		$http.put(`/rest/user`,item).then(function(response) {
 		
 			alert('Cập nhật thành công');
+			$scope.getUser();
 		$scope.getAllAccount();
 		}).catch(function(error) {
 			console.log(error);
@@ -187,6 +189,14 @@ $scope.image_new = ""
 			alert("Lỗi upload hình ảnh");
 			console.log("Error", error);
 		});
+		
+		}else{
+			var item = angular.copy($scope.formUser);
+			$http.put(`/rest/user`,item).then(function(response) {
+			alert('Cập nhật thành công');
+		$scope.getAllAccount();
+		})
+		}
 		
 		
 	

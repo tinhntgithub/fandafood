@@ -1,5 +1,18 @@
 app.controller("restaurantController", function($scope, $http, $document){
 	
+	
+	$scope.getAllLocation = function() {
+		//$hhtp giống axios
+		$http.get("/rest/resloca").then(function(response) {
+			$scope.locations = response.data
+	
+					
+		}).catch(function(error) {
+			console.log(error);
+		})
+		}
+		$scope.getAllLocation();
+	
 		$document.ready(function(){
 				function readURL(input) {
     if (input.files && input.files[0]) {
@@ -86,12 +99,13 @@ $scope.image_new = ""
 	}
 			
 			
-			
+				$scope.image = "r";
 			
 			//Cập nhật
 					$scope.update = function(){
 	
 		var data = new FormData();
+		if($scope.image == ""){ 
 		data.append('file', $scope.mainImage[0]);
 
 		$http.post("/rest/img/food", data, {
@@ -116,8 +130,21 @@ $scope.image_new = ""
 			alert("Lỗi upload hình ảnh");
 			console.log("Error", error);
 		});
+<<<<<<< HEAD
 		
 		
+=======
+		}else{
+			var item = angular.copy($scope.formRest);
+					$http.put("/rest/restaurant", item).then(function(response) {
+									alert("Cập nhật thành công !");
+									$scope.getAllRestaurant();
+									
+								}).catch(function(error) {
+									console.log(error);
+								})
+				}
+>>>>>>> c7a68e5d1e6a4b635a36378809b99ed8469693ea
 	
 	}
 		
