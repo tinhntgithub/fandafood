@@ -1,0 +1,82 @@
+<div class="container">
+	<div class="card">
+		<div class="card-body">
+			
+			<div class="row">
+				<h3 class="mb-4">Quản lý thể loại món ăn</h3>
+			</div>
+			
+			<form class="forms-sample" name="myForm">
+			<div class="row">
+				<div class="row">
+														<label for="exampleInputtext" class="form-label">Tên thể loại</label>
+														<input type="text" class="form-control" id="exampleInputtext" ng-model="formFoodcate.name" placeholder="Cafee">
+													</div>
+			
+			</div>
+												<br>
+													
+													
+				<div class="row">
+				<div class="col-sm-4"></div>
+					<div class="col-sm-4" style="align-items: center;">
+				<button class="btn btn-primary" ng-click="create()">Tạo / Cập nhật</button>
+					
+					<button class="btn btn-primary" ng-click="reset()">Làm mới</button>
+					</div>
+					<div class="col-sm-4"></div>
+				</div>
+				</form>
+			
+		 </div>
+	</div>
+
+	<div class="card">
+		<div class="card-body">
+		<div class="row">
+		<h3 class="mb-4">Danh sách thể loại món ăn</h3>
+		</div>
+		
+		<div class="row">
+			<table>
+					<tr>
+						<th>ID</th>
+						<th>Thể loại</th>
+						<th>Sửa</th>
+						<th>Xóa</th>
+					</tr>
+					<tr dir-paginate = "i in items |filter:search | itemsPerPage:8">
+						<td>{{i.foodCateId}}</td>
+						<td>{{i.name}}</td>
+						<td style="width: 100px;">
+						<button ng-click="edit(i.foodCateId)"
+									class="btn tp-btn-light btn-light" style="width: 50px;">
+									<i class="fas fa-pencil-alt"></i>
+								</button>
+						</td>
+						<td style="width: 50px;">
+						
+						<button class="btn tp-btn-light btn-light" ng-click="delete(i.foodCateId, i.name)"><i class="bi bi-trash"></i></button>
+					
+						</td>
+					</tr>
+				</table>
+				<div class="row">
+			 <div class="product__pagination d-flex justify-content-center">
+                                   <dir-pagination-controls
+                            max-size="8"
+                            direction-links="false"
+                            boundary-links="true" >
+                    </dir-pagination-controls>
+        	</div>
+        </div>
+		</div>
+		
+		
+		
+		
+		
+	</div>
+
+</div>
+</div>

@@ -1,0 +1,195 @@
+
+            <!-- row -->
+<div class="container">
+	<div class="card">
+		<div class="card-body">		
+			<h3 class="mb-4">
+			Quản lý tài khoản
+			</h3>
+			<form class="forms-sample" name="myForm">
+			<p class="fs-18">Hình ảnh</p>
+					<div class= "setting-img d-flex align-items-center mb-4">
+						<div class="avatar-upload d-flex align-items-center">
+							<div class=" change position-relative d-flex">
+								<div class="avatar-preview" style="border-radius: 5px; border:1px solid #FC8019; width: 102px; height: 122px;">
+								<img ng-if="formUser.avatar != null" alt="" id="output" src="" width="100" height="120" ng-src="{{'/img/user/'+ formUser.avatar}}">
+									</div>
+							<div class="change-btn d-flex align-items-center flex-wrap">
+											<input type='file' class="form-control" 
+											onchange="angular.element(this).scope().upload(this.files)" 
+											id="imageUpload" accept=".png, .jpg, .jpeg" />
+							<label for="imageUpload" class="dlab-upload">Chọn ảnh</label>
+										</div>
+										</div>
+								</div>
+								</div>
+											
+			<div class="row">
+												<div class="col-xl-3 col-sm-3">
+													<div class="setting-input">
+														<label for="exampleInputtext" class="form-label">Tên người dùng</label>
+														<input type="text" name="username"  required="required" class="form-control" id="exampleInputtext" ng-model="formUser.username" placeholder="Jordan Nico" pattern="[a-z0-9]{3,}">
+														<label  ng-hide="myForm.username.$valid" class="text-danger">Nhập Vào Tên Người Dùng</label>
+													</div>
+													<br>
+													<div class="setting-input">
+														<label  class="form-label">Mật khẩu</label>
+														<input type="password" name="password" required="required" class="form-control" id="exampleInputtext" ng-model="formUser.password" placeholder="••••••••">
+														<label  ng-hide="myForm.password.$valid" class="text-danger">Nhập Vào Mật Khẩu</label>
+													</div>
+													
+												</div>
+												
+													<div class="col-xl-3 col-sm-3">
+													<div class="setting-input">
+														<label  class="form-label">Họ</label>
+														
+														<input type="text" name="firstname" required="required" class="form-control" ng-model="formUser.firstname" placeholder="Họ">
+													<label  ng-hide="myForm.firstname.$valid" class="text-danger">Nhập Vào Họ Người Dùng</label>
+													</div>
+													<br>
+													<div class="setting-input">
+														 <label  class="form-label">Tên</label>
+														<input type="text" name="lastname" required="required" class="form-control" ng-model="formUser.lastname"  placeholder="Tên">
+														<label  ng-hide="myForm.lastname.$valid" class="text-danger">Nhập Vào Tên Người Dùng</label>
+													</div>
+
+														
+												</div>
+												
+												<div class="col-xl-3 col-sm-3">
+													<div class="setting-input">
+														<label  class="form-label">Số điện thoại</label>
+														
+														<input type="text" name="phone" required="required" class="form-control" ng-model="formUser.phone" placeholder="+0965123456" pattern="[0-9]{10}">
+													<label  ng-hide="myForm.phone.$valid" class="text-danger">Nhập Vào Số Điện Thoại</label>
+													</div>
+													<br>
+													<div class="setting-input">
+														 <label  class="form-label">Email</label>
+														 <br>
+														
+														<input type="email" name="email" required="required" class="form-control" ng-model="formUser.email" placeholder="ordanico@mail.com">
+													<label  ng-hide="myForm.email.$valid" class="text-danger">Nhập Vào Số Điện Thoại</label>
+													</div>												
+													
+												</div>
+												
+												<div class="col-xl-3 col-sm-3">
+													<div class="setting-input">
+														<label  class="form-label">Giới tính</label>
+														<div  style="display: flex; gap: 15px;">
+														<div class="form-check">
+                                                        <input type="radio" ng-required="!formUser.gender" ng-model ="formUser.gender" ng-value="true"   class="form-check-input" name="gender" id="optionsRadios1" >
+                                                        <label class="form-check-label">
+                                                            Nam
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="radio" ng-required="!formUser.gender" ng-model = "formUser.gender" ng-value="false"class="form-check-input" name=""gender"" id="optionsRadios2" >
+                                                        <label class="form-check-label">
+                                                           Nữ
+                                                        </label>
+                                                    </div>
+                                                    
+                                                    </div>
+                                                     	<label  ng-hide="myForm.gender.$valid" class="text-danger">Chọn 1 Giới Tính</label>
+															</div>
+													<br>
+													<br>
+													<div class="setting-input">
+														 <label  class="form-label">Trạng thái</label>
+														<div  style="display: flex; gap: 15px;">
+														<div class="form-check">
+                                                        <input type="radio" ng-required="!formUser.active" ng-model = "formUser.active" ng-value="true" class="form-check-input" name="active" id="optionsRadios3">
+                                                        <label class="form-check-label">
+                                                            Hoạt động
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="radio" ng-required="!formUser.active" ng-model = "formUser.active" ng-value="false" class="form-check-input" name=""active"" id="optionsRadios4">
+                                                        <label class="form-check-label">
+                                                           Không hoạt động
+                                                        </label>
+                                                    </div>
+                                                    
+                                                    </div>
+                                                     	<label  ng-hide="myForm.active.$valid" class="text-danger">Chọn 1 Trạng Thái</label>
+                                                    
+                                                    </div>												
+													
+												</div>
+												
+												
+												
+											</div>
+											
+											<br>
+				<div class="row d-flex justify-content-center">
+					
+					<div class=" d-flex justify-content-center" style="gap: 15px;">
+					<button class="btn btn-primary" ng-click="create()" ng-show="myForm.$valid">Tạo tài khoản</button>
+					<button class="btn btn-primary" ng-show="isUpdate" ng-click="update()">Cập nhật</button>
+					<button class="btn btn-primary" ng-click="reset()">Làm mới</button>
+					</div>
+				</div>
+			</form>
+			</div>
+	</div>
+	<div class="card">
+	<div class="card-body">
+		<h3 class="mb-4">Danh sách tài khoản</h3>
+		<p class="card-description fw-bold"> Tìm Kiếm
+		<div class="row">        
+		<input type="text" class="form-control" ng-model ="search" style="margin: 0 0 0 0;">
+		
+		</div>
+        </p>
+		<div class="row">
+			<table>
+				<tr>
+					<th>Tên người dùng</th>
+					<th>Họ</th>
+					<th>Tên</th>
+					<th>Email</th>
+					<th>Giới tính</th>		
+					<th>Trạng thái</th>			
+					<th>Ngày tạo</th>
+					<th>Chức năng</th>
+				</tr>
+				<tr dir-paginate = "i in items |filter:search | itemsPerPage:8">
+					<td>{{i.username}}</td>			
+					<td>{{i.firstname}}</td>
+					<td>{{i.lastname}}</td>
+					<td>{{i.email}}</td>
+					<td>{{i.gender?"Nam":"Nữ"}}</td>
+					<td>{{i.active?"Hoạt động":"Không hoạt động"}}</td>
+					<td>{{i.createdate | date: 'dd/MM/yyyy'}}</td>
+					<td>
+					<button ng-click="editUser(i.username)"
+									class="btn tp-btn-light btn-light" style="margin-right: 5px">
+									<i class="fas fa-pencil-alt"></i>
+								</button>
+						</td>
+				</tr>
+			</table>
+			<div class="row">
+			 <div class="product__pagination d-flex justify-content-center">
+                                   <dir-pagination-controls
+                            max-size="8"
+                            direction-links="false"
+                            boundary-links="true" >
+                    </dir-pagination-controls>
+        	</div>
+        </div>
+		</div>
+		
+		
+		
+		</div>
+	</div>		
+		
+			</div>
+	
+	
+				

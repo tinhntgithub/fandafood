@@ -1,0 +1,124 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/layout.html :: dynamic(~{::body})}">
+
+
+<body class="fixed-bottom-bar"  ng-app="mySearch"
+	ng-controller="search_controller">
+
+	<div class="osahan-favorites">
+		<div class="d-none">
+			<div class="bg-primary border-bottom p-3 d-flex align-items-center">
+				<a class="toggle togglew toggle-2" href="#"><span></span></a>
+				<h4 class="font-weight-bold m-0 text-white">Yêu thích</h4>
+			</div>
+		</div>
+
+		<div class="container most_popular py-5">
+			<h2 class="font-weight-bold mb-3">Yêu thích </h2>
+			
+			
+			
+			
+			
+			
+        	<div ng-if="list_your_favorite == 0"
+						class="row d-flex align-items-center justify-content-center py-5">
+						<div class="col-md-4 py-5">
+							<div class="text-center py-5">
+								<p class="h4 mb-4">
+									<img
+										src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg//assets/a60759ad1dabe909c46a817ecbf71878.png"
+										style="width: 8.375rem;"
+										class="shopee-search-empty-result-section__icon">
+								</p>
+								<p class="font-weight-bold text-dark h5">Bạn chưa yêu thích món ăn nào? </p>
+								<p>Hãy trải nghiệm và có cho mình những món ăn thuyệt vời đến từ các cửa hàng nhé</p>
+							</div>
+						</div>
+					
+			</div>
+		<div class="row row-cols-5">
+        <div class="col mb-3" id="responsive" ng-repeat = "i in list_your_favorite">
+        
+          <div class="product-grid">
+                <div class="product-image">
+                    <a href="/home/food/detail/{{i.food.food_id}}" class="image">
+                        <img class="pic-1" src="/user/img/food/{{i.food.image}}">
+                    </a>
+                  <!--   <span class="product-hot-label">Hot</span> -->
+                    <span class="lable_like" ng-click="dislike(i.favoriteId)"><i class="fa-solid fa-heart"></i></span>
+                    
+                    <a class="quick-view" href="" ng-click="cart.add(i.food.food_id , i.food.menu_cate.restaurant_id)">Thêm vào giỏ </a>
+                </div>
+                <div class="product-content">
+                		
+                    <h3 class="name2"><a href="/home/food/detail/{{i.food.food_id}}">{{i.food.name}}</a></h3>
+                  
+                    <div class="address">Giá : {{i.food.price | number}}</div>
+                    
+               
+                </div>
+            </div>
+        
+        <!--  -->
+									<div id="toast">{{alert_text}}</div>
+									<div id="toast_error">{{alert_error}}</div>
+									<!--  -->
+        </div>
+        
+         
+      
+    </div>
+
+
+		</div>
+
+		<div
+			class="osahan-menu-fotter fixed-bottom bg-white px-3 py-2 text-center d-none">
+			<div class="row">
+				<div class="col">
+					<a href="home.html"
+						class="text-dark small font-weight-bold text-decoration-none">
+						<p class="h4 m-0">
+							<i class="feather-home text-dark"></i>
+						</p> Home
+					</a>
+				</div>
+				<div class="col">
+					<a href="most_popular.html"
+						class="text-dark small font-weight-bold text-decoration-none">
+						<p class="h4 m-0">
+							<i class="feather-map-pin"></i>
+						</p> Trending
+					</a>
+				</div>
+				<div class="col bg-white rounded-circle mt-n4 px-3 py-2">
+					<div class="bg-danger rounded-circle mt-n0 shadow">
+						<a href="checkout.html"
+							class="text-white small font-weight-bold text-decoration-none">
+							<i class="feather-shopping-cart"></i>
+						</a>
+					</div>
+				</div>
+				<div class="col selected">
+					<a href="favorites.html"
+						class="text-danger small font-weight-bold text-decoration-none">
+						<p class="h4 m-0">
+							<i class="feather-heart"></i>
+						</p> Favorites
+					</a>
+				</div>
+				<div class="col">
+					<a href="profile.html"
+						class="text-dark small font-weight-bold text-decoration-none">
+						<p class="h4 m-0">
+							<i class="feather-user"></i>
+						</p> Profile
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>

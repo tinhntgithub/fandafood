@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/layout.html :: dynamic(~{::body})}">
+
+
+<body class="fixed-bottom-bar"  ng-app="myHehe"
+	ng-controller="address_controller">
+
+	<div class="osahan-profile">
+		<div class="d-none">
+			<div class="bg-primary-style2 border-bottom p-3 d-flex align-items-center">
+				<a class="toggle togglew toggle-2" href="#"><span></span></a>
+				<h4 class="font-weight-bold m-0 text-white">Sổ địa chỉ</h4>
+			</div>
+		</div>
+
+		<div class="container position-relative">
+			<div class="py-5 osahan-profile row">
+				
+				<div class="col-md-12 mb-3">
+					<div class="xMDeox">
+						<div class="Hvae38" role="main">
+							<div style="display: contents;">
+								<div class="+9+kvM">
+									<div class="VzJhMY">
+										<div class="pNAg7i">
+											<div class="XHbZdb">Địa chỉ của tôi</div>
+											<div class="MrJckv"></div>
+										</div>
+										<div>
+											<div class="sS8qJ1">
+												<div style="display: flex;">
+													<button 
+															ng-click = "create()"
+														class="shopee-button-solid shopee-button-solid--primary bXfVa5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+														<div class="hH4BC2">
+															<div class="_1Gw94p">
+																<svg enable-background="new 0 0 10 10"
+																	viewBox="0 0 10 10" x="0" y="0"
+																	class="shopee-svg-icon icon-plus-sign">
+																	<polygon
+																		points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon></svg>
+															</div>
+															<div>Thêm địa chỉ mới</div>
+														</div>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="V0M445">
+										
+										<div class="vgW6G3" >
+											<div class="_5jjfib">Địa chỉ</div>
+										
+											<div class="ApAubL nn3Z+6" ng-repeat = "i in list_address">
+												<div class="_221a6W">
+													<div role="heading" class="FSlv-V m3QHyX">
+														<div class="nFbAe4 beZuCH">
+															<span class="_30MS7O VKNC5l"><div class="tziqvJ">{{i.name}}</div></span>
+															<div class="kTdq3r"></div>
+															<div role="row" class="bRMEUm _2bzRo+ _4DcXuJ">{{i.phone}}</div>
+														</div>
+														<div class="aQxJVJ">
+															<button class="wORiuh" ng-click="edit_address(i.id)">Cập nhật</button>
+															<button class="wORiuh" ng-if="i.active == false" ng-click="remove_address(i.id)">Xóa</button>
+														</div>
+													</div>
+													<div role="heading" class="FSlv-V m3QHyX">
+														<div class="nFbAe4 beZuCH">
+															<div class="xk89A1">
+																<div role="row" class="_4DcXuJ">{{i.address_detail}}</div>
+																<div role="row" class="_4DcXuJ">{{i.city}} , {{i.districts}} , {{i.wards}}</div>
+															</div>
+														</div>
+														<div class="_5txhTu aQxJVJ">
+															<button class="WTM1cN amiqmV EfkdTP" ng-click="choose(i.id)" ng-if="i.active == false">Thiết lập
+																mặc định</button>
+																
+																<button class="WTM1cN amiqmV EfkdTP" ng-if="i.active == true" disabled>Thiết lập
+																mặc định</button>
+														</div>
+													</div>
+													<div role="row" ng-if="i.active == true" class="GM70BR _4DcXuJ"><span role="mark" class="BQozJg D+-Kud _8-tEK7">Mặc định</span></div>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	
+
+
+
+
+		<div class="modal fade" id="exampleModalAddress" tabindex="-1"
+					aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div
+						class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+						<div class="modal-content">
+							<div class="modal-body">
+								<div class="gKd4LS">
+									<div class="_84tOMz">Địa chỉ mới</div>
+									<div class="QKYR-n">Để đặt hàng, vui lòng thêm địa chỉ
+										nhận hàng</div>
+									<form>
+										<div class="lHCVqO">
+											<div class="iWBSHn">
+												<div class="_0f++jY">
+													<div class="y-beKO _3KPPa3">
+														<div class="GD9qsp">
+															<div class="G1Ku9m">Họ và tên</div>
+															<input class="AoLGOD" type="text" placeholder="Họ và tên"
+																autocomplete="name" maxlength="64" value="" ng-model="form_address.name">
+														</div>
+													</div>
+													<div class="KFBSdu"></div>
+													<div class="y-beKO oQLWTY">
+														<div class="GD9qsp">
+															<div class="G1Ku9m">Số điện thoại</div>
+															<input class="AoLGOD" type="text"
+																placeholder="Số điện thoại"
+																autocomplete="user-address-phone" value="" ng-model="form_address.phone">
+														</div>
+													</div>
+												</div>
+												<div class="y-beKO _3KPPa3">
+													<div class="GD9qsp">
+														<select ng-model="form_address.city" id="city"
+															class="AoLGOD" aria-label=".form-select-sm">
+
+															<option value="" selected>Chọn tỉnh thành</option>
+
+														</select>
+
+													</div>
+												</div>
+
+												<div class="y-beKO _3KPPa3">
+													<div class="GD9qsp">
+														<select class="AoLGOD" ng-model="form_address.district"
+															id="district" aria-label=".form-select-sm">
+															<option value="" selected>Chọn quận huyện</option>
+														</select>
+													</div>
+												</div>
+
+
+												<div class="y-beKO _3KPPa3">
+													<div class="GD9qsp">
+														<select class="AoLGOD" ng-model="form_address.ward"
+															id="ward" aria-label=".form-select-sm">
+															<option value="" selected>Chọn phường xã</option>
+														</select>
+
+													</div>
+												</div>
+
+
+
+
+
+
+											</div>
+
+										</div>
+
+										<div class="_0f++jY">
+											<div class="SnzDoF">
+												<div class="QbqE+j tyikTg RYXN7V">
+													<div class="M9JCAS">
+														<div class="oaCSZH">Địa chỉ cụ thể</div>
+														<textarea class="gRsrLD" rows="2"
+															placeholder="Địa chỉ cụ thể" ng-model="form_address.address_detail"
+															autocomplete="user-street-address" maxlength="128"></textarea>
+													</div>
+												</div>
+												<div class="f98nbf"></div>
+											</div>
+										</div>
+										
+									</form>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-bs-dismiss="modal"
+									onclick="$('#exampleModalAddress').modal('hide');">Trở lại</button>
+								
+								
+								<button type="button" class="shopee-button-solid shopee-button-solid--primary bXfVa5" ng-click="create_address()"  ng-if="status_address == true">Thêm mới</button>
+								
+								<button type="button" class="shopee-button-solid shopee-button-solid--primary bXfVa5" ng-click="update_address()"  ng-if="status_address == false">Cập nhật</button>
+							</div>
+						</div>
+					</div>
+				</div>
+<!--  -->
+									<div id="toast">{{alert_text}}</div>
+									<div id="toast_error">{{alert_error}}</div>
+									<!--  -->
+
+	</div>
+
+
+</body>

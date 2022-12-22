@@ -1,0 +1,32 @@
+<!-- row -->
+<div class="container">
+	<div class="card">
+
+		<div class="card-body">
+						<h3 class="mb-4">Phân Quyền Truy Cập</h3>
+			<div class="row">
+			<table>
+				<tr>
+					 <th>Tên đăng nhập</th>
+                     <th>Họ Và Tên</th>
+                     <th >Phân Quyền</th>
+				</tr>
+				
+				<tr ng-repeat = "acc in auths" style="border-bottom: 1px solid #FC8019; align-items: center;">
+					<td>{{acc.account.username}}</td>
+                                <td>{{acc.account.firstname}} {{acc.account.lastname}}</td>
+                              <th class="d-flex" ng-repeat="role in roles" style="display: inline;">
+                                    <div class="form-check form-check-primary ">
+                                        <label class="form-check-label">
+                                          <input type="checkbox" ng-checked="authorityOf(acc , role)" ng-click = "authorityChange(acc,role)" class="form-check-input" > {{role.roleName}} <i class="input-helper"></i></label>
+                                      </div>
+                                </th>  
+                               
+				
+				</tr>
+			
+			</table>
+			</div>
+		</div>
+	</div>
+</div>

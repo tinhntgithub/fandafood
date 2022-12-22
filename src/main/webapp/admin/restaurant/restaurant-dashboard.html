@@ -1,0 +1,112 @@
+
+<!-- row -->
+<div class="container">
+	<div class="card">
+		<div class="card-body">
+		
+				<h3 class="mb-4">Quản lý thông tin nhà hàng</h3>
+				<p class="fs-18">Ảnh nhà hàng :</p>
+				<div class="setting-img d-flex align-items-center mb-4">
+					<div class="avatar-upload d-flex align-items-center">
+						<div class=" change position-relative d-flex">
+							<div class="avatar-preview" style="width: 100px; height : 100px;border-radius : 8px ; border: 1px solid #FC8E32; padding: 2px">
+							<img alt="" src="/img/food/{{formRestaurant.mainImage}}" id="output" style="width: 100%;">
+								
+							</div>
+							<div class="change-btn d-flex align-items-center flex-wrap">
+								<input type='file' class="form-control" id="imageUpload"
+									accept=".png, .jpg, .jpeg"
+									 onchange="angular.element(this).scope().upload(this.files)"
+									 /> <label for="imageUpload"
+									class="dlab-upload">Chọn ảnh</label>
+									 
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-xl-4 col-sm-4">
+						<div class="setting-input">
+							<label for="exampleInputtext" class="form-label">Tên nhà hàng :
+								:</label> <input type="text" ng-model="formRestaurant.name" class="form-control"
+								id="exampleInputtext" placeholder="Nhập tên nhà hàng...">
+						</div>
+						
+						<br>
+						<div class="setting-input">
+							<label class="form-label">Địa chỉ:</label>
+
+
+							<div class="basic-form">
+								<textarea class="form-control h-auto"
+									ng-model="formRestaurant.address" rows="4" id="comment" placeholder="Nhập mô tả..."></textarea>
+							</div>
+
+						</div>
+						
+					</div>
+
+					<div class="col-xl-4 col-sm-4">
+						<div class="setting-input">
+
+
+							<label class="form-label">Khu vực:</label> <select name="cate"
+								class="form-control form-control-lg" required="required"
+								id="exampleFormControlSelect1" ng-model="formRestaurant.locationId.id">
+								<option ng-repeat="y in locationId" ng-value="y.id">{{y.location}}
+								</option>
+
+							</select>
+
+
+						</div>
+
+						<div class="setting-input" style="margin-top: 10px">
+							<label class="form-label">Đánh giá</label> <input
+								ng-model="formRestaurant.totalRate" type="number" min="0" max="5" class="form-control" readonly="readonly"
+								placeholder="Nhập giờ mở cửa">
+						</div>
+
+
+					</div>
+
+					<div class="col-xl-4 col-sm-4">
+						<div class="setting-input">
+							<label class="form-label">Giờ mở cửa:</label> <input id="ResOpenTime"
+								 type="time" min="0" class="form-control" ng-value="formRestaurant.openTime"
+								placeholder="Nhập giờ mở cửa">
+						</div>
+						
+						<br>
+						
+						<div class="setting-input">
+							<label class="form-label">Giờ đóng cửa:</label> <input id="ResCloseTime"
+								 type="time" min="0" class="form-control" ng-value="formRestaurant.closeTime"
+								placeholder="Nhập giờ mở cửa">
+						</div>
+						
+							<br>
+							<br>
+						<div class="setting-input" style="text-align: center; display: flex; gap:10px">
+							<button ng-click="updateRestaurant()"
+								class="btn btn-primary float-end w-100 btn-md">Cập nhật</button>								
+						</div>
+						
+
+
+					</div>
+
+
+
+				</div>
+			
+		</div>
+		
+
+	</div>
+
+
+</div>
+

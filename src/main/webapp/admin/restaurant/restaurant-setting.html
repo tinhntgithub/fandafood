@@ -1,0 +1,338 @@
+
+<!-- row -->
+<div class="container">
+
+
+		<!-- Button trigger modal -->
+		
+		
+		<div class="row">
+			<div class="col-8">
+				<h3 class="mb-3">Danh sách món ăn</h3>
+			</div>
+			<div class="col-4 d-flex justify-content-end mb-3">
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+				  Thêm món ăn
+				</button>
+			</div>
+		</div>
+		
+
+	   <!-- Modal Thêm -->
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-xl">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="staticBackdropLabel">Thêm món ăn</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		       	
+				<p class="fs-18">Ảnh món :</p>
+				<div class="setting-img d-flex align-items-center mb-4">
+					<div class="avatar-upload d-flex align-items-center">
+						<div class=" change position-relative d-flex">
+							<div class="avatar-preview" style="width: 100px; height : 100px;border-radius : 8px ; border: 1px solid #FC8E32; padding: 2px">
+							<img alt="" src="/img/food/{{form.image}}" id="output" style="width: 100%;">
+								
+							</div>
+							<div class="change-btn d-flex align-items-center flex-wrap">
+								<input type='file' class="form-control" id="imageUpload"
+									accept=".png, .jpg, .jpeg"
+									 onchange="angular.element(this).scope().upload(this.files)"
+									 /> <label for="imageUpload"
+									class="dlab-upload">Chọn ảnh</label>
+									 
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-xl-4 col-sm-4">
+						<div class="setting-input">
+							<label for="exampleInputtext" class="form-label">Tên món :
+								</label> <input type="text" ng-model="form.name" class="form-control"
+								id="exampleInputtext" placeholder="Nhập tên món ăn...">
+						</div>
+						<br>
+						<div class="setting-input">
+							<label class="form-label">Menu :</label> <select name="cate"
+								class="form-control form-control-lg" required="required"
+								id="exampleFormControlSelect1" ng-model="form.menu_cate.id">
+								<option ng-repeat="x in menucate" ng-value="x.id">{{x.cate_name}}
+								</option>
+
+							</select>
+
+
+
+						</div>
+						
+					</div>
+
+					<div class="col-xl-4 col-sm-4">
+						<div class="setting-input">
+
+
+							<label class="form-label">loại món:</label> <select name="cate"
+								class="form-control form-control-lg" required="required"
+								id="exampleFormControlSelect1" ng-model="form.foodCate.foodCateId">
+								<option ng-repeat="y in foodCate" ng-value="y.foodCateId">{{y.name}}
+								</option>
+
+							</select>
+
+
+						</div>
+
+						<div class="setting-input" style="margin-top: 10px">
+							<label class="form-label">Trạng thái :</label>
+							<div style="display: flex; gap: 10px;">
+								<div class="form-check">
+									<input class="form-check-input" type="radio" ng-model="form.status" ng-value="true" ng-checked="true" name="radio"> <label
+										class="form-check-label"> Hoạt động</label>
+								</div>
+
+								<div class="form-check">
+									<input class="form-check-input" type="radio"
+										ng-model="form.status" ng-value="false" name="radio">
+									<label class="form-check-label"> Tạm ngừng </label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xl-4 col-sm-4">
+						<div class="setting-input">
+							<label class="form-label">Giá :</label> <input
+								ng-model="form.price" type="number" min="0" class="form-control"
+								placeholder="Nhập giá...">
+						</div>
+						<br>
+						<div class="setting-input">
+							<label class="form-label">Mô tả:</label>
+
+
+							<div class="basic-form">
+								<textarea class="form-control h-auto"
+									ng-model="form.description" rows="4" id="comment" placeholder="Nhập mô tả..."></textarea>
+							</div>
+						</div>
+					</div>
+				</div>			
+			
+		      </div>
+		      <div class="modal-footer d-flex" style="gap : 10px;" >
+		      
+		      	<button type="button" ng-click="create_food()" class="btn btn-primary w-30">Thêm món</button>
+		      	<button type="button" ng-click="reset()" class="btn btn-primary w-30">Làm mới</button>
+		        <button type="button" class="btn btn-outline-dark w-30" data-bs-dismiss="modal">Đóng</button>
+		        
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		
+		<!-- model Cập nhật -->
+		<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-xl">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="staticBackdropLabel">Cập nhật món ăn</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		       	
+				<p class="fs-18">Ảnh món :</p>
+				<div class="setting-img d-flex align-items-center mb-4">
+					<div class="avatar-upload d-flex align-items-center">
+						<div class=" change position-relative d-flex">
+							<div class="avatar-preview" style="width: 100px; height : 100px;border-radius : 8px ; border: 1px solid #FC8E32; padding: 2px">
+							<img alt="" src="/img/food/{{form2.image}}" id="output2" style="width: 100%;">
+								
+							</div>
+							<div class="change-btn d-flex align-items-center flex-wrap">
+								<input type='file' class="form-control" id="imageUpload2"
+									accept=".png, .jpg, .jpeg"
+									 onchange="angular.element(this).scope().upload2(this.files)"
+									 /> <label for="imageUpload2"
+									class="dlab-upload">Chọn ảnh</label>
+									 
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-xl-4 col-sm-4">
+						<div class="setting-input">
+							<label for="exampleInputtext" class="form-label">Tên món :
+								</label> <input type="text" ng-model="form2.name" class="form-control"
+								id="exampleInputtext" placeholder="Nhập tên món ăn...">
+						</div>
+						<br>
+						<div class="setting-input">
+							<label class="form-label">Menu :</label> <select name="cate"
+								class="form-control form-control-lg" required="required"
+								id="exampleFormControlSelect1" ng-model="form2.menu_cate.id">
+								<option ng-repeat="x in menucate" ng-value="x.id">{{x.cate_name}}
+								</option>
+
+							</select>
+
+
+
+						</div>
+						
+					</div>
+
+					<div class="col-xl-4 col-sm-4">
+						<div class="setting-input">
+
+
+							<label class="form-label">loại món:</label> <select name="cate"
+								class="form-control form-control-lg" required="required"
+								id="exampleFormControlSelect1" ng-model="form2.foodCate.foodCateId">
+								<option ng-repeat="y in foodCate" ng-value="y.foodCateId">{{y.name}}
+								</option>
+
+							</select>
+
+
+						</div>
+
+						<div class="setting-input" style="margin-top: 10px">
+							<label class="form-label">Trạng thái :</label>
+							<div style="display: flex; gap: 10px;">
+								<div class="form-check">
+									<input class="form-check-input" type="radio"
+										ng-model="form2.status" ng-value="true" ng-checked="true" name="radio"> <label
+										class="form-check-label"> Hoạt động</label>
+								</div>
+
+								<div class="form-check">
+									<input class="form-check-input" type="radio"
+										ng-model="form2.status" ng-value="false" name="radio">
+									<label class="form-check-label"> Tạm ngừng </label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xl-4 col-sm-4">
+						<div class="setting-input">
+							<label class="form-label">Giá :</label> <input
+								ng-model="form2.price" type="number" min="0" class="form-control"
+								placeholder="Nhập giá...">
+						</div>
+						<br>
+						<div class="setting-input">
+							<label class="form-label">Mô tả:</label>
+
+
+							<div class="basic-form">
+								<textarea class="form-control h-auto"
+									ng-model="form2.description" rows="4" id="comment" placeholder="Nhập mô tả..."></textarea>
+							</div>
+						</div>
+					</div>
+				</div>			
+			
+		      </div>
+		      <div class="modal-footer">
+		      
+		      	<button type="button" ng-click="update_food()" class="btn btn-primary">Cập nhật món</button>
+		      	
+		        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Đóng</button>
+		        
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+
+	<div class="card">
+		<div class="card-body">
+		
+			
+				<div class="input-group search-area2 style-1 w-100 mb-5">
+								<span class="input-group-text p-0"><a
+									href="javascript:void(0)"><svg class="me-1" width="32"
+											height="32" viewBox="0 0 32 32" fill="none"
+											xmlns="http://www.w3.org/2000/svg">
+											<path
+												d="M27.414 24.586L22.337 19.509C23.386 17.928 24 16.035 24 14C24 8.486 19.514 4 14 4C8.486 4 4 8.486 4 14C4 19.514 8.486 24 14 24C16.035 24 17.928 23.386 19.509 22.337L24.586 27.414C25.366 28.195 26.634 28.195 27.414 27.414C28.195 26.633 28.195 25.367 27.414 24.586ZM7 14C7 10.14 10.14 7 14 7C17.86 7 21 10.14 21 14C21 17.86 17.86 21 14 21C10.14 21 7 17.86 7 14Z"
+												fill="#FC8019" />
+											</svg> </a></span> 
+									
+									
+									<input type="text" class="form-control p-0" ng-model ="search" style="margin: 0 0 0 0;" placeholder="Tìm kiếm...">
+							</div>
+			
+			
+			<div class="row" style="margin-left: 10px">
+				<table>
+					<tr style="margin-bottom: 10px;">
+						<th>Ảnh</th>
+						<th>tên món</th>
+						<th>Menu món</th>
+						<th>Loại món</th>
+						<th>Giá</th>
+					
+						<th>Trạng thái</th>
+						<th></th>
+					</tr>
+					<tr dir-paginate="item in items |filter:search | itemsPerPage:8"
+						style="border-bottom: 1px solid black;">
+						<td><img alt=""
+							src="/img/food/{{item.image}}"
+							style="height: 25px; margin-top: 10px;"></td>
+						<td>{{item.name}}</td>
+						<td>{{item.menu_cate.cate_name}}</td>
+						<td>{{item.foodCate.name}}</td>
+						<td>{{item.price}}</td>
+						
+						<td ng-if="item.status">Hoạt động</td>
+						<td ng-if="!item.status">Tạm ngừng</td>
+						<td>
+							<div class="d-flex">
+								<button ng-click="edit_food(item.food_id)" data-bs-toggle="modal" data-bs-target="#staticBackdrop2"
+									class="btn tp-btn-light btn-light" style="margin-right: 5px">
+									<i class="fas fa-pencil-alt"></i>
+								</button>
+
+								<button ng-click="remove_Food(item.food_id)"
+									class="btn tp-btn-light btn-light">
+									<i class="fa fa-trash"></i>
+								</button>
+							</div>
+						</td>
+					</tr>
+				</table>
+				<br>
+				<br>
+				<br>
+				<div class="row">
+					<div class="product__pagination d-flex justify-content-center" >
+                                   <dir-pagination-controls 
+                            max-size="8"
+                            direction-links="false"
+                            boundary-links="true" >
+                    </dir-pagination-controls>
+                </div>
+        </div>
+			</div>
+
+
+
+		</div>
+
+	</div>
+
+
+</div>
+

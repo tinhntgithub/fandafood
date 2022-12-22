@@ -1,0 +1,189 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/layout.html :: dynamic(~{::body})}">
+
+<body class="fixed-bottom-bar" ng-app="mySearch"
+	ng-controller="search_controller">
+	<div class="d-none">
+		<div class="bg-primary p-3 d-flex align-items-center">
+			<a class="toggle togglew toggle-2" href="#"><span></span></a>
+			<h4 class="font-weight-bold m-0 text-white">Tìm kiếm</h4>
+		</div>
+	</div>
+	<div class="osahan-popular">
+
+		<div class="container">
+
+
+			<ul class="nav nav-tabs border-0" id="myTab" role="tablist"
+				style="margin-top: 50px;">
+				<li class="nav-item" role="presentation"><a
+					class="nav-link active border-0 bg-light text-dark rounded"
+					ng-click="change_status()" id="home-tab" data-toggle="tab"
+					href="#home" role="tab" aria-controls="home" aria-selected="true"><i
+						class="feather-home mr-2"></i>Quán ({{list_restaraunt.length}})</a></li>
+				<li class="nav-item" role="presentation"><a
+					ng-click="change_status_false()"
+					class="nav-link border-0 bg-light text-dark rounded ml-3"
+					id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+					aria-controls="profile" aria-selected="false"><i
+						class="feather-disc mr-2"></i>Món ăn ({{list_food.length}})</a></li>
+			</ul>
+			<div class="tab-content" id="myTabContent" style="margin-top: 15px">
+				<div class="tab-pane fade show active" id="home" role="tabpanel"
+					aria-labelledby="home-tab">
+
+
+
+					<div class="input-group mb-4">
+
+						<input type="text"
+							class="form-control form-control-lg input_search border-right-0"
+							id="inlineFormInputGroup" placeholder="Tìm kiếm quán ăn..."
+							ng-model="input_restaraunt" ng-change="search_restaraunt()">
+
+						<div class="input-group-prepend">
+							<div
+								class="btn input-group-text bg-white border_search border-left-0 text-primary">
+								<i class="feather-search"></i>
+							</div>
+						</div>
+					</div>
+
+					<div ng-if="list_restaraunt == 0"
+						class="row d-flex align-items-center justify-content-center py-5">
+						<div class="col-md-4 py-5">
+							<div class="text-center py-5">
+								<p class="h4 mb-4">
+									<img
+										src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg//assets/a60759ad1dabe909c46a817ecbf71878.png"
+										style="width: 8.375rem;"
+										class="shopee-search-empty-result-section__icon">
+								</p>
+								<p class="font-weight-bold text-dark h5">Không tìm thấy</p>
+								<p>chúng tôi không thể tìm thấy bất kỳ thứ gì phù hợp với
+									yêu cầu tìm kiếm của bạn, vui lòng thử lại.</p>
+							</div>
+						</div>
+					</div>
+					<div class="container mt-4 mb-4 p-0">
+
+
+						<div class="row row-cols-5">
+							<div class="col mb-3" id="responsive"
+								ng-repeat="i in list_restaraunt">
+
+								<div class="product-grid">
+									<div class="product-image">
+										<a class="image" href="/home/restaurant/{{i.restaurantId}}">
+											<img class="pic-1" src="/user/img/quanAn/{{i.mainImage}}">
+										</a>
+										<!--   <span class="product-hot-label">Hot</span> -->
+										<span class="product-sale-label">Sale</span> <a
+											class="quick-view" href="/home/restaurant/{{i.restaurantId}}">Xem</a>
+									</div>
+									<div class="product-content">
+
+										<h3 class="name2">
+											<a>{{i.name}}</a>
+										</h3>
+
+										<div class="address">{{i.address}}</div>
+
+									</div>
+								</div>
+
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+				<div class="tab-pane fade" id="profile" role="tabpanel"
+					aria-labelledby="profile-tab">
+
+					<div class="input-group mb-4">
+
+						<input type="text"
+							class="form-control form-control-lg input_search border-right-0"
+							id="inlineFormInputGroup" placeholder="Tìm kiếm quán ăn..."
+							ng-model="input_food" ng-change="search_food()">
+
+						<div class="input-group-prepend">
+							<div
+								class="btn input-group-text bg-white border_search border-left-0 text-primary">
+								<i class="feather-search"></i>
+							</div>
+						</div>
+					</div>
+
+
+
+					<div ng-if="list_food == 0"
+						class="row d-flex align-items-center justify-content-center py-5">
+						<div class="col-md-4 py-5">
+							<div class="text-center py-5">
+								<p class="h4 mb-4">
+									<img
+										src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg//assets/a60759ad1dabe909c46a817ecbf71878.png"
+										style="width: 8.375rem;"
+										class="shopee-search-empty-result-section__icon">
+								</p>
+								<p class="font-weight-bold text-dark h5">Không tìm thấy</p>
+								<p>chúng tôi không thể tìm thấy bất kỳ thứ gì phù hợp với
+									yêu cầu tìm kiếm của bạn, vui lòng thử lại.</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="row row-cols-5" style="margin-top: 20px">
+						<div class="col mb-3" id="responsive" ng-repeat="i in list_food">
+
+							<div class="product-grid">
+								<div class="product-image">
+									<a class="image" href="/home/food/detail/{{i.food_id}}"> <img
+										class="pic-1" src="/user/img/food/{{i.image}}">
+									</a>
+									<!--   <span class="product-hot-label">Hot</span> -->
+									
+									
+		
+									
+									
+									
+								
+								
+
+
+									<span class="product-sale-label">Sale</span> <a
+										class="quick-view" href="/home/food/detail/{{i.food_id}}">Xem</a>
+								</div>
+								<div class="product-content">
+
+									<h3 class="name2">
+										<a>{{i.name}}</a>
+									</h3>
+
+									<div class="address">Giá : {{i.price}}</div>
+
+								</div>
+							</div>
+
+
+
+						</div>
+
+
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+	</div>
+</body>
+
+</html>

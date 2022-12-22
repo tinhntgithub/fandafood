@@ -1,0 +1,46 @@
+<!-- row -->
+<div class="container">
+	<div class="card">
+		<div class="card-body">
+			<h3 class="mb-4">Đánh giá</h3>
+			<br>
+			
+			<div class="row" style="">
+
+				<div class="col-sm-4" style="padding: 10px;">
+								<h4 class="mb-4">Danh sách nhà hàng</h4>
+					<div ng-repeat="i in restaurant">
+						<button class="btn tp-btn-light btn-light" style="margin-bottom: 10px; width: 100%;border: 1px solid #FC8019;"					
+						 ng-value="{{i.restaurantId}}" ng-click="getReviewInRestaurant(i.restaurantId)">{{i.name}}</button>					
+					</div>
+
+				</div>
+				
+				<div class="col-sm-8" style="padding: 10px;">
+								<h4 class="mb-4">Danh sách đánh giá</h4>
+					<div ng-repeat="r in reviews" style="border-radius: 10px; border: 2px solid #FC8019; margin-bottom: 5px; display: flex; gap:10px;">
+						<div class="col-sm-2">
+							<img src="/img/user/{{r.account.avatar}}" width="120" height="120" style="border-radius: 100px;">
+						</div>
+						<div class="col-sm-10">
+							<div class="fw-bold">
+								{{r.account.firstname}} {{r.account.lastname}}
+							</div>
+							<div><input
+								data-role="rating" data-value="{{r.rate}}" disabled
+								data-star-color="red" data-stared-color="#FC8019" data-static="true" ></div>
+						<div>{{r.food.name}}</div>
+						<div>{{r.date | date:'dd/MM/yyyy'}}</div>
+						
+						<div>{{r.message}}</div>
+						</div>	
+					</div>
+				</div>
+					</div>
+
+			
+			
+		</div>
+		
+	</div>
+</div>

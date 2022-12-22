@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<!-- PAGE TITLE HERE -->
+	<title>FandaFood - Đăng ký quán ăn</title>
+
+	<!-- FAVICONS ICON -->
+	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+	<!-- Form step -->
+	<link href="/admin/vendor/jquery-smartwizard/dist/css/smart_wizard.min.css" rel="stylesheet">
+	 <!-- Clockpicker -->
+	 <link href="/admin/vendor/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet">
+	 <!-- Pick date -->
+	 <link rel="stylesheet" href="/admin/vendor/pickadate/themes/default.css">
+	 <link rel="stylesheet" href="/admin/vendor/pickadate/themes/default.date.css">
+	 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Custom Stylesheet -->
+	<link href="/admin/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+	<link href="/admin/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+	<link href="/admin/vendor/swiper/css/swiper-bundle.min.css" rel="stylesheet">
+	<link href="/admin/css/style.css" rel="stylesheet">
+
+
+	<!-- Angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<!-- Router -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+	<style>
+		.content-body {
+			margin-left: 0 !important;
+		}
+	</style>
+</head>
+
+<body ng-app="myMcR" ng-controller="McRegisCtrl">
+
+
+	<!--**********************************
+        Main wrapper start
+    ***********************************-->
+	<div id="main-wrapper">
+
+		<!--**********************************
+            Nav header start
+        ***********************************-->
+		<div class="nav-header">
+            <a href="index.html" class="brand-logo">
+				<img height="80%" src="/user/img/nopanda.png" style="margin-left: 20px">
+            </a>
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+		<!--**********************************
+            Nav header end
+        ***********************************-->
+
+
+
+
+
+		<!--**********************************
+            Header start
+        ***********************************-->
+		<div class="header">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+					<div class="container d-block my-0">
+						<div class="d-flex align-items-center justify-content-sm-between justify-content-end">
+							<div class="header-left">
+								<div class="nav-item d-flex align-items-center">
+									
+								</div>
+							</div>
+							
+							<ul class="navbar-nav header-right ">
+								
+								<li class="nav-item d-flex align-items-center">
+									
+								</li>
+								<li>
+									
+									<div class="dropdown header-profile2 ">
+										<a class="nav-link " href="javascript:void(0);"  role="button" data-bs-toggle="dropdown">
+											<div class="header-info2 d-flex align-items-center">
+												<img src="images/banner-img/pic-1.png" alt="">
+												<div class="d-flex align-items-center sidebar-info">
+													<div>
+														<h6 class="font-w500 mb-0 ms-2">Hehe</h6>
+													</div>	
+													<i class="fas fa-chevron-down"></i>
+												</div>
+												
+											</div>
+										</a>
+										<div class="dropdown-menu dropdown-menu-end">
+											
+											<a href="page-login.html" class="dropdown-item ai-icon ms-1">
+												<svg  xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+												<span class="ms-1">Logout </span>
+											</a>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+
+
+
+
+		<!--**********************************
+            Content body start
+        ***********************************-->
+		<div class="content-body">
+			<div class="container">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item "><a href="javascript:void(0)">ĐĂNG KÝ BÁN HÀNG</a></li>
+
+					</ol>
+				</div>
+				<!-- row -->
+				<div class="row">
+					<div class="col-xl-12 col-xxl-12">
+						<div class="card">
+							<div class="card-header">
+								<h4 class="card-title">Tiến độ đăng ký</h4>
+							</div>
+							<div class="card-body">
+								<div id="smartwizard" class="form-wizard order-create">
+									<ul class="nav nav-wizard">
+										<li><a class="nav-link" href="#info">
+												<span>1</span>
+											</a></li>
+										<li><a class="nav-link" href="#pack">
+												<span>2</span>
+											</a></li>
+										<li><a class="nav-link" href="#submit">
+												<span>3</span>
+											</a></li>
+							
+									</ul>
+									<div class="tab-content">
+										<div id="info" class="tab-pane" role="tabpanel">
+											<div class="row">
+												<div class="col-lg-12 mb-3">
+													<div class="mb-3">
+														<label class="text-label form-label">Khu vực*</label>
+														<select id="location" class="default-select form-control wide mb-3 ms-0" ng-model="locaform.location"
+															ng-options="o.Name for o in loca"
+														>
+														
+															
+														</select>
+													</div>
+												</div>
+												<div class="col-lg-12 mb-3">
+													<div class="mb-3">
+														<label class="text-label form-label">Ảnh quán*</label>
+														<div class="setting-img d-flex align-items-center mb-4">
+															<div class="avatar-upload d-flex align-items-center">
+																<div class=" change position-relative d-flex">
+																	<div class="avatar-preview">
+																		<div id="imagePreview"
+																			style="background-image: url(https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg);">
+																		</div>
+																	</div>
+																	<div
+																		class="change-btn d-flex align-items-center flex-wrap">
+																		<input type='file' class="form-control"
+																			id="imageUpload"
+																			accept=".png, .jpg, .jpeg" ng-model="form.mainImage"/>
+																		<label for="imageUpload"
+																			class="dlab-upload">Chọn ảnh</label>
+																		<a href="javascript:void"
+																			class="btn remove-img ms-2">Bỏ</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 mb-2">
+													<div class="mb-3">
+														<label class="text-label form-label">Tên quán*</label>
+														<input type="text" name="firstName" class="form-control" ng-model="form.name"
+															required>
+													</div>
+												</div>
+												<div class="col-lg-6 mb-2">
+													<div class="mb-3">
+														<label class="text-label form-label">Đia chỉ*</label>
+														<input type="text" name="lastName" class="form-control"
+															required ng-model="form.address">
+													</div>
+												</div>
+												<div class="col-lg-6 mb-2">
+													<div class="mb-3">
+														<label class="form-label">Giờ mở cửa*</label>
+														<div class="input-group clockpicker ">
+															<input type="text" class="form-control" value="00:00" id="open-time"><span
+																class="input-group-text"><i
+																	class="fas fa-clock"></i></span>
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 mb-2">
+													<div class="mb-3">
+														<label class="form-label">Giờ đóng cửa*</label>
+														<div class="input-group clockpicker ">
+															<input type="text" class="form-control" value="24:00" id="close-time"><span
+																class="input-group-text"><i
+																	class="fas fa-clock"></i></span>
+														</div>
+													</div>
+												</div>
+
+											</div>
+										</div>
+										<div id="incname" class="tab-pane" role="tabpanel">
+											<div class="row">
+												<div class="col-lg-6 mb-2">
+													<div class="mb-3">
+														<label class="text-label form-label">Company Name*</label>
+														<input type="text" name="firstName" class="form-control"
+															placeholder="Cellophane Square" required>
+													</div>
+												</div>
+												<div class="col-lg-6 mb-2">
+													<div class="mb-3">
+														<label class="text-label form-label">Company Email
+															Address*</label>
+														<input type="email" class="form-control" id="emial1"
+															placeholder="example@example.com.com" required>
+													</div>
+												</div>
+												<div class="col-lg-6 mb-2">
+													<div class="mb-3">
+														<label class="text-label form-label">Company Phone
+															Number*</label>
+														<input type="text" name="phoneNumber" class="form-control"
+															placeholder="(+1)408-657-9007" required>
+													</div>
+												</div>
+												<div class="col-lg-6 mb-2">
+													<div class="mb-3">
+														<label class="text-label form-label">Your position in
+															Company*</label>
+														<input type="text" name="place" class="form-control" required>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div id="hehe" class="tab-pane" role="tabpanel">
+											<div class="row">
+												<div class="col-sm-4 mb-2">
+													<h4>Monday *</h4>
+												</div>
+												<div class="col-6 col-sm-4 mb-2">
+													<div class="mb-3">
+														<input class="form-control" value="9.00" type="number"
+															name="input1" id="input1">
+													</div>
+												</div>
+												<div class="col-6 col-sm-4 mb-2">
+													<div class="mb-3">
+														<input class="form-control" value="6.00" type="number"
+															name="input2" id="input2">
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-4 mb-2">
+													<h4>Tuesday *</h4>
+												</div>
+												<div class="col-6 col-sm-4 mb-2">
+													<div class="mb-3">
+														<input class="form-control" value="9.00" type="number"
+															name="input3" id="input3">
+													</div>
+												</div>
+												<div class="col-6 col-sm-4 mb-2">
+													<div class="mb-3">
+														<input class="form-control" value="6.00" type="number"
+															name="input4" id="input4">
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-4 mb-2">
+													<h4>Wednesday *</h4>
+												</div>
+												<div class="col-6 col-sm-4 mb-2">
+													<div class="mb-3">
+														<input class="form-control" value="9.00" type="number"
+															name="input5" id="input5">
+													</div>
+												</div>
+												<div class="col-6 col-sm-4 mb-2">
+													<div class="mb-3">
+														<input class="form-control" value="6.00" type="number"
+															name="input6" id="input6">
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-4 mb-2">
+													<h4>Thrusday *</h4>
+												</div>
+												<div class="col-6 col-sm-4 mb-2">
+													<div class="mb-3">
+														<input class="form-control" value="9.00" type="number"
+															name="input7" id="input7">
+													</div>
+												</div>
+												<div class="col-6 col-sm-4 mb-2">
+													<div class="mb-3">
+														<input class="form-control" value="6.00" type="number"
+															name="input8" id="input8">
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-4 mb-2">
+													<h4>Friday *</h4>
+												</div>
+												<div class="col-6 col-sm-4 mb-2">
+													<div class="mb-3">
+														<input class="form-control" value="9.00" type="number"
+															name="input9" id="input9">
+													</div>
+												</div>
+												<div class="col-6 col-sm-4 mb-2">
+													<div class="mb-3">
+														<input class="form-control" value="6.00" type="number"
+															name="input10" id="input10">
+													</div>
+												</div>
+											</div>
+										</div>
+										<div id="pack" class="tab-pane" role="tabpanel">
+											<div class="row emial-setup" style="min-height: 500px;">
+												<div class="col-lg-3 col-sm-6 col-6 align-self-center" ng-repeat="p in pre">
+													<div class="card overflow-hidden">
+														<div class="text-center p-3 overlay-box " style="background-image: url(/admin/images/big/img1.jpg);">
+															<div class="profile-photo">
+																<img src="https://cdn-icons-png.flaticon.com/512/5559/5559146.png" width="100" class="img-fluid rounded-circle" alt="">
+															</div>
+															<h3 class="mt-3 mb-1 text-white" >{{p.name}}</h3>
+														</div>
+														<ul class="list-group list-group-flush">
+															<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Phí</span> <strong class="text-muted" >{{p.price}} VNĐ</strong></li>
+															<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Thời hạn</span> 		<strong class="text-muted">{{p.date}}</strong></li>
+															<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Tag name</span> 		<strong class="text-muted">{{p.restaurantTag}}</strong></li>
+															<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Biểu tượng cao cấp</span> 		<strong class="text-muted">{{p.premiumIcon?'Có':'Không'}}</strong></li>
+														</ul>
+														<div class="card-footer border-0 mt-0">							
+															
+																<div class="form-check custom-checkbox mb-3 checkbox-primary">
+																	<input type="radio" class="form-check-input" id="customRadioBox1" name="optradioCustom" ng-value="preid">
+																	<label class="form-check-label" for="customRadioBox1">{{p.name}}</label>
+																</div>
+														
+														</div>
+													</div>
+												</div>
+												<!-- <div class="col-lg-3 col-sm-6 col-6">
+													<div class="card overflow-hidden">
+														<div class="text-center p-3 overlay-box " style="background-image: url(/admin/images/big/img1.jpg);">
+															<div class="profile-photo">
+																<img src="https://www.shareicon.net/download/2017/02/07/878467_service_512x512.png" width="100" class="img-fluid rounded-circle" alt="">
+															</div>
+															<h3 class="mt-3 mb-1 text-white">Cao cấp</h3>
+															<p class="text-white mb-0">Gói nâng cao</p>
+														</div>
+														<ul class="list-group list-group-flush">
+															<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Phí</span> <strong class="text-muted">500.000 vnđ/tháng</strong></li>
+															<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Loại quán</span> 		<strong class="text-muted">Ưu tiên</strong></li>
+														</ul>
+														<div class="card-footer border-0 mt-0">							
+															
+																<div class="form-check custom-checkbox mb-3 checkbox-primary">
+																	<input type="radio" class="form-check-input" id="customRadioBox1" name="optradioCustom">
+																	<label class="form-check-label" for="customRadioBox1">Nâng cao</label>
+																</div>
+														
+														</div>
+													</div>
+												</div> -->
+											</div>
+										</div>
+										<div id="submit" class="tab-pane" role="tabpanel">
+											<div class="row">
+												<div class="col-12">
+													<div class="skip-email text-center">
+														<h4>Hoàn tất đăng ký, nhấn để xác nhận</h4>
+														<button ng-click="mcregist()" class="btn btn-primary">Đăng ký</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--**********************************
+            Content body end
+        ***********************************-->
+
+
+		<!--**********************************
+            Footer start
+        ***********************************-->
+		<div class="footer">
+            <div class="copyright border-top">
+                <p>Website đặt đồ ăn trực tuyến <a >Fanda</a></p>
+            </div>
+        </div>
+		<!--**********************************
+            Footer end
+        ***********************************-->
+
+		<!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+		<!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+
+	</div>
+	<!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+	<!--**********************************
+        Scripts
+    ***********************************-->
+	<!-- Required vendors -->
+	<script src="/admin/vendor/global/global.min.js"></script>
+	<script src="/admin/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+	<script src="/admin/vendor/jquery-steps/build/jquery.steps.min.js"></script>
+	<script src="/admin/vendor/jquery-validation/jquery.validate.min.js"></script>
+	<script src="/admin/vendor/chart.js/Chart.bundle.min.js"></script>
+	
+	<!-- Daterangepicker -->
+    <!-- momment js is must -->
+    <script src="/admin/vendor/moment/moment.min.js"></script>
+    <script src="/admin/vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- clockpicker -->
+    <script src="/admin/vendor/clockpicker/js/bootstrap-clockpicker.min.js"></script>
+    <!-- asColorPicker -->
+    <script src="/admin/vendor/jquery-asColor/jquery-asColor.min.js"></script>
+    <script src="/admin/vendor/jquery-asGradient/jquery-asGradient.min.js"></script>
+    <script src="/admin/vendor/jquery-asColorPicker/js/jquery-asColorPicker.min.js"></script>
+    <!-- Material color picker -->
+    <script src="/admin/vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <!-- pickdate -->
+    <script src="/admin/vendor/pickadate/picker.js"></script>
+    <script src="/admin/vendor/pickadate/picker.time.js"></script>
+    <script src="/admin/vendor/pickadate/picker.date.js"></script>
+
+
+	<!-- Form validate init -->
+	<script src="/admin/js/plugins-init/jquery.validate-init.js"></script>
+	
+
+	<!-- Daterangepicker -->
+    <script src="/admin/js/plugins-init/bs-daterange-picker-init.js"></script>
+    <!-- Clockpicker init -->
+    <script src="/admin/js/plugins-init/clock-picker-init.js"></script>
+    <!-- asColorPicker init -->
+    <script src="/admin/js/plugins-init/jquery-asColorPicker.init.js"></script>
+    <!-- Material color picker init -->
+    <script src="/admin/js/plugins-init/material-date-picker-init.js"></script>
+    <!-- Pickdate -->
+    <script src="/admin/js/plugins-init/pickadate-init.js"></script>
+
+	<script src="/admin/js/custom.js"></script>
+	<script src="/admin/js/dlabnav-init.js"></script>
+	<script src="/admin/vendor/swiper/js/swiper-bundle.min.js"></script>
+
+	<!-- Form Steps -->
+	<script src="/admin/vendor/jquery-smartwizard/dist/js/jquery.smartWizard.js"></script>
+	<script src="/admin/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+	<script src="/admin/js/demo.js"></script>
+
+
+
+	<script src="/app/admin/controller/restaurant/merchant-register.js"></script>
+
+
+
+</body>
+
+
+
+</html>
